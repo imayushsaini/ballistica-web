@@ -60,6 +60,20 @@ h3,h2{
 .hidden{
   display: none;
 }
+.featured-list {
+  display: flex;
+  flex-wrap: wrap;
+  span{
+    background-color: white;
+    border-radius: 8px;
+    a {
+      color:black;
+      text-decoration: none;
+    }
+    margin: 8px;
+    padding: 8px;
+  }
+}
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */

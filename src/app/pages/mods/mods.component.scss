@@ -57,8 +57,12 @@ mat-paginator {
 }
 
 .loading {
-  min-height: 51vh;
+  min-height: 61vh;
   align-items: center;
   justify-content: center;
   display: flex;
+  width: inherit;
+  position: absolute;
+  z-index: 2;
+
 }

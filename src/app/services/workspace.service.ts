@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+const API = 'https://mods.ballistica.workers.dev';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,7 +43,7 @@ export class WorkspaceService {
   }
 
   fetchWorkspaceList() {
-    return this.http.get<HttpResponse<any>>("https://api2.bombsquad.ga/workspacelist",{headers:{'Content-Type':'test/plain'},observe:'response'});
+    return this.http.get<HttpResponse<any>>(`${API}/workspacelist`,{headers:{'Content-Type':'test/plain'},observe:'response'});
   }
 
   getWorkspaceList() {
@@ -50,15 +51,15 @@ export class WorkspaceService {
   }
 
   installModToWorkspace(sourceUrl:string,workspace:string) {
-      return this.http.post<HttpResponse<any>>("https://api2.bombsquad.ga/urltoworkspace",{sourceUrl:sourceUrl,workspace:workspace},{observe:'response'});
+      return this.http.post<HttpResponse<any>>(`${API}/urltoworkspace`,{sourceUrl:sourceUrl,workspace:workspace},{observe:'response'});
   }
 
   createWorkspace(name:string) {
-    return this.http.post<HttpResponse<any>>("https://api2.bombsquad.ga/createworkspace",{name:name},{observe:'response'});
+    return this.http.post<HttpResponse<any>>(`${API}/createworkspace`,{name:name},{observe:'response'});
   }
 
   setActive(name:string) {
-    return this.http.post<HttpResponse<any>>("https://api2.bombsquad.ga/setworkspace",{name:name},{observe:'response'});
+    return this.http.post<HttpResponse<any>>(`${API}/setworkspace`,{name:name},{observe:'response'});
   }
 
 }

@@ -54,12 +54,12 @@ export class ModsComponent implements OnInit {
   constructor(private modsService:ModsService,private router:Router,private _seoService:SEOServiceService,private activatedRoute:ActivatedRoute, private workspace: WorkspaceService) { }
 
   ngOnInit(): void {
+    this.mods = Array.from({ length: 5 }, (_, i) => ({ title: `Mod ${i + 1}`, description: `Mod ${i + 1} description` }));
     this.loadData();
 
-        var rt = this.getChild(this.activatedRoute)
+    var rt = this.getChild(this.activatedRoute)
 
-        rt.data.subscribe((data: any) => {
-
+    rt.data.subscribe((data: any) => {
           this._seoService.updateTitle(data.title);
           this._seoService.updateOgUrl(data.ogUrl);
           //Updating Description tag dynamically with title
