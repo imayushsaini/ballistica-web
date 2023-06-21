@@ -34,6 +34,13 @@ export class ModComponent implements OnInit {
     if(this.tokenStorage.getToken()) this.isLoggedIn = true;
   }
 
+  return() {
+    const key = this.activatedRoute.snapshot.queryParamMap.get('q');
+    const page = this.activatedRoute.snapshot.queryParamMap.get('page');
+    const page_size = this.activatedRoute.snapshot.queryParamMap.get('size');
+    this.router.navigate(['/mods'], {queryParams:{q:key,page:page,size:page_size}});
+
+  }
   loadData(modId:any) {
     this.modsService.getMods(1,0,modId).subscribe((data:any)=>{
       this.mod=data;

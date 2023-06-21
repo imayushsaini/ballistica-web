@@ -18,14 +18,11 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   changes = new Subject<void>();
 
-  // For internationalization, the `$localize` function from
-  // the `@angular/localize` package can be used.
   firstPageLabel = $localize`First page`;
   itemsPerPageLabel = $localize`Items per page:`;
   lastPageLabel = $localize`Last page`;
 
-  // You can set labels to an arbitrary string too, or dynamically compute
-  // it through other third-party internationalization libraries.
+
   nextPageLabel = 'Next page';
   previousPageLabel = 'Previous page';
 
@@ -51,10 +48,17 @@ export class ModsComponent implements OnInit {
   pageSizeOptions: number[] = [ 10, 50, 100];
   mods:any;
   isLoading:boolean = true;
-  constructor(private modsService:ModsService,private router:Router,private _seoService:SEOServiceService,private activatedRoute:ActivatedRoute, private workspace: WorkspaceService) { }
+  constructor(private modsService:ModsService,private router:Router,private route: ActivatedRoute, private _seoService:SEOServiceService,private activatedRoute:ActivatedRoute, private workspace: WorkspaceService) { }
 
   ngOnInit(): void {
     this.mods = Array.from({ length: 5 }, (_, i) => ({ title: `Mod ${i + 1}`, description: `Mod ${i + 1} description` }));
+    const key = this.route.snapshot.queryParamMap.get('q');
+    const page = this.route.snapshot.queryParamMap.get('page');
+    const page_size = this.route.snapshot.queryParamMap.get('size');
+    this.value = key ? key : '';
+    this.pageSize = Number(page_size) ? Number(page_size) : 10;
+    this.currentPage = Number(page) ? Number(page) : 0;
+
     this.loadData();
 
     var rt = this.getChild(this.activatedRoute)
@@ -98,7 +102,7 @@ export class ModsComponent implements OnInit {
     this.loadData();
   }
   openModPage(mod:any){
-    this.router.navigate(['/mods/'+mod.messageId]);
+    this.router.navigate(['/mods/'+mod.messageId], {queryParams:{q:this.value,page:this.currentPage,size:this.pageSize}});
   }
   valueChange(event:any){
     this.loadData();
