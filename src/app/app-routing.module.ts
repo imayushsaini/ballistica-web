@@ -8,7 +8,7 @@ const routes: Routes = [
     data:{
       title:'BombSquad Community Site | BCS',
       description:"Welcome to BombSquad Community Website, find plugins, servers & account details, downloads links and tools.",
-      ogUrl:'https://bombsquad.ga'
+      ogUrl:'https://bombsquad-community.web.app/'
     }
   },
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
     data:{
       title:'Download Latest BombSquad Mods',
       description:"Download Community Mods, Plugins for all version of BombSquad and install them directly to workspace.",
-      ogUrl:'https://bombsquad.ga/mods'
+      ogUrl:'https://bombsquad-community.web.app/mods'
     }
   },
   {path:'mods/:modId',
@@ -31,7 +31,7 @@ const routes: Routes = [
     data:{
       title:'Download BombSquad Game',
       description:"Download Latest version of BombSquad Game, Remote, VR, Server Builds for Windows 11, Android, Linux, Macbook",
-      ogUrl:'https://bombsquad.ga/download'
+      ogUrl:'https://bombsquad-community.web.app/download'
     }
    },
    {
@@ -40,7 +40,7 @@ const routes: Routes = [
     data:{
       title:'BombSquad Public Server List',
       description:"BombSquad Public Servers List, find queue Id, IP address of all public servers ever hosted for bombsquad.",
-      ogUrl:'https://bombsquad.ga/servers'
+      ogUrl:'https://bombsquad-community.web.app/servers'
     }
   },
   {
@@ -49,7 +49,7 @@ const routes: Routes = [
     data:{
       title:'BombSquad Players Account',
       description:"Search BombSquad Player Account Details, pb-id, Device accounts",
-      ogUrl:'https://bombsquad.ga/players'
+      ogUrl:'https://bombsquad-community.web.app/players'
     }
   },
   {
@@ -58,7 +58,7 @@ const routes: Routes = [
     data:{
       title:'Login BombSquad Account',
       description:"BombSquad Account login page",
-      ogUrl:'https://bombsquad.ga/login'
+      ogUrl:'https://bombsquad-community.web.app/login'
     }
   },
   {
@@ -68,7 +68,7 @@ const routes: Routes = [
     data:{
       title:'BombSquad Community Plugin Manager',
       description:"One click to install mods for bombsquad, biggest collection of plugins/mods available for bombsquad",
-      ogUrl:'https://bombsquad.ga/pluginmanager'
+      ogUrl:'https://bombsquad-community.web.app/pluginmanager'
     }
   },
   {
@@ -78,7 +78,7 @@ const routes: Routes = [
     data:{
       title:'Donate BombSquad Community',
       description:"Support US !",
-      ogUrl:'https://bombsquad.ga/support'
+      ogUrl:'https://bombsquad-community.web.app/support'
     }
   },
   {path:'**',redirectTo:'home'}

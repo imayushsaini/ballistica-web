@@ -70,7 +70,7 @@ export class ModComponent implements OnInit {
         rt.data.subscribe((data: any) => {
 
           this._seoService.updateTitle(meta.title);
-          this._seoService.updateOgUrl("https://bombsquad.ga");
+          this._seoService.updateOgUrl("https://bombsquad-community.web.app/");
           //Updating Description tag dynamically with title
           this._seoService.updateDescription(meta.description)
         });
