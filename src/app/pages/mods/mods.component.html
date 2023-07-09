@@ -24,7 +24,10 @@
       <div class="loading" *ngIf="isLoading">
         <mat-spinner></mat-spinner>
       </div>
-      <div class="mod" *ngFor="let mod of mods" (click)="openModPage(mod)">
+      <div class="mod" *ngFor="let mod of mods; let i = index" (click)="openModPage(mod)">
+        <div class="ads" *ngIf="i%4==0">
+          <app-banner [banner]="banner"></app-banner>
+        </div>
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{mod.title}}</h5>

@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { WorkspaceService } from 'src/app/services/workspace.service';
+import { Banner } from 'src/app/models/model';
+import { BannerModule } from 'src/app/shared/banner/banner.component';
 @Injectable()
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   changes = new Subject<void>();
@@ -47,8 +49,17 @@ export class ModsComponent implements OnInit {
   currentPage = 0;
   pageSizeOptions: number[] = [ 10, 50, 100];
   mods:any;
-  isLoading:boolean = true;
-  constructor(private modsService:ModsService,private router:Router,private route: ActivatedRoute, private _seoService:SEOServiceService,private activatedRoute:ActivatedRoute, private workspace: WorkspaceService) { }
+  isLoading: boolean = true;
+  banner: Banner;
+  constructor(private modsService: ModsService, private router: Router, private route: ActivatedRoute, private _seoService: SEOServiceService, private activatedRoute: ActivatedRoute, private workspace: WorkspaceService) {
+      this.banner = new Banner(
+      'ca-pub-7561471327972639',
+      1688169659,
+      'fluid',
+      true
+      )
+  }
+
 
   ngOnInit(): void {
     this.mods = Array.from({ length: 5 }, (_, i) => ({ title: `Mod ${i + 1}`, description: `Mod ${i + 1} description` }));
@@ -126,6 +137,7 @@ const routes: Routes = [{path: '', component: ModsComponent}];
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    BannerModule,
     FormsModule
     ],
   exports: [ModsComponent],

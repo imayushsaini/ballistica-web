@@ -3,10 +3,14 @@ import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { TokenStorageService } from './services/token-storage.service';
-import { WorkspaceService } from './services/workspace.service';
 
 declare const gtag:Function;
 
+declare global {
+  interface Window {
+    adsbygoogle: any;
+  }
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

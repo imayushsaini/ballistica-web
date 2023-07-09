@@ -14,14 +14,23 @@ import {MatSelectModule} from '@angular/material/select'
 import {MatChipsModule} from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { Banner } from 'src/app/models/model';
+import { BannerModule } from 'src/app/shared/banner/banner.component';
 @Component({
   selector: 'app-mod',
   templateUrl: './mod.component.html',
   styleUrls: ['./mod.component.scss']
 })
 export class ModComponent implements OnInit {
-
-  constructor(private modsService:ModsService,private activatedRoute:ActivatedRoute,private _seoService:SEOServiceService,private router:Router,public dialog: MatDialog, private tokenStorage:TokenStorageService) { }
+  banner: Banner;
+  constructor(private modsService: ModsService, private activatedRoute: ActivatedRoute, private _seoService: SEOServiceService, private router: Router, public dialog: MatDialog, private tokenStorage: TokenStorageService) {
+     this.banner = new Banner(
+      'ca-pub-7561471327972639',
+      5930666999,
+      'auto',
+      true
+      )
+  }
 
   mod:any;
   isLoggedIn = false;
@@ -159,7 +168,8 @@ const routes: Routes = [{path: '', component: ModComponent}];
     MatButtonModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    BannerModule,
     ],
   exports: [ModComponent, ModDialog],
   declarations: [ModComponent, ModDialog],
