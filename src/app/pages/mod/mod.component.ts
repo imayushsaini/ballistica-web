@@ -27,7 +27,8 @@ export class ModComponent implements OnInit {
      this.banner = new Banner(
       'ca-pub-7561471327972639',
       5930666999,
-      'auto',
+       'auto',
+      null,
       true
       )
   }

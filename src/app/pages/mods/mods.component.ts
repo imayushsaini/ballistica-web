@@ -55,7 +55,8 @@ export class ModsComponent implements OnInit {
       this.banner = new Banner(
       'ca-pub-7561471327972639',
       1688169659,
-      'fluid',
+        'fluid',
+      '-6t+ed+2i-1n-4w',
       true
       )
   }
