@@ -80,6 +80,15 @@ const routes: Routes = [
       description:"Support US !",
       ogUrl:'https://bombsquad-community.web.app/support'
     }
+  },{
+    path:'gallery',
+    loadChildren:() => import ('./pages/gallery/gallery.component').then(m => m.GalleryModule),
+
+    data:{
+      title:'Gallery | BobmSquad',
+      description:"Amazing Picture Collection of Bombsquad",
+      ogUrl:'https://bombsquad-community.web.app/gallery'
+    }
   },
   {path:'**',redirectTo:'home'}
 ];
