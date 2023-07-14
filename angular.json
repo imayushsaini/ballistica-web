@@ -32,7 +32,8 @@
               "src/sitemap.txt",
               "src/manifest.webmanifest",
               "src/25f06dfbb8c64b578ba2d963d06de119.txt",
-              "src/ads.txt"
+              "src/ads.txt",
+              "src/yandex_8a0a833b31182a38.html"
             ],
             "styles": [
               "src/styles.scss"
