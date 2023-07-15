@@ -85,8 +85,16 @@ const routes: Routes = [
     loadChildren:() => import ('./pages/gallery/gallery.component').then(m => m.GalleryModule),
 
     data:{
-      title:'Gallery | BobmSquad',
+      title:'Gallery | BombSquad',
       description:"Amazing Picture Collection of Bombsquad",
+      ogUrl:'https://bombsquad-community.web.app/gallery'
+    }
+  },{
+    path:'blog',
+    loadChildren:() => import ('./blog/blog.module').then(m => m.BlogModule),
+    data:{
+      title:'Blog | BombSquad',
+      description:"Discover insightful articles on various topics, modding tutorials, and latest updates around BombSquad",
       ogUrl:'https://bombsquad-community.web.app/gallery'
     }
   },

@@ -8,10 +8,6 @@ import { CommonModule } from '@angular/common';
 })
 export class BannerComponent implements AfterViewInit {
 
-
-  @Input()
-  banner!: Banner;
-
   constructor() {    }
 
   ngAfterViewInit() {

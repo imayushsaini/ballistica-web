@@ -156,9 +156,12 @@
           "builder": "@nguniversal/builders:prerender",
           "options": {
             "routes": [
+              "/",
               "/home",
               "/gallery",
               "/download",
+              "/blog",
+              "/blog/host-bombsquad-server-free",
               "/pluginmanager"
             ],
             "guessRoutes": false

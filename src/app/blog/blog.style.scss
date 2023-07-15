@@ -1,0 +1,72 @@
+.main{
+  min-height: 80vh;
+  color: white;
+  background-color: black;padding-bottom:20px
+}
+h1 {
+  text-align: center;
+  padding-top: 2rem;
+}
+.blog-list {
+  flex-grow: 3;
+}
+.more {
+  flex-grow: 1;
+  margin-left: 1rem;
+  min-height: 90vh;
+}
+.blog-item {
+  margin-bottom: 2rem;
+}
+.blogs {
+  display: flex;
+  margin: auto;
+  width: 90%;
+  justify-content: space-between;
+}
+.card {
+  color: black;
+  cursor: pointer;
+}
+.card-body {
+  display: flex;
+  flex-wrap: wrap;
+  h5 {
+    font-size: large;
+    font-weight: 500;
+  }
+  .thumbnail {
+
+  }
+  img {
+     object-fit: cover;
+     width: 288px;
+  }
+  .description {
+    margin-top: 10px;
+    margin-left: 20px;
+    flex-grow: 2;
+  }
+}
+
+.header {
+  text-align: center;
+}
+.content {
+  width: 80%;
+  margin: auto;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .more {
+    display: none;
+  }
+  .card-body {
+    img {
+      width: 100%;
+    }
+  }
+  .content {
+    width: 90%;
+  }
+}

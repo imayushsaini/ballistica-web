@@ -26,7 +26,7 @@
       </div>
       <div class="mod" *ngFor="let mod of mods; let i = index" (click)="openModPage(mod)">
         <div class="ads" *ngIf="i%4==0 && i!=0">
-          <app-banner [banner]="banner"></app-banner>
+          <app-banner></app-banner>
         </div>
         <div class="card">
           <div class="card-body">
