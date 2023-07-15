@@ -9,9 +9,12 @@
       <div *ngFor="let image of currentimages.slice(0, currentimages.length/2); let i = index" class="gallery-item">
         <img [src]="CDN+image.url" [alt]="image.alt" (click)="openOverlay(image)" loading="lazy">
       </div>
-      <div class="gallery-item">
-        <app-banner [banner]="banner"></app-banner>
-      </div>
+    </div>
+
+    <div class="ads">
+      <app-banner [banner]="banner"></app-banner>
+    </div>
+    <div class="gallery">
       <div *ngFor="let image of currentimages.slice(currentimages.length/2); let i = index" class="gallery-item">
         <img [src]="CDN+image.url" [alt]="image.alt" (click)="openOverlay(image)" loading="lazy">
       </div>
