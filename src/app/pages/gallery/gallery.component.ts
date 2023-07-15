@@ -6,6 +6,8 @@ import { HttpClient } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { MatIconModule } from '@angular/material/icon';
 import { images } from './image_map';
+import { BannerModule } from "src/app/shared/banner/banner.component";
+import { Banner } from "src/app/models/model";
 @Component({
   selector: 'app-Gallery',
   templateUrl: './gallery.component.html',
@@ -19,8 +21,17 @@ export class GalleryComponent implements OnInit {
   endPoint = 12;
   showOverlay = false;
   selectedImage!: { url: string; alt: string; };
+   banner: Banner;
   CDN = "https://scintillating-creponne-d386aa.netlify.app";
-  constructor(private http: HttpClient, private _seoService: SEOServiceService, private activatedRoute: ActivatedRoute) { }
+  constructor(private http: HttpClient, private _seoService: SEOServiceService, private activatedRoute: ActivatedRoute) {
+    this.banner = new Banner(
+      'ca-pub-7561471327972639',
+      1688169659,
+        'fluid',
+      '-6t+ed+2i-1n-4w',
+      true
+      )
+  }
 
   ngOnInit(): void {
     var rt = this.getChild(this.activatedRoute)
@@ -71,10 +82,11 @@ const routes: Routes = [{path: '', component: GalleryComponent}];
 
 @NgModule({
   imports: [
-     CommonModule,
+    CommonModule,
     RouterModule.forChild(routes),
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    BannerModule,
     ],
   exports: [GalleryComponent],
   declarations: [GalleryComponent],

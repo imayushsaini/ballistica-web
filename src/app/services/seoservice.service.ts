@@ -9,6 +9,8 @@ export class SEOServiceService {
 
   updateTitle(title: string) {
     this.title.setTitle(title);
+    this.meta.updateTag({ name: 'og:title', content: title })
+    this.meta.updateTag({ name: 'title', content: title })
   }
 
   updateOgUrl(url: string) {
