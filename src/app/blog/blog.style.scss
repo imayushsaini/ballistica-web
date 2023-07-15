@@ -3,12 +3,12 @@
   color: white;
   background-color: black;padding-bottom:20px
 }
-h1 {
+h1 , .heading{
   text-align: center;
   padding-top: 2rem;
 }
 .blog-list {
-  flex-grow: 3;
+  width: 70%;
 }
 .more {
   flex-grow: 1;
@@ -21,7 +21,7 @@ h1 {
 .blogs {
   display: flex;
   margin: auto;
-  width: 90%;
+  width: 98%;
   justify-content: space-between;
 }
 .card {
@@ -30,7 +30,7 @@ h1 {
 }
 .card-body {
   display: flex;
-  flex-wrap: wrap;
+
   h5 {
     font-size: large;
     font-weight: 500;
@@ -56,12 +56,20 @@ h1 {
   width: 80%;
   margin: auto;
 }
+.more{
+  width: 30%;
+   border: 0.3px solid #767676;
+}
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .more {
     display: none;
   }
+  .blog-list {
+  width: 100%;
+}
   .card-body {
+    flex-wrap: wrap;
     img {
       width: 100%;
     }

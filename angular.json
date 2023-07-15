@@ -156,7 +156,6 @@
           "builder": "@nguniversal/builders:prerender",
           "options": {
             "routes": [
-              "/",
               "/home",
               "/gallery",
               "/download",

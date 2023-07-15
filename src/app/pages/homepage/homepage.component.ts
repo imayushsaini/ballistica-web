@@ -27,6 +27,7 @@ export class HomepageComponent implements OnInit,OnDestroy {
           this._seoService.updateOgUrl(data.ogUrl);
           //Updating Description tag dynamically with title
           this._seoService.updateDescription(data.description)
+          this._seoService.updateCanonicalTag("https://bombsquad-community.web.app/home")
         });
    }
 

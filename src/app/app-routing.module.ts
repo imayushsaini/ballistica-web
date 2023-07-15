@@ -8,7 +8,7 @@ const routes: Routes = [
     data:{
       title:'BombSquad Community Site | BCS',
       description:"Welcome to BombSquad Community Website, find plugins, servers & account details, downloads links and tools.",
-      ogUrl:'https://bombsquad-community.web.app/'
+      ogUrl:'https://bombsquad-community.web.app/home'
     }
   },
   {
@@ -95,7 +95,7 @@ const routes: Routes = [
     data:{
       title:'Blog | BombSquad',
       description:"Discover insightful articles on various topics, modding tutorials, and latest updates around BombSquad",
-      ogUrl:'https://bombsquad-community.web.app/gallery'
+      ogUrl:'https://bombsquad-community.web.app/blog'
     }
   },
   {path:'**',redirectTo:'home'}
