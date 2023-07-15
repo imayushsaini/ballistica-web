@@ -5,7 +5,7 @@
     "ng": "ng",
     "clean": "rimraf ./dist",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run prerender",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev:ssr": "ng run ballistica-web:serve-ssr",
