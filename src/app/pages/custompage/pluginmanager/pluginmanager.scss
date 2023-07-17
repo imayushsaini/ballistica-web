@@ -19,3 +19,9 @@ h2{
 img{
   width: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+   .content {
+    width: 100%;
+   }
+  }

@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterModule, Routes } from "@angular/router";
 import { SEOServiceService } from "src/app/services/seoservice.service";
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClient } from "@angular/common/http";
+import { BannerModule } from "src/app/shared/banner/banner.component";
 @Component({
   selector: 'app-pluginmanager',
   templateUrl: './pluginmanager.html',
@@ -49,7 +50,8 @@ const routes: Routes = [{path: '', component: PluginManager}];
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    MatButtonModule
+    MatButtonModule,
+    BannerModule
     ],
   exports: [PluginManager],
   declarations: [PluginManager],

@@ -2,10 +2,17 @@
 .background{
   background-color: black;
   min-height: 65vh;
+  color: white;
 }
 .icon{
   img{
     height: 30px;
+  }
+}
+.thumbnail {
+  padding-bottom: 30px;
+  img {
+    width: 373px;
   }
 }
 .content{

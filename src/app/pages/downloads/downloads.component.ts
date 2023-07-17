@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 import { SEOServiceService } from 'src/app/services/seoservice.service';
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { BannerModule } from 'src/app/shared/banner/banner.component';
 @Component({
   selector: 'app-downloads',
   templateUrl: './downloads.component.html',
@@ -39,7 +40,8 @@ const routes: Routes = [{path: '', component: DownloadsComponent}];
   imports: [
     RouterModule.forChild(routes),
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    BannerModule
     ],
   exports: [DownloadsComponent],
   declarations: [DownloadsComponent],

@@ -30,7 +30,7 @@ const routes: Routes = [
     loadChildren:() => import ('./pages/downloads/downloads.component').then(m => m.DownloadModule),
     data:{
       title:'Download BombSquad Game',
-      description:"Download Latest version of BombSquad Game, Remote, VR, Server Builds for Windows 11, Android, Linux, Macbook",
+      description:"Get the latest version of BombSquad for Android, Windows, Linux, and MacBook. Transform your mobile devices into gaming controllers with BombSquad Remote. Immerse yourself in VR battles with BombSquad VR.",
       ogUrl:'https://bombsquad-community.web.app/download'
     }
    },
@@ -66,9 +66,9 @@ const routes: Routes = [
     loadChildren:() => import ('./pages/custompage/pluginmanager/pluginmanager').then(m => m.PluginManagerModule),
 
     data:{
-      title:'BombSquad Community Plugin Manager',
-      description:"One click to install mods for bombsquad, biggest collection of plugins/mods available for bombsquad",
-      ogUrl:'https://bombsquad-community.web.app/pluginmanager'
+      title:'Download BombSquad Community Plugin Manager',
+      description:"Simplify game modding and enhance your Bombsquad experience with the Bombsquad Plugin Manager. Access a wide range of community-created content, enjoy seamless integration, and take control of your plugin updates.",
+      ogUrl:'https://bombsquad-community.web.app/pluginmanager/'
     }
   },
   {

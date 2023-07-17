@@ -44,7 +44,7 @@ const routes: Routes = [ { path: "", component: BlogPostHome},
     data: {
       title:'BombSquad Server Hosting Guide',
       description:"This article presents a comprehensive guide on hosting a free BombSquad server, offering detailed insights into the process for both PC and Android devices. It contains all possible ways we can host BombSquad Server/Party with Advantage and Disadvantage about each.",
-      ogUrl:'https://bombsquad-community.web.app/blog/host-bombsquad-server-free'
+      ogUrl:'https://bombsquad-community.web.app/blog/host-bombsquad-server-free/'
     } }];
 
 @NgModule({
