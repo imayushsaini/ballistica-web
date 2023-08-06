@@ -161,7 +161,8 @@
               "/download",
               "/blog",
               "/blog/host-bombsquad-server-free",
-              "/pluginmanager"
+              "/pluginmanager",
+              "/free-server"
             ],
             "guessRoutes": false
           },

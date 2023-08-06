@@ -80,22 +80,33 @@ const routes: Routes = [
       description:"Support US !",
       ogUrl:'https://bombsquad-community.web.app/support'
     }
-  },{
+  },
+  {
     path:'gallery',
     loadChildren:() => import ('./pages/gallery/gallery.component').then(m => m.GalleryModule),
 
     data:{
       title:'Gallery | BombSquad',
-      description:"Amazing Picture Collection of Bombsquad",
+      description:"Amazing Picture Collection of Bombsquad, Directly from Eric's Gallery",
       ogUrl:'https://bombsquad-community.web.app/gallery'
     }
-  },{
+  },
+  {
     path:'blog',
     loadChildren:() => import ('./blog/blog.module').then(m => m.BlogModule),
     data:{
       title:'Blog | BombSquad',
       description:"Discover insightful articles on various topics, modding tutorials, and latest updates around BombSquad",
       ogUrl:'https://bombsquad-community.web.app/blog'
+    }
+  },
+  {
+    path: 'free-server',
+    loadChildren: () => import('./pages/custompage/free-server/free-server').then(m => m.FreeServerModule),
+    data: {
+      title: 'Create Free Server | BCS',
+      description: "Fully Managed BombSquad Server Hosting as a Service, Absolutely free !",
+      ogUrl: 'https://bombsquad-community.web.app/free-server'
     }
   },
   {path:'**',redirectTo:'home'}
