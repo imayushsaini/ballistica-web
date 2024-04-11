@@ -98,8 +98,8 @@ export class ModsComponent implements OnInit {
       for(var mod of this.mods){
         var title=""
         for(var attach of mod.attachments ){
-          if(attach.endsWith(".py")){
-            title = attach.split('/').pop()
+          if(attach.fileName.endsWith(".py")){
+            title = attach.fileName
           }
         }
         mod.title=title;

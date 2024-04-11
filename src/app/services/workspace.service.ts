@@ -26,7 +26,7 @@ export class WorkspaceService {
   }
 
   verifyWorkspace() {
-    if(this.workspaces[0]=="(no workspaces)") {
+    if(this.workspaces.length==0) {
       // no workspace available in this account : sad  , lets create one
       console.log("no workspace found under this account");
       this.createWorkspace("BCS MODS").subscribe(response=>{
@@ -50,8 +50,8 @@ export class WorkspaceService {
     return this.workspaces;
   }
 
-  installModToWorkspace(sourceUrl:string,workspace:string) {
-      return this.http.post<HttpResponse<any>>(`${API}/urltoworkspace`,{sourceUrl:sourceUrl,workspace:workspace},{observe:'response'});
+  installModToWorkspace(fileId:string, fileName:string, workspace:string) {
+      return this.http.post<HttpResponse<any>>(`${API}/urltoworkspace`,{fileId:fileId, fileName:fileName, workspace:workspace},{observe:'response'});
   }
 
   createWorkspace(name:string) {

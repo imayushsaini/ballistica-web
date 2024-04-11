@@ -16,6 +16,11 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Banner } from 'src/app/models/model';
 import { BannerModule } from 'src/app/shared/banner/banner.component';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+interface file {
+  fileName: string,
+  fileId: string
+}
 @Component({
   selector: 'app-mod',
   templateUrl: './mod.component.html',
@@ -23,7 +28,14 @@ import { BannerModule } from 'src/app/shared/banner/banner.component';
 })
 export class ModComponent implements OnInit {
   banner: Banner;
-  constructor(private modsService: ModsService, private activatedRoute: ActivatedRoute, private _seoService: SEOServiceService, private router: Router, public dialog: MatDialog, private tokenStorage: TokenStorageService) {
+  constructor(private modsService: ModsService,
+    private activatedRoute: ActivatedRoute,
+    private _seoService: SEOServiceService,
+    private router: Router,
+    public dialog: MatDialog,
+    private tokenStorage: TokenStorageService,
+    private workspace:WorkspaceService,
+  private santizer: DomSanitizer) {
      this.banner = new Banner(
       'ca-pub-7561471327972639',
       5930666999,
@@ -35,9 +47,11 @@ export class ModComponent implements OnInit {
 
   mod:any;
   isLoggedIn = false;
-  videos:string[]=[];
-  scripts:string[]=[];
-  images:string[]=[];
+  videos:file[]=[];
+  scripts:file[]=[];
+  images: file[] = [];
+  imageUrls: SafeUrl[] = [];
+  videoUrls: SafeUrl[] = [];
   ngOnInit(): void {
     var modId=this.activatedRoute.snapshot.paramMap.get('modId');
     this.loadData(modId);
@@ -57,23 +71,41 @@ export class ModComponent implements OnInit {
 
         var title="unknown.mod"
         for(var attach of this.mod[0].attachments ){
-          if(attach.endsWith(".py") || attach.endsWith(".zip") || attach.endsWith(".rar")){
-            title = attach.split('/').pop()
+          if(attach.fileName.endsWith(".py") || attach.fileName.endsWith(".zip") || attach.fileName.endsWith(".rar")){
+            title = attach.fileName
             this.scripts.push(attach);
           }
-          else if(attach.endsWith(".mp4")){
+          else if(attach.fileName.endsWith(".mp4")){
             this.videos.push(attach);
           }
-          else if(attach.endsWith(".jpg")||attach.endsWith(".png")||attach.endsWith(".jpeg")||attach.endsWith(".gif")) {
+          else if(attach.fileName.endsWith(".jpg")||attach.fileName.endsWith(".png")||attach.fileName.endsWith(".jpeg")||attach.fileName.endsWith(".gif")) {
             this.images.push(attach);
           }
         }
 
         this.mod[0].title=title;
-        this.updateMeta(this.mod[0])
+      this.updateMeta(this.mod[0])
+      for (var image of this.images) {
+        this.loadMedia(image.fileId, "image");
+      }
+      for (var video of this.videos) {
+        this.loadMedia(video.fileId, "video");
+      }
     })
   }
 
+  loadMedia(fileId: string, type: string) {
+    this.modsService.downloadMod(fileId).subscribe((response: Blob) => {
+      const blob = new Blob([response], { type: response.type });
+      const url = window.URL.createObjectURL(blob);
+      if (type == "image") {
+        this.imageUrls.push(this.santizer.bypassSecurityTrustUrl(url));
+      } else if (type == "video") {
+         this.videoUrls.push(this.santizer.bypassSecurityTrustUrl(url));
+      }
+    })
+
+  }
   updateMeta(meta:any){
         var rt = this.getChild(this.activatedRoute)
 
@@ -94,9 +126,9 @@ export class ModComponent implements OnInit {
     }
   }
 
-  openVerticallyCentered(fileUrl: String) {
+  openVerticallyCentered(file: file) {
     const dialogRef = this.dialog.open(ModDialog, {
-      data : { file:fileUrl ,loggedIn:this.isLoggedIn}
+      data : { file:file ,loggedIn:this.isLoggedIn}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -117,16 +149,16 @@ export class ModDialog{
   loggedIn:boolean;
   validFile=false;
   haveWorkspace:boolean = false;
-  constructor(@Inject(MAT_DIALOG_DATA) data : {file : String, loggedIn:boolean}, private workspace:WorkspaceService, private snackBar: MatSnackBar) {
+  constructor(@Inject(MAT_DIALOG_DATA) data : {file : file, loggedIn:boolean},private modsService: ModsService, private workspace:WorkspaceService, private snackBar: MatSnackBar) {
 
     this.file = data.file;
     this.loggedIn = data.loggedIn;
     this.workspaces = workspace.getWorkspaceList();
-    this.selected = this.workspaces[0];
-    if(this.selected!="(no workspaces)"){
+    // this.selected = this.workspaces[0];
+    if(this.workspaces.length>0){
       this.haveWorkspace=true;
     }
-    if(this.file.endsWith(".py"))
+    if(this.file.fileName.endsWith(".py"))
      this.validFile=true;
 
   }
@@ -135,18 +167,28 @@ export class ModDialog{
   }
 
   download() {
-    window.open(this.file,"_self");
+    this.modsService.downloadMod(this.file.fileId).subscribe((response: Blob) => {
+      const downloadLink = document.createElement('a');
+      const blob = new Blob([response], { type: response.type });
+      const url = window.URL.createObjectURL(blob);
+      downloadLink.href = url;
+      downloadLink.download = this.file.fileName;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      window.URL.revokeObjectURL(url);
+    });
     this.snackBar.open("Downloading Started",'',this.config)
   }
 
   install() {
-    this.snackBar.open(`Installing mod ${this.file.split("/").pop()} to workspace ${this.selected}`,'',this.config)
+    this.snackBar.open(`Installing mod ${this.file.fileName} to workspace ${this.selected}`,'',this.config)
     this.installMod(0);
   }
   installMod(retry:number) {
-    this.workspace.installModToWorkspace(this.file,this.selected,).subscribe(response =>{
+    this.workspace.installModToWorkspace(this.file.fileId, this.file.fileName, this.selected,).subscribe(response =>{
         if(response.status==200) {
-          this.snackBar.open(`Installation done for ${this.file.split("/").pop()}`,'',this.config)
+          this.snackBar.open(`Installation done for ${this.file.fileName}`,'',this.config)
         }
     },(error)=> {
       if(retry>=3){

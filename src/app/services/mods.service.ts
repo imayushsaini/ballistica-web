@@ -16,4 +16,7 @@ export class ModsService {
   getMods(size:any,page:any,key:string){
     return this.http.get(`${API}/mods` ,{params:{page:page,size:size,key:key}});
   }
+  downloadMod(fileId: String) {
+    return this.http.get(`${API}/getFile?fileId=${fileId}`, {responseType: 'blob'});
+  }
 }
