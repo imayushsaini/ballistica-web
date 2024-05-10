@@ -1,7 +1,7 @@
 import { Component, NgModule, OnInit } from "@angular/core";
 import { ActivatedRoute, RouterModule, Routes } from "@angular/router";
 import { SEOServiceService } from "src/app/services/seoservice.service";
-import {MatButtonModule} from '@angular/material/button';
+import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
 import { HttpClient } from "@angular/common/http";
 @Component({
   selector: 'app-support',

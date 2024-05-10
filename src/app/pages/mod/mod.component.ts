@@ -1,19 +1,19 @@
 import { Component, Inject, NgModule, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
 import { ModsService } from 'src/app/services/mods.service';
 import { SEOServiceService } from 'src/app/services/seoservice.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 
-import {MatSnackBar, MatSnackBarConfig, MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select'
-import {MatChipsModule} from '@angular/material/chips';
+import {MatLegacySnackBar as MatSnackBar, MatLegacySnackBarConfig as MatSnackBarConfig, MatLegacySnackBarModule as MatSnackBarModule} from '@angular/material/legacy-snack-bar';
+import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
+import {MatLegacyFormFieldModule as MatFormFieldModule} from '@angular/material/legacy-form-field';
+import {MatLegacySelectModule as MatSelectModule} from '@angular/material/legacy-select'
+import {MatLegacyChipsModule as MatChipsModule} from '@angular/material/legacy-chips';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { Banner } from 'src/app/models/model';
 import { BannerModule } from 'src/app/shared/banner/banner.component';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';

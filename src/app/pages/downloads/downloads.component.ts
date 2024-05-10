@@ -1,8 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 import { SEOServiceService } from 'src/app/services/seoservice.service';
-import {MatCardModule} from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import {MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-card';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { BannerModule } from 'src/app/shared/banner/banner.component';
 @Component({
   selector: 'app-downloads',

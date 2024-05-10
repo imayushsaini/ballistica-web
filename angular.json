@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ballistica-web:build:production"
+              "buildTarget": "ballistica-web:build:production"
             },
             "development": {
-              "browserTarget": "ballistica-web:build:development"
+              "buildTarget": "ballistica-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +90,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ballistica-web:build"
+            "buildTarget": "ballistica-web:build"
           }
         },
         "test": {
@@ -133,13 +133,15 @@
             "development": {
               "optimization": false,
               "sourceMap": true,
-              "extractLicenses": false
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           },
           "defaultConfiguration": "production"
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "configurations": {
             "development": {
               "browserTarget": "ballistica-web:build:development",
@@ -153,7 +155,7 @@
           "defaultConfiguration": "development"
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "routes": [
               "/home",
@@ -164,7 +166,7 @@
               "/pluginmanager",
               "/free-server"
             ],
-            "guessRoutes": false
+            "discoverRoutes": false
           },
           "configurations": {
             "production": {
@@ -181,7 +183,6 @@
       }
     }
   },
-  "defaultProject": "ballistica-web",
   "cli": {
     "analytics": "c32326e4-3e9d-442b-a8e1-299759f06a77"
   }
