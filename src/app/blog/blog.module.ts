@@ -4,6 +4,7 @@ import { Routes, RouterModule, ActivatedRoute, Router } from "@angular/router";
 import { HostServerPost } from "./posts/host.server/host.server.post";
 import { SEOServiceService } from "../services/seoservice.service";
 import { BannerModule } from "../shared/banner/banner.component";
+import { HostGCPServerPost } from "./posts/gcp/gcp.post";
 
 
 @Component({
@@ -45,7 +46,17 @@ const routes: Routes = [ { path: "", component: BlogPostHome},
       title:'BombSquad Server Hosting Guide',
       description:"This article presents a comprehensive guide on hosting a free BombSquad server, offering detailed insights into the process for both PC and Android devices. It contains all possible ways we can host BombSquad Server/Party with Advantage and Disadvantage about each.",
       ogUrl:'https://bombsquad-community.web.app/blog/host-bombsquad-server-free/'
-    } }];
+    }
+  },
+  // {
+  //   path: 'host-bombsquad-server-gcp', component: HostGCPServerPost,
+  //   data: {
+  //      title:'BombSquad Server | Google Cloud Platform',
+  //     description:"Lets host BombSquad Server on Google Cloud Platform",
+  //     ogUrl:'https://bombsquad-community.web.app/blog/host-bombsquad-server-gcp/'
+  //   }
+  // }
+];
 
 @NgModule({
   imports: [
