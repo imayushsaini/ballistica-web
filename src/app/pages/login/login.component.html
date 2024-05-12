@@ -1,27 +1,43 @@
 <div class="login-page">
-  <div class="login-options" >
-      <span class="heading"><h2 *ngIf="!isLoggedIn">LOGIN V2</h2>
-          <h2 *ngIf="isLoggedIn">LOGGED IN AS</h2></span>
-      <div class="details">
-        <div *ngIf="!isLoggedIn">
-          <div class="login-btn" (click)="login()" *ngIf="!url">
-            Login with Ballistica V2 Account.
-          </div>
-          <div *ngIf="url && !error">
-              Complete your authentication.... <br> auto redirecting to <br>
-              <a href={{url}}>{{url}}</a>
-          </div>
-          <div *ngIf="error" class="error">
-               {{error}} <br><br>
-               <div class="login-btn" (click)="retry()">
-                    retry
-               </div>
+  <div class="login-options">
+    <span class="heading">
+      <h2 *ngIf="!isLoggedIn">LOGIN VIA V2</h2>
+      <h2 *ngIf="isLoggedIn">LOGGED IN AS</h2>
+    </span>
+    <div class="login-process">
+      <div *ngIf="!isLoggedIn">
+        <div class="login-btn" (click)="login()" *ngIf="!url">
+          Login with Ballistica V2 Account
+        </div>
+
+        <div *ngIf="url && !error">
+          Complete your authentication.... <br> auto redirecting to <br>
+          <a href={{url}}>{{url}}</a>
+        </div>
+        <div *ngIf="error" class="error">
+          {{error}} <br><br>
+          <div class="login-btn" (click)="retry()">
+            retry
           </div>
         </div>
-          <div *ngIf="isLoggedIn" class="tag">
-            <br><br>
-              <img src="assets/img/icon_account_v2.svg" alt=""> {{tag}}
-          </div>
       </div>
+      <div *ngIf="isLoggedIn" class="tag">
+        <br><br>
+        <img src="assets/img/icon_account_v2.svg" alt=""> {{tag}}
+      </div>
+    </div>
+    <div class="info" *ngIf="!url">
+      <p>
+        This site works with BombSquad 'V2' accounts (also called Ballistica accounts). These accounts are beginning
+        to replace
+        legacy accounts starting in BombSquad 1.7.
+        <br> Above login button will redirect you to Ballistica website where you can enter you email and password.
+        <br>
+        To use other login types like Google Play, you can click on "Manager Account" button within your game
+        account
+        options.
+        It will login you V2 account in browser and then you can continue with above login process.
+      </p>
+    </div>
   </div>
 </div>
