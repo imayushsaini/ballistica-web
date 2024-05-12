@@ -34,15 +34,15 @@ const routes: Routes = [
       ogUrl:'https://bombsquad-community.web.app/download'
     }
    },
-   {
-    path:'servers',
-    loadChildren:() => import ('./pages/servers/servers.component').then(m => m.ServersModule),
-    data:{
-      title:'BombSquad Public Server List',
-      description:"BombSquad Public Servers List, find queue Id, IP address of all public servers ever hosted for bombsquad.",
-      ogUrl:'https://bombsquad-community.web.app/servers'
-    }
-  },
+  //  {
+  //   path:'servers',
+  //   loadChildren:() => import ('./pages/servers/servers.component').then(m => m.ServersModule),
+  //   data:{
+  //     title:'BombSquad Public Server List',
+  //     description:"BombSquad Public Servers List, find queue Id, IP address of all public servers ever hosted for bombsquad.",
+  //     ogUrl:'https://bombsquad-community.web.app/servers'
+  //   }
+  // },
   {
     path:'players',
     loadChildren:() => import ('./pages/players/players.component').then(m => m.PlayersModule),
