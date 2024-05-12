@@ -4,23 +4,23 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
   @Input() isLoggedIn: any;
   @Input() tag: any;
-  title="BombSquad";
+  title = 'BombSquad';
 
   public isMenuCollapsed = true;
-  constructor(private tokenStorage:TokenStorageService) { }
+  constructor(private tokenStorage: TokenStorageService) {}
 
   ngOnInit(): void {
     const user = this.tokenStorage.getUser();
     this.tag = user.tag;
   }
 
-  signout(){
+  signout() {
     this.tokenStorage.signOut();
     location.reload();
-   }
+  }
 }

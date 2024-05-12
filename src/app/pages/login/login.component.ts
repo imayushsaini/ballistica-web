@@ -7,85 +7,87 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  date:any;
-  proxy:string="";
-  key:string="";
-  url?:string;
-  error:any;
-  tag?:string;
-  isLoggedIn= false;
+  date: any;
+  proxy: string = '';
+  key: string = '';
+  url?: string;
+  error: any;
+  tag?: string;
+  isLoggedIn = false;
   child: Window | null | undefined;
-  constructor(private authService:AuthService, private tokenStorage:TokenStorageService, private router:Router) { }
+  constructor(
+    private authService: AuthService,
+    private tokenStorage: TokenStorageService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-    if(this.tokenStorage.getToken()){
-      this.tag =  this.tokenStorage.getUser().tag;
-      this.isLoggedIn=true;
+    if (this.tokenStorage.getToken()) {
+      this.tag = this.tokenStorage.getUser().tag;
+      this.isLoggedIn = true;
       this.router.navigate(['/mods']);
     }
-
   }
 
-
-  login(){
-    this.authService.getProxy().subscribe((data:any) => {
-
+  login() {
+    this.authService.getProxy().subscribe((data: any) => {
       this.date = JSON.stringify(data.end_command[1].s);
       this.proxy = data.end_command[1].p;
       this.key = data.end_command[1].k;
       this.url = data.open_url;
-      setTimeout(()=> {
-        this.child = window.open(this.url,"_blank");
-      }, 2000)
+      setTimeout(() => {
+        this.child = window.open(this.url, '_blank');
+      }, 2000);
 
       this.checkProgress();
-    })
+    });
   }
 
   checkProgress() {
-    this.authService.checkLoginProgress(this.date,this.proxy,this.key).subscribe((data:any) => {
-        if(data.status==202) {
-           setTimeout(()=> {
+    this.authService
+      .checkLoginProgress(this.date, this.proxy, this.key)
+      .subscribe(
+        (data: any) => {
+          if (data.status == 202) {
+            setTimeout(() => {
               this.checkProgress();
-           }, 3000)
-        }else if(data.status ==200) {
-          const user = JSON.parse(atob(data.body.token.split(".")[1]))
-          this.tokenStorage.saveUser(user);
-          this.tokenStorage.saveToken(data.body.token);
-          this.child?.close();
-          this.afterLoggedIn();
-        }
-    },(error)=>{
-      this.error = error.error;
-    })
+            }, 3000);
+          } else if (data.status == 200) {
+            const user = JSON.parse(atob(data.body.token.split('.')[1]));
+            this.tokenStorage.saveUser(user);
+            this.tokenStorage.saveToken(data.body.token);
+            this.child?.close();
+            this.afterLoggedIn();
+          }
+        },
+        (error) => {
+          this.error = error.error;
+        },
+      );
   }
 
-  afterLoggedIn(){
+  afterLoggedIn() {
     const user = this.tokenStorage.getUser();
     this.tag = user.tag;
     this.isLoggedIn = true;
-    setInterval(()=>{
+    setInterval(() => {
       location.reload();
-    },1000);
+    }, 1000);
   }
-  retry(){
+  retry() {
     location.reload();
   }
 }
 
-const routes: Routes = [{path: '', component: LoginComponent}];
+const routes: Routes = [{ path: '', component: LoginComponent }];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ],
+  imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [LoginComponent],
   declarations: [LoginComponent],
-  providers: []
+  providers: [],
 })
-export class LoginModule {
-}
+export class LoginModule {}

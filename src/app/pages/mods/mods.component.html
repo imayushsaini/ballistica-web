@@ -1,21 +1,32 @@
 <section>
   <div class="background">
     <div class="heading">
-      <h1> Mods Repository</h1>
+      <h1>Mods Repository</h1>
     </div>
     <div class="about-page">
       <p>
-        Mods/Plugins made by BombSquad Community , shared over community <a href="https://discord.gg/ucyaesh">discord
-          server</a> .
-        Install at your own risk - contact developers on discord if facing any issue .<br> Become a contributor , post
-        your mod in above mentioned discord server.
+        Mods/Plugins made by BombSquad Community , shared over community
+        <a href="https://discord.gg/ucyaesh">discord server</a> . Install at
+        your own risk - contact developers on discord if facing any issue .<br />
+        Become a contributor , post your mod in above mentioned discord server.
       </p>
     </div>
     <div class="search-box">
       <mat-form-field class="example-form-field">
         <mat-label>Search Mod</mat-label>
-        <input matInput type="text" [(ngModel)]="value" (ngModelChange)="valueChange($event)">
-        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="resetSearch()">
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="value"
+          (ngModelChange)="valueChange($event)"
+        />
+        <button
+          *ngIf="value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="resetSearch()"
+        >
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
@@ -24,24 +35,29 @@
       <div class="loading" *ngIf="isLoading">
         <mat-spinner></mat-spinner>
       </div>
-      <div class="mod" *ngFor="let mod of mods; let i = index" (click)="openModPage(mod)">
-        <div class="ads" *ngIf="i%4==0 && i!=0">
+      <div
+        class="mod"
+        *ngFor="let mod of mods; let i = index"
+        (click)="openModPage(mod)"
+      >
+        <div class="ads" *ngIf="i % 4 == 0 && i != 0">
           <app-banner></app-banner>
         </div>
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{mod.title}}</h5>
-            {{mod.description.slice(0,120)}}
+            <h5 class="card-title">{{ mod.title }}</h5>
+            {{ mod.description.slice(0, 120) }}
           </div>
         </div>
       </div>
 
-      <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page"
-        (page)="pageChanged($event)">
+      <mat-paginator
+        [length]="200"
+        [pageSizeOptions]="[10, 50, 100]"
+        aria-label="Select page"
+        (page)="pageChanged($event)"
+      >
       </mat-paginator>
-
-
     </div>
   </div>
-
 </section>

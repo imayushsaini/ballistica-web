@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -29,13 +28,15 @@ $ballistica-web-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$ballistica-web-theme: mat.define-dark-theme((
-  color: (
-    primary: $ballistica-web-primary,
-    accent: $ballistica-web-accent,
-    warn: $ballistica-web-warn,
+$ballistica-web-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $ballistica-web-primary,
+      accent: $ballistica-web-accent,
+      warn: $ballistica-web-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -57,12 +58,18 @@ $ballistica-web-theme: mat.define-dark-theme((
 }
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-.dark-theme{
+.dark-theme {
   background-color: black;
   color: white;
 }
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";

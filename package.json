@@ -14,6 +14,7 @@
     "prerender": "ng run ballistica-web:prerender",
     "build:ci": "npm run clean && npm run build-deploy",
     "build-deploy": "ng build --base-href /bombsquad-web/",
+    "host": "npx lite-server --baseDir=\"dist/ballistica-web/browser\"",
     "firebase": "firebase deploy --only hosting"
   },
   "private": true,
@@ -57,6 +58,8 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "lite-server": "^2.6.1",
+    "prettier": "^3.2.5",
     "typescript": "~5.4.5",
     "url": "^0.11.0"
   }

@@ -1,33 +1,36 @@
-import {Component, OnInit, Input, AfterViewInit, NgModule} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  AfterViewInit,
+  NgModule,
+} from '@angular/core';
 import { Banner } from '../../models/model';
 import { CommonModule } from '@angular/common';
 @Component({
-    selector: 'app-banner',
-    templateUrl: './banner.component.html',
-    styleUrls: ['./banner.component.scss']
+  selector: 'app-banner',
+  templateUrl: './banner.component.html',
+  styleUrls: ['./banner.component.scss'],
 })
 export class BannerComponent implements AfterViewInit {
-
-  constructor() {    }
+  constructor() {}
 
   ngAfterViewInit() {
-        setTimeout(() => {
-            try {
-             (window['adsbygoogle'] = window['adsbygoogle'] || []).push({
-                    overlays: {bottom: true}
-               });
-
-            } catch (e) {
-                console.error(e);
-            }
-        }, 0);
+    setTimeout(() => {
+      try {
+        (window['adsbygoogle'] = window['adsbygoogle'] || []).push({
+          overlays: { bottom: true },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }, 0);
   }
-
 }
 
 @NgModule({
   declarations: [BannerComponent],
   imports: [CommonModule],
-  exports:[BannerComponent]
+  exports: [BannerComponent],
 })
-export class BannerModule { }
+export class BannerModule {}

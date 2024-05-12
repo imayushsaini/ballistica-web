@@ -1,48 +1,52 @@
-import { Component, NgModule, OnInit } from "@angular/core";
-import { ActivatedRoute, RouterModule, Routes } from "@angular/router";
-import { SEOServiceService } from "src/app/services/seoservice.service";
-import { MatButtonModule} from '@angular/material/button';
-import { HttpClient } from "@angular/common/http";
-import { CommonModule } from "@angular/common";
+import { Component, NgModule, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { SEOServiceService } from 'src/app/services/seoservice.service';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { images } from './image_map';
-import { BannerModule } from "src/app/shared/banner/banner.component";
-import { Banner } from "src/app/models/model";
+import { BannerModule } from 'src/app/shared/banner/banner.component';
+import { Banner } from 'src/app/models/model';
 @Component({
   selector: 'app-Gallery',
   templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss']
+  styleUrls: ['./gallery.component.scss'],
 })
 export class GalleryComponent implements OnInit {
-  images: { url: string; alt: string; }[] = images;
+  images: { url: string; alt: string }[] = images;
 
-  currentimages:{ url: string, alt: string }[] = this.images.slice(0, 12);
+  currentimages: { url: string; alt: string }[] = this.images.slice(0, 12);
   startPoint = 0;
   endPoint = 12;
   showOverlay = false;
-  selectedImage!: { url: string; alt: string; };
-   banner: Banner;
-  CDN = "https://scintillating-creponne-d386aa.netlify.app";
-  constructor(private http: HttpClient, private _seoService: SEOServiceService, private activatedRoute: ActivatedRoute) {
+  selectedImage!: { url: string; alt: string };
+  banner: Banner;
+  CDN = 'https://scintillating-creponne-d386aa.netlify.app';
+  constructor(
+    private http: HttpClient,
+    private _seoService: SEOServiceService,
+    private activatedRoute: ActivatedRoute,
+  ) {
     this.banner = new Banner(
       'ca-pub-7561471327972639',
       1688169659,
-        'fluid',
+      'fluid',
       '-6t+ed+2i-1n-4w',
-      true
-      )
+      true,
+    );
   }
 
   ngOnInit(): void {
-    var rt = this.getChild(this.activatedRoute)
+    var rt = this.getChild(this.activatedRoute);
     rt.data.subscribe((data: any) => {
-          this._seoService.updateTitle(data.title);
-          this._seoService.updateOgUrl(data.ogUrl);
-          //Updating Description tag dynamically with title
-          this._seoService.updateDescription(data.description)
-        });
+      this._seoService.updateTitle(data.title);
+      this._seoService.updateOgUrl(data.ogUrl);
+      //Updating Description tag dynamically with title
+      this._seoService.updateDescription(data.description);
+    });
   }
-  getChild(activatedRoute: ActivatedRoute):any {
+  getChild(activatedRoute: ActivatedRoute): any {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
     } else {
@@ -67,9 +71,8 @@ export class GalleryComponent implements OnInit {
     }
 
     this.currentimages = this.images.slice(this.startPoint, this.endPoint);
-
   }
-  openOverlay(image: { url: string, alt: string }) {
+  openOverlay(image: { url: string; alt: string }) {
     this.selectedImage = image;
     this.showOverlay = true;
   }
@@ -78,7 +81,7 @@ export class GalleryComponent implements OnInit {
   }
 }
 
-const routes: Routes = [{path: '', component: GalleryComponent}];
+const routes: Routes = [{ path: '', component: GalleryComponent }];
 
 @NgModule({
   imports: [
@@ -87,10 +90,9 @@ const routes: Routes = [{path: '', component: GalleryComponent}];
     MatButtonModule,
     MatIconModule,
     BannerModule,
-    ],
+  ],
   exports: [GalleryComponent],
   declarations: [GalleryComponent],
-  providers: []
+  providers: [],
 })
-export class GalleryModule {
-}
+export class GalleryModule {}

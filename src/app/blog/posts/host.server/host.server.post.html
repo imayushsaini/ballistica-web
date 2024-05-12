@@ -6,138 +6,226 @@
   <div class="content">
     <article>
       <h2>Introduction</h2>
-      <p>BombSquad is a popular multiplayer game that utilizes a server/client architecture. In this setup, player input
-        is
-        transmitted to the host server during a network game, which then processes the inputs and sends the results back
-        to all
-        participating clients. However, to ensure a seamless and enjoyable gaming experience, it is crucial for the
-        server
-        to
-        maintain a lag-free network connection. This article delves into the significance of server performance and
-        network
-        connection quality in optimizing the multiplayer experience in BombSquad. Right now BombSquad Server can be
-        hosted
-        with multiple ways, lets explore all possible way we can use to host this game's server.
+      <p>
+        BombSquad is a popular multiplayer game that utilizes a server/client
+        architecture. In this setup, player input is transmitted to the host
+        server during a network game, which then processes the inputs and sends
+        the results back to all participating clients. However, to ensure a
+        seamless and enjoyable gaming experience, it is crucial for the server
+        to maintain a lag-free network connection. This article delves into the
+        significance of server performance and network connection quality in
+        optimizing the multiplayer experience in BombSquad. Right now BombSquad
+        Server can be hosted with multiple ways, lets explore all possible way
+        we can use to host this game's server.
       </p>
       <h2>Possible ways to host BombSquad Server</h2>
-      <p>BombSquad Server/Party can be hosted in mulitple ways. Majorly it divided into 2 category host with GUI game or
-        without GUI - headless server. Lets discuss each of them with pros and cons. </p>
+      <p>
+        BombSquad Server/Party can be hosted in mulitple ways. Majorly it
+        divided into 2 category host with GUI game or without GUI - headless
+        server. Lets discuss each of them with pros and cons.
+      </p>
       <ol>
-        <hr>
+        <hr />
         <li>
           <h3>Host a Public Party | Gather</h3>
-          <p>This option is available within game. Click Gather > Public > Host a Public Party. <br>
-            With this option game will be hosted on your device on phone/laptop where ever you running game. So people
-            will connect with you device to play together. Your Party/Server will appear in public party list. </p>
+          <p>
+            This option is available within game. Click Gather > Public > Host a
+            Public Party. <br />
+            With this option game will be hosted on your device on phone/laptop
+            where ever you running game. So people will connect with you device
+            to play together. Your Party/Server will appear in public party
+            list.
+          </p>
           Pros
           <ul>
-            <li>Game will run super smooth for you, since server is running on your game only.</li>
+            <li>
+              Game will run super smooth for you, since server is running on
+              your game only.
+            </li>
             <li>Very Easy to host , and its totally free.</li>
             <li>You can use plugin/mods installed in your game.</li>
           </ul>
-          Cons <ul>
-            <li>You need very good internet , else other players will feel laggy.</li>
-            <li>If you are using WIFI then you need to configure your router to forward you game port i.e 43210 from
-              router to your device.</li>
-            <li>If you using Windows , most probably you also need to configure your Windows firewall for this
-              application to allow incoming traffic on game port i.e 43210 (may be different , you will get message what
-              port you need to open.)</li>
-            <li>Your server is on as long as game is running, once you close game your party will get closed. So this is
-              not a permanent solution.</li>
-            <li>Since game is hosted on your device and visible to everyone , they will be available to see you IP
-              Address , and may able to know your Country/City.</li>
+          Cons
+          <ul>
+            <li>
+              You need very good internet , else other players will feel laggy.
+            </li>
+            <li>
+              If you are using WIFI then you need to configure your router to
+              forward you game port i.e 43210 from router to your device.
+            </li>
+            <li>
+              If you using Windows , most probably you also need to configure
+              your Windows firewall for this application to allow incoming
+              traffic on game port i.e 43210 (may be different , you will get
+              message what port you need to open.)
+            </li>
+            <li>
+              Your server is on as long as game is running, once you close game
+              your party will get closed. So this is not a permanent solution.
+            </li>
+            <li>
+              Since game is hosted on your device and visible to everyone , they
+              will be available to see you IP Address , and may able to know
+              your Country/City.
+            </li>
           </ul>
-          <hr>
+          <hr />
         </li>
         <app-banner></app-banner>
         <li>
           <h3>Host a Private Party | Gather</h3>
-          <p>This option also available within game. Click Gather > Private > Host a Private Party.<br>
-            With this option game will be hosted on cloud server hosted by game owner Eric Froemling, This will give you
-            a secret Party Code which you need to share with your friends with whom you want to play.</p>
+          <p>
+            This option also available within game. Click Gather > Private >
+            Host a Private Party.<br />
+            With this option game will be hosted on cloud server hosted by game
+            owner Eric Froemling, This will give you a secret Party Code which
+            you need to share with your friends with whom you want to play.
+          </p>
           Pros
           <ul>
-            <li>Game will run on cloud server near your location, so it will run smooth for you and your friend.</li>
-            <li>Very cheap , most of the time you will be available to create this party for free , else it will charge
-              very small tickets.</li>
-            <li>Easiest way to host a party/server, you not need to do any configuration on your phone or network.</li>
-            <li>Usefull in scenario where you just to play with your friends privately.</li>
+            <li>
+              Game will run on cloud server near your location, so it will run
+              smooth for you and your friend.
+            </li>
+            <li>
+              Very cheap , most of the time you will be available to create this
+              party for free , else it will charge very small tickets.
+            </li>
+            <li>
+              Easiest way to host a party/server, you not need to do any
+              configuration on your phone or network.
+            </li>
+            <li>
+              Usefull in scenario where you just to play with your friends
+              privately.
+            </li>
           </ul>
           Cons
           <ul>
-            <li>Since game is hosted on cloud, and you dont have access to that cloud server , you cant use any
-              mods/plugin.</li>
+            <li>
+              Since game is hosted on cloud, and you dont have access to that
+              cloud server , you cant use any mods/plugin.
+            </li>
             <li>Server will remain open for limited time duration.</li>
           </ul>
-          <hr>
+          <hr />
         </li>
         <li>
           <h3>Host a Dedicated Server | Cloud Server</h3>
-          <p>This server is not hosted with your game. This Option use headless server scripts.
-            For this you may need some technical knowledge to create a server and install game server scripts, also it
-            need some extra assets like you phone number and credit card/debit card.
-            Hosting on Dedicated Cloud server means you will buy a computer which is running somewhere else and you will
-            install BombSquad server scripts on that computer. So definately this is not a free solution
-            you need to buy a cloud server also known as instance , virtual machine , droplet , EC2, VPS, some kids call
-            it an "IP" which is technically misleading.<br> Dont worry you not need to always pay for this, yipee
-            yeah there are some cloud providers (nearly all) they provides free trial with limited resource and time
-            period or gives you free credits which you can spend to host a server. But you still need to have a valid
-            bank credit card to verify your account to redeem free trial.
-            Like you can check out Cloud providers like AWS, they gives 12 Months free trial with t2.micro EC2 instance
-            and 100GB of Bandwidth and to create AWS account you need to to have atleast Debit Card and they charge
-            small amount of money like 2Rs or 1$ to verify you card. They refunds that amount within 24 hours in same
-            bank account.
-            If you google "Cloud server with free trial" you will find plenty of websites that offer free trial for some
-            duration.</p>
+          <p>
+            This server is not hosted with your game. This Option use headless
+            server scripts. For this you may need some technical knowledge to
+            create a server and install game server scripts, also it need some
+            extra assets like you phone number and credit card/debit card.
+            Hosting on Dedicated Cloud server means you will buy a computer
+            which is running somewhere else and you will install BombSquad
+            server scripts on that computer. So definately this is not a free
+            solution you need to buy a cloud server also known as instance ,
+            virtual machine , droplet , EC2, VPS, some kids call it an "IP"
+            which is technically misleading.<br />
+            Dont worry you not need to always pay for this, yipee yeah there are
+            some cloud providers (nearly all) they provides free trial with
+            limited resource and time period or gives you free credits which you
+            can spend to host a server. But you still need to have a valid bank
+            credit card to verify your account to redeem free trial. Like you
+            can check out Cloud providers like AWS, they gives 12 Months free
+            trial with t2.micro EC2 instance and 100GB of Bandwidth and to
+            create AWS account you need to to have atleast Debit Card and they
+            charge small amount of money like 2Rs or 1$ to verify you card. They
+            refunds that amount within 24 hours in same bank account. If you
+            google "Cloud server with free trial" you will find plenty of
+            websites that offer free trial for some duration.
+          </p>
           Pros
           <ul>
-            <li>You have complete control on your server, you can customize server scripts, install mods</li>
-            <li>This Server will run 24/7, as this is running on some other's computer, not yours.</li>
-            <li>You can host this server for free , using free trial from cloud. Create new account after trial expire
-              or use some other cloud providers.</li>
+            <li>
+              You have complete control on your server, you can customize server
+              scripts, install mods
+            </li>
+            <li>
+              This Server will run 24/7, as this is running on some other's
+              computer, not yours.
+            </li>
+            <li>
+              You can host this server for free , using free trial from cloud.
+              Create new account after trial expire or use some other cloud
+              providers.
+            </li>
           </ul>
           Cons
           <ul>
-            <li>You need a valid Credit card/Debit Card , to create Cloud account.</li>
-            <li>Some cloud provides free trial for some time duration. But then after trial expire they will start
-              charging money.</li>
-            <li>You need good technicall skills or have to pay good attention while watching youtube tutorials, and
-              follow it properly.</li>
-            <li>You need to understand free trial terms condition properly, else you can get huge bill.</li>
-            <li>It could be little hard to do , if you doing for first time.</li>
+            <li>
+              You need a valid Credit card/Debit Card , to create Cloud account.
+            </li>
+            <li>
+              Some cloud provides free trial for some time duration. But then
+              after trial expire they will start charging money.
+            </li>
+            <li>
+              You need good technicall skills or have to pay good attention
+              while watching youtube tutorials, and follow it properly.
+            </li>
+            <li>
+              You need to understand free trial terms condition properly, else
+              you can get huge bill.
+            </li>
+            <li>
+              It could be little hard to do , if you doing for first time.
+            </li>
           </ul>
-          <hr>
+          <hr />
         </li>
         <app-banner></app-banner>
         <li>
           <h3>Host a Headless Server | On your device</h3>
-          <p>This is a combination of option 1 and option 3. In this server will be hosted on your device instead of
-            cloud server. But not within you game, it will be hosted with headless server scripts.
-            <br>So you not need to keep your game running. As server scripts will be running in background on your
-            computer/phone/device.
-            But you need to keep your phone/computer powered on as server is running on your device.
+          <p>
+            This is a combination of option 1 and option 3. In this server will
+            be hosted on your device instead of cloud server. But not within you
+            game, it will be hosted with headless server scripts. <br />So you
+            not need to keep your game running. As server scripts will be
+            running in background on your computer/phone/device. But you need to
+            keep your phone/computer powered on as server is running on your
+            device.
           </p>
-          Pros <ul>
+          Pros
+          <ul>
             <li>Its free to host. Since server is running on you device.</li>
-            <li>You can use rasberry pi , old computer or Android device and keep them turned on 24/7 to keep you server
-              online.</li>
-            <li>You can customize scripts, install mods or modify in what ever way you want.
             <li>
+              You can use rasberry pi , old computer or Android device and keep
+              them turned on 24/7 to keep you server online.
+            </li>
+            <li>
+              You can customize scripts, install mods or modify in what ever way
+              you want.
+            </li>
+            <li></li>
           </ul>
-          Cons <ul>
-            <li>All cons of option 1, port forwarding, firewall setting, IP address reveal, good internet.</li>
-            <li>Additionally you father will get electricity bill, as you keeping your device turned on for long itme.
+          Cons
+          <ul>
+            <li>
+              All cons of option 1, port forwarding, firewall setting, IP
+              address reveal, good internet.
+            </li>
+            <li>
+              Additionally you father will get electricity bill, as you keeping
+              your device turned on for long itme.
             </li>
           </ul>
         </li>
       </ol>
       <h2>Conclusion</h2>
-      <p>All above options have Advantage and Disadvantage , it depends on you need. In next article we will go deep in
-        Dedicated servers and will talk about all cloud providers available how to choose correct server and how to
-        configure them. If you have experience hosting server share your feedback about your cloud or post article like
-        this.
-        Send you article in community discord server <a href="https://discord.gg/ucyaesh">Discord Invite link.</a>
       <p>
+        All above options have Advantage and Disadvantage , it depends on you
+        need. In next article we will go deep in Dedicated servers and will talk
+        about all cloud providers available how to choose correct server and how
+        to configure them. If you have experience hosting server share your
+        feedback about your cloud or post article like this. Send you article in
+        community discord server
+        <a href="https://discord.gg/ucyaesh">Discord Invite link.</a>
+      </p>
+
+      <p></p>
     </article>
   </div>
 </section>

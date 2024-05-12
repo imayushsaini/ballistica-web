@@ -1,9 +1,11 @@
-.main{
+.main {
   min-height: 80vh;
   color: white;
-  background-color: black;padding-bottom:20px
+  background-color: black;
+  padding-bottom: 20px;
 }
-h1 , .heading{
+h1,
+.heading {
   text-align: center;
   padding-top: 2rem;
 }
@@ -36,11 +38,10 @@ h1 , .heading{
     font-weight: 500;
   }
   .thumbnail {
-
   }
   img {
-     object-fit: cover;
-     width: 288px;
+    object-fit: cover;
+    width: 288px;
   }
   .description {
     margin-top: 10px;
@@ -56,9 +57,9 @@ h1 , .heading{
   width: 80%;
   margin: auto;
 }
-.more{
+.more {
   width: 30%;
-   border: 0.3px solid #767676;
+  border: 0.3px solid #767676;
 }
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
@@ -66,8 +67,8 @@ h1 , .heading{
     display: none;
   }
   .blog-list {
-  width: 100%;
-}
+    width: 100%;
+  }
   .card-body {
     flex-wrap: wrap;
     img {
