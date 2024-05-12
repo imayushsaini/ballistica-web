@@ -1,15 +1,15 @@
 import { Component, Injectable, NgModule, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatLegacyPaginatorIntl as MatPaginatorIntl, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatPaginatorIntl,  PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 import { Subject } from 'rxjs';
 import { SEOServiceService } from 'src/app/services/seoservice.service';
 
-import {MatLegacyInputModule as MatInputModule} from '@angular/material/legacy-input';
-import {MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from '@angular/material/legacy-progress-spinner';
-import {MatLegacyFormFieldModule as MatFormFieldModule} from '@angular/material/legacy-form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatLegacyPaginatorModule as MatPaginatorModule} from '@angular/material/legacy-paginator';
+import { MatInputModule} from '@angular/material/input';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatIconModule} from '@angular/material/icon';
+import { MatPaginatorModule} from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { PlayersService } from 'src/app/services/players.service';
 @Injectable()

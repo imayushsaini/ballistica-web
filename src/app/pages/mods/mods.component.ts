@@ -1,18 +1,18 @@
 import { Component, Injectable, NgModule, OnInit } from '@angular/core';
-import { MatLegacyPaginatorIntl as MatPaginatorIntl, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 
-import {MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from '@angular/material/legacy-progress-spinner';
-import {MatLegacyFormFieldModule as MatFormFieldModule} from '@angular/material/legacy-form-field';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
-import {MatLegacyPaginatorModule as MatPaginatorModule} from '@angular/material/legacy-paginator';
+import { MatPaginatorModule} from '@angular/material/paginator';
 
 import { Subject } from 'rxjs';
 import { ModsService } from 'src/app/services/mods.service';
 import { SEOServiceService } from 'src/app/services/seoservice.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import {  MatInputModule } from '@angular/material/input';
 import { WorkspaceService } from 'src/app/services/workspace.service';
 import { Banner } from 'src/app/models/model';
 import { BannerModule } from 'src/app/shared/banner/banner.component';

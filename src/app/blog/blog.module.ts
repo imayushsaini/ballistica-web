@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit } from "@angular/core";
-import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
+import { MatButtonModule } from "@angular/material/button";
 import { Routes, RouterModule, ActivatedRoute, Router } from "@angular/router";
 import { HostServerPost } from "./posts/host.server/host.server.post";
 import { SEOServiceService } from "../services/seoservice.service";
