@@ -72,7 +72,7 @@ export class BaportComponent implements OnInit, AfterViewInit {
         if (this.insertedByUs) {
           this.insertedByUs = false;
           let snackBarRef = this._snackBar.open(
-            'Download udpated code',
+            'Download updated code',
             'Download',
           );
           snackBarRef.onAction().subscribe(() => this.downloadScript());
@@ -81,7 +81,7 @@ export class BaportComponent implements OnInit, AfterViewInit {
           if (this.portSnackBarRef == null) {
             this.portSnackBarRef = this._snackBar.open(
               'Update code to latest API',
-              'Port',
+              'Update',
             );
             this.portSnackBarRef
               .onAction()
