@@ -1,0 +1,23 @@
+.background {
+  background-color: black;
+  min-height: 65vh;
+  color: white;
+}
+
+.content {
+  width: 80%;
+  margin: auto;
+}
+.heading {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 20px;
+}
+.description {
+  padding-top: 30px;
+}
+.baport-try-btn {
+  display: flex;
+  justify-content: center;
+}
