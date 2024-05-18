@@ -36,6 +36,7 @@
     "@angular/ssr": "^17.3.7",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
+    "ace-builds": "^1.33.2",
     "bootstrap": "^5.2.0",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",

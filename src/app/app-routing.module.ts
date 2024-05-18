@@ -139,7 +139,7 @@ const routes: Routes = [
     path: 'baport',
     loadChildren: () => import("./pages/baport/baport.component").then((m) => m.BaPortModule),
     data: {
-      title: 'BAPORT | Update plugin',
+      title: 'BAPORT | Update plugin to API 8',
       description: 'Update plugins to latest version of game.',
       ogUrl: 'https://bombsquad-community.web.app/baport'
     }

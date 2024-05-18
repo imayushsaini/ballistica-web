@@ -4,7 +4,8 @@
       Introducing BAPORT: Your BS Plugin Update Wizard
     </div>
     <div class="description">
-      <p>Meet BAPORT, your ultimate solution for effortlessly updating your Bobmsquad game plugins to the latest API
+      <p>Meet <a href="https://github.com/bombsquad-community/baport">BAPORT</a> , your ultimate solution for
+        effortlessly updating your Bobmsquad game plugins to the latest API
         version,
         currently at API 8. BAPORT streamlines the tedious process of converting code from API 6 or 7 to the latest
         version,
@@ -33,7 +34,10 @@
         [matRippleUnbounded]="true" [disableRipple]="false">Update plugin now</button>
     </div>
   </div>
-  <div class="baport-app">
-    IMPLEMENT ACE.JS HERE
+  <div class="baport-app" *ngIf="appLaunched" dragDropFile (fileDropped)="onFileDropped($event)">
+
+    <div class="tip">Paste your code here or drag drop your file.</div>
+    <div class="warn" *ngIf="mulitfilewarning">we support only one file upload at a time</div>
+    <div class="app-ace-editor" #editor>
+    </div>
   </div>
-</div>
