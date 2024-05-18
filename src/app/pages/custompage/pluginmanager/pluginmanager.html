@@ -1,59 +1,132 @@
 <div class="main">
   <div class="content">
+    <h1>Download BombSquad Plugin Manager</h1>
 
-    <h1>BombSquad Plugin Manager</h1>
+    <p>
+      Introducing Bombsquad Plugin Manager: Simplify Game Modding and Access
+      Community Content <br />
 
+      The Bombsquad Plugin Manager is a powerful tool designed specifically for
+      the popular game Bombsquad. This plugin manager serves as a convenient
+      gateway to enhance your gaming experience by providing easy access to a
+      wide range of community-created content.
+    </p>
 
-    <p> Plugin-manager
-      A plugin manager for the game - <a href="https://www.froemling.net/apps/bombsquad">Bombsquad</a> . Plugin manager is a plugin in itself, which makes further modding of your game more convenient by providing easier access to community created content.
+    <h2>Key Features of Bombsquad Plugin Manager</h2>
+    <ul>
+      <li>
+        <strong>Open-Source:</strong> Both the plugin manager itself and all the
+        plugins available in this repository are completely open-source. This
+        ensures transparency and allows for collaboration and improvement within
+        the gaming community.
+      </li>
+      <li>
+        <strong>Cross-Platform Compatibility:</strong> The plugin manager works
+        seamlessly on all platforms, ensuring that players on different devices
+        can benefit from its functionality.
+      </li>
+      <li>
+        <strong>API Version Compatibility:</strong> The plugin manager ensures
+        that you only encounter plugins and updates that are compatible with
+        your game's current API version. This prevents any compatibility issues
+        and ensures a smooth modding experience.
+      </li>
+      <li>
+        <strong>Plugin Search:</strong> Easily search for plugins that cater to
+        your specific needs. The plugin manager provides a convenient search
+        function that allows you to discover new and exciting additions to your
+        game.
+      </li>
+      <li>
+        <strong>Third-Party Plugin Sources:</strong> Expand your options by
+        adding 3rd party plugin sources. However, please note that these plugins
+        may not be audited, so exercise caution when using them. Add 3rd party
+        plugin sources (use them at your own risk, since they may not be
+        audited!).
+      </li>
+      <li>
+        <strong>Auto-Updates Control:</strong>Take control of your plugin
+        manager and plugin updates. Enable or disable auto-updates based on your
+        preferences, ensuring that you have full control over the modding
+        process.
+      </li>
+      <li>
+        <strong>Instant Activation:</strong> No need to restart the game after
+        installing plugins or minigames. The plugin manager allows you to
+        immediately enable installed plugins without any interruptions to your
+        gameplay.
+      </li>
+      <li>
+        <strong>Seamless Integration:</strong> Launch a plugin's settings
+        directly from the plugin manager window, providing a seamless and
+        efficient way to customize your gaming experience.
+      </li>
+      <li>
+        <strong>Source Code Preview:</strong> Prior to installation, you can
+        review a plugin's source code within the plugin manager. This
+        transparency allows you to make informed decisions about which plugins
+        to install.
+      </li>
+    </ul>
 
-      <h2>Features</h2>
-      <ul>
-        <li>
-          Completely open-source - both the plugin-manager and all the plugins in this repository.
-        </li>
-        <li>Works on all platforms.</li>
-        <li>Only deal with plugins and updates targetting your game's current API version.</li>
-        <li>Search for plugins.</li>
-        <li> Add 3rd party plugin sources (use them at your own risk, since they may not be audited!).</li>
-        <li>Enable or disable auto-updates for plugin manager and plugins.</li>
-        <li> Immediately enable installed plugins/minigames without having to restart game.</li>
-        <li> Launch a plugin's settings directly from the plugin manager window.</li>
-        <li>Check out a plugin's source code before installing it.</li>
-        <li>Sync installed plugins with workspaces.</li>
-        <li>Sort plugins by popularity, downloads, rating or some other metric.</li>
-      </ul>
+    <h2>Download</h2>
+    Direct download for all platforms. Click this download button to start
+    downloading plugin manager script. <br />
+    <button mat-raised-button color="primary" (click)="onDownload()">
+      Download Now
+    </button>
+    <br /><br />
+    <a href="https://github.com/bombsquad-community/plugin-manager"
+      >View it on github </a
+    ><br />
+    <br />
+    <app-banner></app-banner> <br />
+    <h2>Installation Options</h2>
+    There are two recommended methods for installing the Bombsquad Plugin
+    Manager: <br />
+    <ul>
+      <li>
+        <strong>Recommended Method:</strong> Download the "plugin_manager.py"
+        file to your mods directory. Access the mods directory by navigating to
+        your game's Settings, then selecting Advanced, and finally clicking on
+        Show Mods Folder. This method ensures a seamless installation process.
+      </li>
+      <li>
+        <strong>Alternative Method:</strong> Add the "plugin_manager.py" file to
+        your workspace. However, please note that self-updates of the plugin
+        manager will not work with this installation method. To manually apply
+        updates, simply copy the latest source code of the plugin manager into
+        your workspace. It's important to note that this method may lead to
+        compatibility issues if the game overwrites the plugin manager during
+        the next sync.
+      </li>
+    </ul>
 
-       <h2>Download</h2>
-       Direct download for all platforms <br>
-       <button mat-raised-button color="primary" (click)="onDownload()">Download Now</button> <br>
-       <a href="https://github.com/bombsquad-community/plugin-manager">View it on github </a><br>
+    <h2>Usage</h2>
+    If installed correctly, you'll see the plugin manager button in your game's
+    settings.
+    <br />
+    <video controls width="750" style="width: 100%">
+      <source src="assets/img/plugin-manager.webm" alt="" />
+    </video>
+    <br />
 
-      <h2>Installation</h2>
-      There are two different ways the plugin manager can be installed: <br>
+    That's it, you now have access to a variety of community created content
+    waiting for you to install!
+    <h2>Contributing</h2>
+    Submitting a Plugin In order for a plugin to get accepted to this
+    <a href="https://github.com/bombsquad-community/plugin-manager"
+      >official repository</a
+    >
+    <br />
+    <br />
 
-      1. Download plugin_manager.py to your mods directory (check it out by going into your game's Settings -> Advanced -> Show Mods Folder). This is the recommended way (see below).
-      <br>
-      2. Another way is to add plugin_manager.py to your workspace. However, plugin manager self-updates will fail when installed using this way since the game will overrwrite the updated plugin manager, with the older version from workspace on the next sync. However, you can manually apply updates by copying the latest plugin manager's source code again to your workspace when using this method.
+    Discover the Power of Bombsquad Plugin Manager <br />
 
-      <h2>Usage</h2>
-      If installed correctly, you'll see the plugin manager button in your game's settings.
-      <br>
-      <img src="https://user-images.githubusercontent.com/106954762/190505304-519c4b91-2461-42b1-be57-655a3fb0cbe8.gif" alt="">
-      <br>
-
-      That's it, you now have access to a variety of community created content waiting for you to install!
-      <h2>Contributing</h2>
-      Submitting a Plugin
-      In order for a plugin to get accepted to this <a href="https://github.com/bombsquad-community/plugin-manager">official repository</a> , it must target the general game audience and be completely open and readable, not be encoded or encrypted in any form.
-      If your plugin doesn't target the general game audience, you can put your plugin(s) in a GitHub repository and then your plugin(s) can be installed through the custom source option in-game. See 3rd party plugin sources for more information.
-      New plugins are accepted through a pull request. Add your plugin in the minigames, utilities, or the category directory you feel is the most relevant to the type of plugin you're submitting, here. Then add an entry to the category's JSON metadata file.
-      Plugin manager will also show and execute the settings icon if your ba.Plugin export class has a method named on_plugin_manager_prompt; check out the colorscheme plugin as an example and its behaviour when the settings icon is tapped via the plugin manager in-game.
-
-      License
-      Plugin manager's source code is licensed under the MIT license. See LICENSE for more information.
-      Any plugins you submit here are automatically assumed to be licensed under the MIT license, i.e. unless you explicitly specify a different license while submitting a plugin.
-
-
+    Take your Bombsquad gaming experience to the next level with the Bombsquad
+    Plugin Manager. Simplify the process of modding your game and explore an
+    extensive library of community-created content. With its user-friendly
+    interface and powerful features, the plugin manager is your ultimate
+    companion for expanding and customizing your gameplay.
   </div>
 </div>

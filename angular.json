@@ -30,11 +30,12 @@
               "src/favicon.ico",
               "src/assets",
               "src/sitemap.txt",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/25f06dfbb8c64b578ba2d963d06de119.txt",
+              "src/ads.txt",
+              "src/yandex_8a0a833b31182a38.html"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -76,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ballistica-web:build:production"
+              "buildTarget": "ballistica-web:build:production"
             },
             "development": {
-              "browserTarget": "ballistica-web:build:development"
+              "buildTarget": "ballistica-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ballistica-web:build"
+            "buildTarget": "ballistica-web:build"
           }
         },
         "test": {
@@ -103,9 +104,7 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
@@ -130,13 +129,15 @@
             "development": {
               "optimization": false,
               "sourceMap": true,
-              "extractLicenses": false
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           },
           "defaultConfiguration": "production"
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "configurations": {
             "development": {
               "browserTarget": "ballistica-web:build:development",
@@ -150,11 +151,18 @@
           "defaultConfiguration": "development"
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "routes": [
-              "/"
-            ]
+              "/home",
+              "/gallery",
+              "/download",
+              "/blog",
+              "/blog/host-bombsquad-server-free",
+              "/pluginmanager",
+              "/free-server"
+            ],
+            "discoverRoutes": false
           },
           "configurations": {
             "production": {
@@ -171,7 +179,6 @@
       }
     }
   },
-  "defaultProject": "ballistica-web",
   "cli": {
     "analytics": "c32326e4-3e9d-442b-a8e1-299759f06a77"
   }

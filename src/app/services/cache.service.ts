@@ -2,11 +2,11 @@ import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CacheService {
   cacheMap = new Map<any, any>(null);
-  constructor() { }
+  constructor() {}
 
   addToCache(req: HttpRequest<any>, response: HttpResponse<any>): void {
     const url = req.urlWithParams;
@@ -21,6 +21,6 @@ export class CacheService {
       return undefined;
     }
 
-    return (this.cacheMap.get(url)).response;
+    return this.cacheMap.get(url).response;
   }
 }

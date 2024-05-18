@@ -1,0 +1,43 @@
+<div class="main background">
+  <div class="content" *ngIf="!appLaunched">
+    <div class="heading">
+      Introducing BAPORT: Your BS Plugin Update Wizard
+    </div>
+    <div class="description">
+      <p>Meet <a href="https://github.com/bombsquad-community/baport">BAPORT</a> , your ultimate solution for
+        effortlessly updating your Bobmsquad game plugins to the latest API
+        version,
+        currently at API 8. BAPORT streamlines the tedious process of converting code from API 6 or 7 to the latest
+        version,
+        ensuring compatibility and efficiency in your game scripts.</p>
+      Features:
+      <ol>
+        <li>CLI Convenience: BAPORT offers a command-line interface (CLI) for seamless batch updating of plugins.
+          Whether you have a
+          handful or a plethora of plugins, BAPORT simplifies the update process, saving you time and effort.</li>
+        <li>Discord Integration: Harness the power of BAPORT directly within your Bombsquad Discord community. Utilize
+          BAPORT
+          alongside your Discord bot to swiftly update snippets of code with ease. No need to switch between platforms;
+          BAPORT
+          brings the update capabilities directly to your Discord chat.</li>
+        <li>
+          Web Browser Deployment: BAPORT transcends platforms with its browser compatibility. Simply drag and drop your
+          files into
+          the browser interface, and BAPORT will swiftly update them to the latest code version. Whether you're on the
+          go or
+          prefer a web-based workflow, BAPORT adapts to your needs.
+        </li>
+      </ol>
+    </div>
+    <div class="baport-try-btn">
+      <button mat-flat-button color="primary" (click)="launch()" matRipple [matRippleCentered]="false"
+        [matRippleUnbounded]="true" [disableRipple]="false">Update plugin now</button>
+    </div>
+  </div>
+  <div class="baport-app" *ngIf="appLaunched" dragDropFile (fileDropped)="onFileDropped($event)">
+
+    <div class="tip">Paste your code here or drag drop your file.</div>
+    <div class="warn" *ngIf="mulitfilewarning">we support only one file upload at a time</div>
+    <div class="app-ace-editor" #editor>
+    </div>
+  </div>

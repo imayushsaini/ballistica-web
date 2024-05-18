@@ -1,0 +1,24 @@
+.main {
+  background-color: black;
+  color: white;
+  line-height: 1.9;
+  min-height: 65vh;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.content {
+  width: 80%;
+  margin: auto;
+  padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .content {
+    width: 90%;
+  }
+}

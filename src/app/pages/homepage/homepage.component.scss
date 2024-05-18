@@ -1,69 +1,81 @@
-
-.header{
+.header {
   color: white;
-  h1{
+  h1 {
     text-align: center;
     font-size: 2.5rem;
     margin-top: 20px;
   }
-
 }
-h3,h2{
+h3,
+h2 {
   text-align: center;
   color: white;
 }
 
-.downloads{
- display: flex;
- justify-content: center;
- align-items: center;
+.downloads {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // .empty-block{
 //     min-height: 8em;
 // }
-.about{
-    background-color: black;
-    color: white;
-    padding-top: 60px;
-    padding-bottom: 20px;
-    h2{
-        text-align: center;
-    }
-
+.about {
+  background-color: black;
+  color: white;
+  padding-top: 60px;
+  padding-bottom: 20px;
+  h2 {
+    text-align: center;
+  }
 }
-.about-text{
+.about-text {
   // width:300px;
   margin: auto;
   line-height: 1.9;
   font-size: 1.1rem;
 }
-.trailer{
-     background-color: black;
-    // background: url("assets/img/clayBackGreen.png");
-    color: white;
-    padding-top: 60px;
-    h2{
-        text-align: center;
+.trailer {
+  background-color: black;
+  // background: url("assets/img/clayBackGreen.png");
+  color: white;
+  padding-top: 60px;
+  h2 {
+    text-align: center;
+  }
+  .videos-list {
+    // display: flex;
+    // justify-content: center;
+  }
+  .container {
+    max-width: 704px;
+    .row {
+      margin-top: 60px;
     }
-    .videos-list{
-        // display: flex;
-        // justify-content: center;
-    }
-    .container{
-        max-width: 704px;
-        .row{
-            margin-top: 60px;
-        }
-    }
+  }
 }
-.hidden{
+.hidden {
   display: none;
+}
+.featured-list {
+  display: flex;
+  flex-wrap: wrap;
+  span {
+    background-color: white;
+    border-radius: 8px;
+    a {
+      color: black;
+      text-decoration: none;
+    }
+    margin: 8px;
+    padding: 8px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .downloads{
+  .downloads {
     flex-direction: column;
   }
 }

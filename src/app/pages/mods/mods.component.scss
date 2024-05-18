@@ -1,64 +1,83 @@
-
-
-.background{
-    background-color: black;
-    min-height: 65vh;
+.background {
+  background-color: black;
+  min-height: 65vh;
 }
-.heading{
-    color: white;
-    text-align: center;
-    font-size: 2em;
-    padding-top: 20px;
+.heading {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 20px;
 }
-.mat-card{
-    background-color: #c9c9c9 !important;
+.mat-card {
+  background-color: #c9c9c9 !important;
 }
 :host ::ng-deep .mat-form-field-underline {
-    background-color: white !important;
-    border: 1px solid;
- }
-
-:host ::ng-deep .mat-form-field-label{
-     color: white !important;
- }
-
-.search-box{
-    color: whitesmoke;
-    margin: auto;
-    padding-top: 2em;
-    width: 80%;
+  background-color: white !important;
+  border: 1px solid;
 }
-.about-page{
+
+:host ::ng-deep .mat-form-field-label {
+  color: white !important;
+}
+
+.search-box {
+  color: whitesmoke;
+  margin: auto;
+  padding-top: 2em;
+  width: 80%;
+}
+.about-page {
   width: 80%;
   margin: auto;
   color: #a09e9e;
   padding-top: 20px;
   font-size: small;
-  a{
+  a {
     text-decoration: none;
   }
-
 }
-.mods-list{
-    width: 80%;
-    margin: auto;
-    .mod{
-        padding-bottom: 2em;
-        cursor: pointer;
-    }
+.mods-list {
+  width: 80%;
+  margin: auto;
+  .mod {
+    padding-bottom: 2em;
+    cursor: pointer;
+  }
 }
 mat-paginator {
-    background-color: rgba(255, 255, 255, .1);
-    color: white;
-
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 :host ::ng-deep .mat-select-value {
-    color: rgba(235, 230, 230, 0.904) !important;
+  color: rgba(235, 230, 230, 0.904) !important;
 }
 
 .loading {
-  min-height: 51vh;
+  min-height: 61vh;
   align-items: center;
   justify-content: center;
   display: flex;
+  width: inherit;
+  position: absolute;
+  z-index: 2;
+}
+.ads {
+  margin-bottom: 25px;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  color: white;
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: white;
+}
+
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: #f44336;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: white;
 }

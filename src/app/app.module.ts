@@ -19,7 +19,7 @@ import { LazyloadimageDirective } from './_helpers/lazyloadimage.directive';
     AppComponent,
     NavBarComponent,
     FooterComponent,
-    LazyloadimageDirective
+    LazyloadimageDirective,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -27,15 +27,14 @@ import { LazyloadimageDirective } from './_helpers/lazyloadimage.directive';
     BrowserAnimationsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: true,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
     NgbModule,
   ],
-  providers: [authInterceptorProvider,cacheInterceptorProvider],
-  bootstrap: [AppComponent]
+  providers: [authInterceptorProvider, cacheInterceptorProvider],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
- }
+export class AppModule {}

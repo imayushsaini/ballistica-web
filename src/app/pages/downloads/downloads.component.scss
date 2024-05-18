@@ -1,41 +1,49 @@
-
-.background{
+.background {
   background-color: black;
   min-height: 65vh;
+  color: white;
 }
-.icon{
-  img{
+.icon {
+  img {
     height: 30px;
   }
 }
-.content{
+.thumbnail {
+  padding-bottom: 30px;
+  img {
+    width: 373px;
+  }
+}
+.content {
   width: 80%;
   margin: auto;
 }
-.heading{
+.heading {
   color: white;
   text-align: center;
   font-size: 2em;
   padding-top: 20px;
 }
 
-.bombsquad-app{
+.bombsquad-app {
   margin-top: 40px;
 }
-.download-links{
-  .dwn-link{
+.download-links {
+  .dwn-link {
     margin-top: 20px;
-    img{
+    img {
       height: 40px;
     }
   }
 }
 
-.dwn-btn{
-  img{
+.dwn-btn {
+  img {
     height: 28px;
   }
   @media only screen and (min-width: 768px) {
-    img{height: 58px;}
+    img {
+      height: 58px;
+    }
   }
 }

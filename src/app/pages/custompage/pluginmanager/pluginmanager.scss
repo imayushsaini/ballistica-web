@@ -1,21 +1,27 @@
-.main{
+.main {
   background-color: black;
   color: white;
   line-height: 1.9;
 }
 
-h1{
+h1 {
   text-align: center;
 }
 
-h2{
+h2 {
   margin: 20px 0px;
 }
-.content{
+.content {
   width: 80%;
   margin: auto;
   padding: 20px;
 }
-img{
+img {
   width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+  }
 }

@@ -1,19 +1,17 @@
-
-.logo{
-    img{
-      width: 200px;
-    }
+.logo {
+  img {
+    width: 200px;
+  }
 }
-:host ::ng-deep .nav-link{
+:host ::ng-deep .nav-link {
   padding-right: 2.3rem !important;
 }
-.navbar-collapse{
+.navbar-collapse {
   justify-content: space-between;
 }
-.tag{
+.tag {
   color: white;
-
 }
-.background{
+.background {
   background-color: black;
 }
