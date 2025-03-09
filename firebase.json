@@ -1,21 +1,34 @@
+
 {
-  "hosting": {
-    "public": "dist/ballistica-web/browser",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "appAssociation": "AUTO",
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/mods/**",
-        "dynamicLinks": true
-      },
-      {
-        "source": "/players",
-        "dynamicLinks": true
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "target" :"ballistica-web",
+      "public": "dist/ballistica-web/browser",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "appAssociation": "AUTO",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/mods/**",
+          "dynamicLinks": true
+        },
+        {
+          "source": "/players",
+          "dynamicLinks": true
+        },
+        {
+          "source": "/server-manager/**",
+          "destination": "/server-manager/index.html"
+        }
+      ]
+    },
+    {
+      "target" :"server-manager",
+      "public": "ballistica-ui/dist/ballistica-ui/browser",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    }
+  ]
 }
