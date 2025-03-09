@@ -27,8 +27,8 @@
     },
     {
       "target" :"server-manager",
-      "public": "ballistica-ui/dist/ballistica-ui/browser",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "public": "ballistica-ui/dist/server-manager/browser",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     }
   ]
 }
