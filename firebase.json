@@ -15,6 +15,10 @@
       {
         "source": "/players",
         "dynamicLinks": true
+      },
+      {
+        "source": "/server-manager/**",
+        "destination": "/server-manager/index.html"
       }
     ]
   }
