@@ -1,6 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  Event,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 import { filter } from 'rxjs';
 import { TokenStorageService } from './services/token-storage.service';
 import { SwUpdate } from '@angular/service-worker';
@@ -40,15 +46,15 @@ export class AppComponent {
         }
         /** END */
       });
-    this.router.events
-      .pipe(filter((event: Event) => event instanceof NavigationStart))
-      .subscribe((event) => {
-        /** START : Code to Track Page View  */
+    this.router.events.subscribe((event) => {
+      /** START : Code to Track Page View  */
+      if (event instanceof NavigationStart) {
         if (event.url.startsWith('/server-manager')) {
-            window.location.href = event.url; // Forces a full reload
-         }
-        /** END */
-      });
+          window.location.href = event.url; // Forces a full reload
+        }
+      }
+      /** END */
+    });
     if (swUpdate.isEnabled) {
       this.swUpdate.versionUpdates.subscribe((evt) => {
         switch (evt.type) {
