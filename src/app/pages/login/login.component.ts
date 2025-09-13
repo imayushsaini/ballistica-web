@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
       const redirect = this.route.snapshot.queryParamMap.get('redirect');
       if (redirect == 'server-manager') {
-        this.router.navigate(['/server-manager/']);
+        window.location.href = '/server-manager/';
         return;
       }
       this.router.navigate(['/mods']);
