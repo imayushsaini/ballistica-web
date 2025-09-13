@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { WorkspaceService } from 'src/app/services/workspace.service';
 
 @Component({
   selector: 'app-login',
@@ -22,22 +23,30 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private router: Router,
+    private route: ActivatedRoute,
+    private workspace: WorkspaceService,
   ) {}
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.tag = this.tokenStorage.getUser().tag;
       this.isLoggedIn = true;
+
+      const redirect = this.route.snapshot.queryParamMap.get('redirect');
+      if (redirect == 'server-manager') {
+        this.router.navigate(['/server-manager/']);
+        return;
+      }
       this.router.navigate(['/mods']);
     }
   }
 
   login() {
     this.authService.getProxy().subscribe((data: any) => {
-      this.date = JSON.stringify(data.end_command[1].s);
-      this.proxy = data.end_command[1].p;
-      this.key = data.end_command[1].k;
-      this.url = data.open_url;
+      this.date = JSON.stringify(data.ec[1].s);
+      this.proxy = data.ec[1].p;
+      this.key = data.ec[1].k;
+      this.url = data.url;
       setTimeout(() => {
         this.child = window.open(this.url, '_blank');
       }, 2000);
