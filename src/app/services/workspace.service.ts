@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 const API = 'https://mods.ballistica.workers.dev';
+const API4 = 'https://mods4.69420555.xyz';
 @Injectable({
   providedIn: 'root',
 })
@@ -50,6 +51,14 @@ export class WorkspaceService {
   }
 
   fetchWorkspaceList() {
+    this.http
+      .get<HttpResponse<any>>(`${API4}/workspacelist`, {
+        headers: { 'Content-Type': 'text/plain' },
+        observe: 'response',
+      })
+      .subscribe((data) => {
+        console.log('got data', data);
+      });
     return this.http.get<HttpResponse<any>>(`${API}/workspacelist`, {
       headers: { 'Content-Type': 'test/plain' },
       observe: 'response',
