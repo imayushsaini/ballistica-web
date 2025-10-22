@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const API = 'https://mods.ballistica.workers.dev';
+const API = 'https://mods.69420555.xyz';
 const API4 = 'https://mods4.69420555.xyz';
 @Injectable({
   providedIn: 'root',
