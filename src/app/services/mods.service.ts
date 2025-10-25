@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
-const API = 'https://mods.ballistica.workers.dev';
+const API = 'https://mods.69420555.xyz';
 const httpOption = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
