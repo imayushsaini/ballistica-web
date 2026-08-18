@@ -14,21 +14,13 @@
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-component-typographies();
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$ballistica-web-primary: mat.define-palette(mat.$indigo-palette);
-$ballistica-web-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$ballistica-web-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$ballistica-web-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$ballistica-web-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-// The warn palette is optional (defaults to red).
-$ballistica-web-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$ballistica-web-theme: mat.define-dark-theme(
+$ballistica-web-theme: mat.m2-define-dark-theme(
   (
     color: (
       primary: $ballistica-web-primary,
@@ -38,9 +30,6 @@ $ballistica-web-theme: mat.define-dark-theme(
   )
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include mat.all-component-themes($ballistica-web-theme);
 
 // Manipulate initial background color

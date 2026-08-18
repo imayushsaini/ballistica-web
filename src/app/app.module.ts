@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,7 @@ import { LazyloadimageDirective } from './_helpers/lazyloadimage.directive';
     LazyloadimageDirective,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -34,7 +34,11 @@ import { LazyloadimageDirective } from './_helpers/lazyloadimage.directive';
     }),
     NgbModule,
   ],
-  providers: [authInterceptorProvider, cacheInterceptorProvider],
+  providers: [
+    authInterceptorProvider,
+    cacheInterceptorProvider,
+    provideClientHydration(),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

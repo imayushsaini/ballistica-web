@@ -1,14 +1,30 @@
-import {Injectable} from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
-function _window(): any {
-  return window;
-}
+const mockStorage: Storage = {
+  length: 0,
+  clear: () => {},
+  getItem: () => null,
+  key: () => null,
+  removeItem: () => {},
+  setItem: () => {},
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WindowRef {
+  private platformId = inject(PLATFORM_ID);
+
   get nativeWindow(): any {
-    return _window();
+    if (isPlatformBrowser(this.platformId) && typeof window !== 'undefined') {
+      return window;
+    }
+    return {
+      sessionStorage: mockStorage,
+      localStorage: mockStorage,
+      location: { href: '', reload: () => {} },
+      open: () => null,
+    };
   }
 }

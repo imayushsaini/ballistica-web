@@ -18,7 +18,6 @@ import {
 import { SEOServiceService } from 'src/app/services/seoservice.service';
 
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -75,7 +74,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 const routes: Routes = [{ path: '', component: HomepageComponent }];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), FlexLayoutModule],
+  imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [HomepageComponent],
   declarations: [HomepageComponent],
   providers: [],
