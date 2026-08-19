@@ -21,7 +21,17 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     let authReq = request;
     const token = this.token.getToken();
-    if (token != null) {
+    
+    // Only attach Authorization header to our backend API endpoints
+    // Never send Authorization header to third-party endpoints (e.g. raw.githubusercontent.com, presigned S3 URLs) to prevent CORS preflight blocks
+    const isApiEndpoint =
+      request.url.includes('mods.69420555.xyz') ||
+      request.url.includes('ballistica.workers.dev') ||
+      request.url.includes('ballistica.net') ||
+      request.url.startsWith('/v2/') ||
+      request.url.startsWith('/api/');
+
+    if (token != null && isApiEndpoint) {
       authReq = request.clone({
         setHeaders: { Authorization: 'Bearer ' + token },
       });

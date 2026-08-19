@@ -94,27 +94,37 @@ export class PluginManager implements OnInit {
     }
   }
 
-  onDownload() {
-    this.http
-      .get(this.downloadLink, { responseType: 'blob' })
-      .subscribe({
-        next: (res) => {
-          var a = document.createElement('a');
-          const url = URL.createObjectURL(res);
-          a.href = url;
-          a.download = 'plugin_manager.py';
-          a.click();
-          URL.revokeObjectURL(url);
-          this.snackBar.open('Download started for plugin_manager.py', '', this.config);
-        },
-        error: (err) => {
-          console.error('Download failed:', err);
-          this.snackBar.open('Download failed. Please try again.', '', this.config);
-        },
-      });
+  async onDownload() {
+    this.snackBar.open('Starting download for plugin_manager.py...', '', this.config);
+    try {
+      // Use direct fetch with no-cors / standard CORS to download blob
+      const res = await fetch(this.downloadLink, { method: 'GET' });
+      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'plugin_manager.py';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      this.snackBar.open('plugin_manager.py downloaded successfully!', '', this.config);
+    } catch (err) {
+      console.warn('Fetch download failed, attempting direct link navigation:', err);
+      // Fallback: direct window open / anchor download
+      const a = document.createElement('a');
+      a.href = this.downloadLink;
+      a.target = '_blank';
+      a.download = 'plugin_manager.py';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      this.snackBar.open('Download started in new tab.', '', this.config);
+    }
   }
 
-  installToWorkspace() {
+  async installToWorkspace() {
     this.isInstalling = true;
     const wsObj = this.workspaces.find(
       (w) => w.id === this.selectedWorkspace || w.name === this.selectedWorkspace,
@@ -123,32 +133,33 @@ export class PluginManager implements OnInit {
 
     this.snackBar.open(`Installing Plugin Manager to "${wsName}"...`, '', this.config);
 
-    this.http.get(this.downloadLink, { responseType: 'blob' }).subscribe({
-      next: (blob) => {
-        this.workspaceService
-          .installRawContentToWorkspace(blob, 'plugin_manager.py', this.selectedWorkspace)
-          .subscribe({
-            next: (res: any) => {
-              this.isInstalling = false;
-              this.snackBar.open('Plugin Manager installed successfully!', '', this.config);
-            },
-            error: (err: any) => {
-              this.isInstalling = false;
-              console.error('Workspace install error:', err);
-              this.snackBar.open(
-                `Installation failed: ${err?.message || 'Server error'}`,
-                '',
-                this.config,
-              );
-            },
-          });
-      },
-      error: (err) => {
-        this.isInstalling = false;
-        console.error('Failed to fetch plugin_manager.py:', err);
-        this.snackBar.open('Failed to fetch script content.', '', this.config);
-      },
-    });
+    try {
+      const fetchRes = await fetch(this.downloadLink);
+      if (!fetchRes.ok) throw new Error(`Failed to fetch script: HTTP ${fetchRes.status}`);
+      const blob = await fetchRes.blob();
+
+      this.workspaceService
+        .installRawContentToWorkspace(blob, 'plugin_manager.py', this.selectedWorkspace)
+        .subscribe({
+          next: () => {
+            this.isInstalling = false;
+            this.snackBar.open('Plugin Manager installed successfully!', '', this.config);
+          },
+          error: (err: any) => {
+            this.isInstalling = false;
+            console.error('Workspace install error:', err);
+            this.snackBar.open(
+              `Installation failed: ${err?.message || 'Server error'}`,
+              '',
+              this.config,
+            );
+          },
+        });
+    } catch (err: any) {
+      this.isInstalling = false;
+      console.error('Failed to fetch plugin_manager.py:', err);
+      this.snackBar.open(`Failed to load plugin_manager.py: ${err?.message || 'Network error'}`, '', this.config);
+    }
   }
 
   goToLogin() {
