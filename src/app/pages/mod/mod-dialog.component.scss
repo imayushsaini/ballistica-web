@@ -1,0 +1,254 @@
+.dialog-container {
+  color: #e0e6ed;
+  padding: 8px 4px;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px 16px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .file-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(63, 81, 181, 0.2);
+      border: 1px solid rgba(63, 81, 181, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7986cb;
+      flex-shrink: 0;
+
+      mat-icon {
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    .dialog-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 2px 0;
+      font-family: monospace;
+      padding: 0;
+    }
+
+    .dialog-subtitle {
+      font-size: 0.8rem;
+      color: #8c9ba5;
+    }
+  }
+
+  .dialog-close-btn {
+    color: #78909c;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+.dialog-content {
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.option-card {
+  background: #0f1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+
+  &.option-cloud {
+    border-color: rgba(63, 81, 181, 0.4);
+    background: #12141c;
+  }
+
+  .option-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    .option-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(63, 81, 181, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7986cb;
+
+      &.manual-icon {
+        background: rgba(255, 255, 255, 0.06);
+        color: #90a4ae;
+      }
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .option-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .option-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .option-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        background: rgba(76, 175, 80, 0.15);
+        border: 1px solid rgba(76, 175, 80, 0.35);
+        color: #81c784;
+        padding: 1px 6px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .option-body {
+    .option-desc {
+      font-size: 0.82rem;
+      color: #8c9ba5;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+    }
+  }
+}
+
+.workspace-select-wrapper {
+  margin-bottom: 12px;
+
+  .select-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #b0bec5;
+    margin-bottom: 4px;
+  }
+
+  .custom-select-field {
+    width: 100%;
+  }
+}
+
+.workspace-option-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .ws-opt-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #7986cb;
+  }
+}
+
+.btn-install,
+.btn-download,
+.btn-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s ease;
+  text-decoration: none;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.btn-install {
+  background: #3f51b5;
+  color: #ffffff;
+
+  &:hover {
+    background: #303f9f;
+  }
+}
+
+.btn-download {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e0e6ed;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+  }
+}
+
+.btn-login {
+  background: rgba(63, 81, 181, 0.15);
+  border: 1px solid rgba(63, 81, 181, 0.35);
+  color: #9fa8da;
+
+  &:hover {
+    background: rgba(63, 81, 181, 0.25);
+    color: #ffffff;
+  }
+}
+
+.dialog-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+
+  &.alert-warning {
+    background: rgba(255, 152, 0, 0.12);
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    color: #ffb74d;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #ffa726;
+      flex-shrink: 0;
+    }
+
+    p {
+      margin: 2px 0 0 0;
+      color: #ffe082;
+    }
+  }
+}

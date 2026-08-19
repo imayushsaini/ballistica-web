@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -6,21 +7,35 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavBarComponent implements OnInit {
-  @Input() isLoggedIn: any;
+export class NavBarComponent implements OnInit, OnDestroy {
+  @Input() isLoggedIn: boolean = false;
   @Input() tag: any;
   title = 'BombSquad';
-
   public isMenuCollapsed = true;
+  private sub?: Subscription;
+
   constructor(private tokenStorage: TokenStorageService) {}
 
   ngOnInit(): void {
     const user = this.tokenStorage.getUser();
-    this.tag = user.tag;
+    this.tag = user?.tag;
+    this.isLoggedIn = !!this.tokenStorage.getToken();
+
+    this.sub = this.tokenStorage.loginEvent.subscribe(() => {
+      const u = this.tokenStorage.getUser();
+      this.tag = u?.tag;
+      this.isLoggedIn = !!this.tokenStorage.getToken();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   signout() {
     this.tokenStorage.signOut();
-    location.reload();
+    this.isLoggedIn = false;
+    this.tag = '';
   }
 }
+

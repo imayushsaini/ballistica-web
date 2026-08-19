@@ -1,47 +1,131 @@
-<div class="mod-page">
-  <div class="ad">
-    <app-banner></app-banner>
-  </div>
-
-  <div class="mod-info" *ngIf="mod">
-    <span class="heading">
-      <h2>{{ mod[0].title }}</h2>
-    </span>
-    <div class="details">
-      <div>
-        Posted on : {{ mod[0].uploadedOn }} <br />
-        Posted By : {{ mod[0].uploaderUsername }} <br />
-        Details : {{ mod[0].description }} <br />
-        <br />
-        Scripts :
-        <mat-chip-set aria-label="Fish selection" *ngFor="let file of scripts">
-          <!-- <a href={{file}}> {{file.split("/").pop()}}</a> -->
-          <mat-chip (click)="openVerticallyCentered(file)">{{
-            file.fileName
-          }}</mat-chip>
-        </mat-chip-set>
-      </div>
+<div class="mod-detail-page">
+  <div class="mod-detail-container" *ngIf="mod && mod.length > 0">
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+      <button class="back-btn" (click)="return()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back to Mods</span>
+      </button>
     </div>
-    <br />
-    <div class="ad">
+
+    <!-- Ad Banner Top -->
+    <div class="ad-banner-top">
       <app-banner></app-banner>
     </div>
-    <div class="row justify-content-center">
-      <div class="videos" *ngFor="let video of videoUrls">
-        <video controls>
-          <source [src]="video" type="video/mp4" />
-        </video>
+
+    <!-- Mod Header Card -->
+    <div class="mod-header-card">
+      <div class="mod-icon-badge">
+        <mat-icon>extension</mat-icon>
+      </div>
+
+      <div class="mod-header-content">
+        <div class="mod-title-row">
+          <h1 class="mod-main-title">{{ mod[0].title }}</h1>
+        </div>
+
+        <div class="mod-meta-badges">
+          <div class="meta-badge" *ngIf="mod[0].uploaderUsername">
+            <mat-icon class="meta-icon">person</mat-icon>
+            <span>{{ mod[0].uploaderUsername }}</span>
+          </div>
+          <div class="meta-badge" *ngIf="mod[0].uploadedOn">
+            <mat-icon class="meta-icon">calendar_today</mat-icon>
+            <span>{{ mod[0].uploadedOn }}</span>
+          </div>
+          <div class="meta-badge" *ngIf="scripts?.length">
+            <mat-icon class="meta-icon">code</mat-icon>
+            <span>{{ scripts.length }} {{ scripts.length === 1 ? 'script' : 'scripts' }}</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="images" *ngFor="let image of imageUrls">
-        <img [src]="image" alt="" />
+
+    <!-- Installation / Scripts Action Panel -->
+    <div class="action-panel-card" *ngIf="scripts && scripts.length > 0">
+      <div class="panel-header">
+        <div class="panel-icon-wrap">
+          <mat-icon>cloud_download</mat-icon>
+        </div>
+        <div>
+          <h2 class="panel-title">Install or Download Mod</h2>
+          <p class="panel-subtitle">
+            Click any script below to install it directly to your Ballistica cloud workspace or download the file.
+          </p>
+        </div>
+      </div>
+
+      <div class="scripts-grid">
+        <div
+          class="script-card"
+          *ngFor="let file of scripts"
+          (click)="openVerticallyCentered(file)"
+        >
+          <div class="script-left">
+            <mat-icon class="script-icon">description</mat-icon>
+            <div class="script-info">
+              <span class="script-filename">{{ file.fileName }}</span>
+              <span class="script-ext-badge">{{ file.fileName.split('.').pop() }}</span>
+            </div>
+          </div>
+          <button class="script-action-btn" type="button">
+            <mat-icon>download_for_offline</mat-icon>
+            <span>Install / Download</span>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="heading return">
-      <div class="return-btn" (click)="return()">
-        <h3>Return</h3>
+
+    <!-- Mod Description Card -->
+    <div class="description-card">
+      <h2 class="section-title">
+        <mat-icon class="section-icon">info</mat-icon>
+        <span>Description &amp; Details</span>
+      </h2>
+      <div class="description-content">
+        <p class="description-text">
+          {{ mod[0].description || 'No description provided for this mod.' }}
+        </p>
       </div>
+    </div>
+
+    <!-- Media Gallery (Videos & Screenshots) -->
+    <div class="media-section" *ngIf="videoUrls.length > 0 || imageUrls.length > 0">
+      <h2 class="section-title">
+        <mat-icon class="section-icon">photo_library</mat-icon>
+        <span>Media &amp; Previews</span>
+      </h2>
+
+      <!-- Videos -->
+      <div class="videos-grid" *ngIf="videoUrls.length > 0">
+        <div class="video-card" *ngFor="let video of videoUrls">
+          <video controls preload="metadata" class="media-video">
+            <source [src]="video" type="video/mp4" />
+            Your browser does not support HTML video.
+          </video>
+        </div>
+      </div>
+
+      <!-- Images -->
+      <div class="images-grid" *ngIf="imageUrls.length > 0">
+        <div class="image-card" *ngFor="let image of imageUrls">
+          <img [src]="image" alt="Mod preview image" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad Banner Bottom -->
+    <div class="ad-banner-bottom">
+      <app-banner></app-banner>
+    </div>
+
+    <!-- Footer Back Button -->
+    <div class="footer-nav">
+      <button class="back-btn-secondary" (click)="return()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back to Mods List</span>
+      </button>
     </div>
   </div>
 </div>
+

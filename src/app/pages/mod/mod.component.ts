@@ -1,7 +1,7 @@
 import { Component, Inject, NgModule, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModsService } from 'src/app/services/mods.service';
 import { SEOServiceService } from 'src/app/services/seoservice.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Banner } from 'src/app/models/model';
@@ -74,10 +75,12 @@ export class ModComponent implements OnInit {
   }
   loadData(modId: any) {
     this.modsService.getMods(1, 0, modId).subscribe((data: any) => {
-      this.mod = data;
+      const rawMods = Array.isArray(data) ? data : data?.mods || [];
+      if (!rawMods || rawMods.length === 0) return;
+      this.mod = rawMods;
 
       var title = 'unknown.mod';
-      for (var attach of this.mod[0].attachments) {
+      for (var attach of this.mod[0].attachments || []) {
         if (
           attach.fileName.endsWith('.py') ||
           attach.fileName.endsWith('.zip') ||
@@ -104,6 +107,25 @@ export class ModComponent implements OnInit {
       }
       for (var video of this.videos) {
         this.loadMedia(video.fileId, 'video');
+      }
+
+      // Auto-open install dialog if redirected back from login
+      const installFileName = this.activatedRoute.snapshot.queryParamMap.get('installFile');
+      const installFileId = this.activatedRoute.snapshot.queryParamMap.get('fileId');
+      if (installFileName || installFileId) {
+        const targetScript =
+          this.scripts.find(
+            (s) =>
+              (installFileId && s.fileId === installFileId) ||
+              (installFileName && s.fileName === installFileName)
+          ) ||
+          (this.scripts.length > 0 ? this.scripts[0] : null);
+
+        if (targetScript) {
+          setTimeout(() => {
+            this.openVerticallyCentered(targetScript);
+          }, 200);
+        }
       }
     });
   }
@@ -139,8 +161,9 @@ export class ModComponent implements OnInit {
   }
 
   openVerticallyCentered(file: file) {
+    const modId = this.activatedRoute.snapshot.paramMap.get('modId') || '';
     const dialogRef = this.dialog.open(ModDialog, {
-      data: { file: file, loggedIn: this.isLoggedIn },
+      data: { file: file, loggedIn: this.isLoggedIn, modId: modId },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -152,32 +175,43 @@ export class ModComponent implements OnInit {
 @Component({
   selector: 'mod-dialog.component',
   templateUrl: 'mod-dialog.component.html',
+  styleUrls: ['./mod-dialog.component.scss'],
 })
 export class ModDialog {
   public file: any;
+  public modId: string = '';
   selected = '';
-  workspaces: any;
+  workspaces: any[] = [];
   loggedIn: boolean;
   validFile = false;
   haveWorkspace: boolean = false;
   constructor(
-    @Inject(MAT_DIALOG_DATA) data: { file: file; loggedIn: boolean },
+    @Inject(MAT_DIALOG_DATA) data: { file: file; loggedIn: boolean; modId?: string },
     private modsService: ModsService,
     private workspace: WorkspaceService,
     private snackBar: MatSnackBar,
+    private router: Router,
+    public dialogRef: MatDialogRef<ModDialog>,
   ) {
     this.file = data.file;
     this.loggedIn = data.loggedIn;
-    this.workspaces = workspace.getWorkspaceList();
-    // this.selected = this.workspaces[0];
+    this.modId = data.modId || '';
+    this.workspaces = workspace.getWorkspaceList() || [];
     if (this.workspaces.length > 0) {
       this.haveWorkspace = true;
+      this.selected = this.workspaces[0].id || this.workspaces[0].name || this.workspaces[0];
     }
     if (this.file.fileName.endsWith('.py')) this.validFile = true;
   }
   config: MatSnackBarConfig = {
     duration: 5000,
   };
+
+  goToLogin() {
+    this.dialogRef.close();
+    const returnUrl = `/mods/${this.modId}?installFile=${encodeURIComponent(this.file.fileName)}&fileId=${encodeURIComponent(this.file.fileId)}`;
+    this.router.navigate(['/login'], { queryParams: { redirect: returnUrl } });
+  }
 
   download() {
     this.modsService
@@ -197,8 +231,10 @@ export class ModDialog {
   }
 
   install() {
+    const wsObj = this.workspaces.find((w: any) => w.id === this.selected || w.name === this.selected);
+    const wsDisplayName = wsObj ? wsObj.name : this.selected;
     this.snackBar.open(
-      `Installing mod ${this.file.fileName} to workspace ${this.selected}`,
+      `Installing mod ${this.file.fileName} to workspace "${wsDisplayName}"...`,
       '',
       this.config,
     );
@@ -211,22 +247,25 @@ export class ModDialog {
         this.file.fileName,
         this.selected,
       )
-      .subscribe(
-        (response) => {
-          if (response.status == 200) {
+      .subscribe({
+        next: (response: any) => {
+          if (response && (response.status === 200 || response.status === 204)) {
             this.snackBar.open(
-              `Installation done for ${this.file.fileName}`,
+              `Installation complete for ${this.file.fileName}`,
               '',
               this.config,
             );
           }
         },
-        (error) => {
-          if (retry >= 3) {
-            this.snackBar.open(`Installation FAILED  :( `, '', this.config);
-          } else this.installMod(retry + 1);
+        error: (error) => {
+          console.error('Install mod error:', error);
+          if (retry >= 2) {
+            this.snackBar.open(`Installation FAILED: ${error?.message || 'Server error'}`, '', this.config);
+          } else {
+            this.installMod(retry + 1);
+          }
         },
-      );
+      });
   }
 }
 
@@ -242,6 +281,7 @@ const routes: Routes = [{ path: '', component: ModComponent }];
     MatSelectModule,
     MatSnackBarModule,
     MatChipsModule,
+    MatIconModule,
     BannerModule,
   ],
   exports: [ModComponent, ModDialog],
@@ -249,3 +289,4 @@ const routes: Routes = [{ path: '', component: ModComponent }];
   providers: [],
 })
 export class ModPageModule {}
+

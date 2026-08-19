@@ -1,43 +1,165 @@
 <div class="login-page">
-  <div class="login-options">
-    <span class="heading">
-      <h2 *ngIf="!isLoggedIn">LOGIN VIA V2</h2>
-      <h2 *ngIf="isLoggedIn">LOGGED IN AS</h2>
-    </span>
-    <div class="login-process">
-      <div *ngIf="!isLoggedIn">
-        <div class="login-btn" (click)="login()" *ngIf="!url">
-          Login with Ballistica V2 Account
+  <div class="login-container">
+    <!-- Logged Out State -->
+    <div class="auth-card" *ngIf="!isLoggedIn">
+      <div class="auth-header">
+        <div class="logo-badge">
+          <img src="assets/img/icon_account_v2.svg" alt="Ballistica V2" class="v2-icon" />
+        </div>
+        <h1 class="auth-title">Sign in with API Key</h1>
+        <p class="auth-subtitle">
+          Connect your Ballistica V2 account to install and manage mods directly to your cloud workspaces.
+        </p>
+      </div>
+
+      <!-- Login Form -->
+      <form (ngSubmit)="login()" class="login-form">
+        <div class="form-group">
+          <label for="apiKeyInput" class="form-label">Ballistica API Token / Key</label>
+          <div class="input-wrapper">
+            <mat-icon class="input-icon">vpn_key</mat-icon>
+            <input
+              id="apiKeyInput"
+              [type]="showApiKey ? 'text' : 'password'"
+              [(ngModel)]="apiKey"
+              name="apiKey"
+              class="custom-input"
+              placeholder="Paste your Ballistica API token here..."
+              autocomplete="off"
+              [disabled]="isLoading"
+              required
+            />
+            <button
+              type="button"
+              class="icon-btn"
+              (click)="toggleShowApiKey()"
+              [title]="showApiKey ? 'Hide Token' : 'Show Token'"
+            >
+              <mat-icon>{{ showApiKey ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <button
+              type="button"
+              class="icon-btn"
+              *ngIf="apiKey"
+              (click)="clearApiKey()"
+              title="Clear"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
         </div>
 
-        <div *ngIf="url && !error">
-          Complete your authentication.... <br />
-          auto redirecting to <br />
-          <a href="{{ url }}">{{ url }}</a>
+        <!-- Error Alert -->
+        <div class="alert alert-error" *ngIf="errorMessage">
+          <mat-icon class="alert-icon">error_outline</mat-icon>
+          <div class="alert-content">
+            <span class="alert-title">Authentication Failed</span>
+            <p class="alert-text">{{ errorMessage }}</p>
+          </div>
         </div>
-        <div *ngIf="error" class="error">
-          {{ error }} <br /><br />
-          <div class="login-btn" (click)="retry()">retry</div>
+
+        <!-- Success Alert -->
+        <div class="alert alert-success" *ngIf="successMessage">
+          <mat-icon class="alert-icon">check_circle_outline</mat-icon>
+          <div class="alert-content">
+            <span class="alert-title">Welcome Back</span>
+            <p class="alert-text">{{ successMessage }}</p>
+          </div>
         </div>
-      </div>
-      <div *ngIf="isLoggedIn" class="tag">
-        <br /><br />
-        <img src="assets/img/icon_account_v2.svg" alt="" /> {{ tag }}
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="isLoading || !apiKey.trim()"
+        >
+          <mat-spinner diameter="20" *ngIf="isLoading" class="spinner"></mat-spinner>
+          <span *ngIf="!isLoading">Sign In</span>
+          <span *ngIf="isLoading">Authenticating...</span>
+        </button>
+      </form>
+
+      <!-- Token Guide Section -->
+      <div class="guide-section">
+        <h3 class="guide-title">
+          <mat-icon class="guide-icon">help_outline</mat-icon>
+          How to get your Ballistica API Token
+        </h3>
+
+        <div class="guide-methods">
+          <!-- Option 1 -->
+          <div class="guide-method">
+            <div class="method-badge">Option 1: Using Email & Password</div>
+            <ol class="guide-steps">
+              <li>
+                Visit <a href="https://ballistica.net" target="_blank" rel="noopener noreferrer">ballistica.net</a> and log in with your email and password.
+              </li>
+              <li>
+                Click on <strong>API Keys</strong> &rarr; <strong>New API Key</strong>.
+              </li>
+              <li>
+                Copy the API key and paste it in the field above.
+              </li>
+            </ol>
+          </div>
+
+          <!-- Option 2 -->
+          <div class="guide-method">
+            <div class="method-badge">Option 2: Via BombSquad Game (v1.7+)</div>
+            <ol class="guide-steps">
+              <li>
+                Open <strong>BombSquad (v1.7+)</strong> on your device.
+              </li>
+              <li>
+                On the game's home page, click your <strong>Account Tag</strong> (top left), then click <strong>Manage Account</strong> (opens ballistica.net already signed in).
+              </li>
+              <li>
+                On ballistica.net, click the <strong>Home</strong> logo (top left) &rarr; <strong>API Keys</strong> &rarr; <strong>New API Key</strong>.
+              </li>
+              <li>
+                Copy the API key and paste it in the field above.
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="info" *ngIf="!url">
-      <p>
-        This site works with BombSquad 'V2' accounts (also called Ballistica
-        accounts). These accounts are beginning to replace legacy accounts
-        starting in BombSquad 1.7.
-        <br />
-        Above login button will redirect you to Ballistica website where you can
-        enter you email and password.
-        <br />
-        To use other login types like Google Play, you can click on "Manager
-        Account" button within your game account options. It will login you V2
-        account in browser and then you can continue with above login process.
-      </p>
+
+    <!-- Logged In State -->
+    <div class="auth-card profile-card" *ngIf="isLoggedIn">
+      <div class="profile-header">
+        <div class="avatar-ring">
+          <img src="assets/img/icon_account_v2.svg" alt="V2 Avatar" class="profile-avatar" />
+        </div>
+        <h2 class="profile-tag">{{ currentUser?.tag || tag }}</h2>
+        <span class="profile-id" *ngIf="currentUser?.id">ID: {{ currentUser?.id }}</span>
+      </div>
+
+      <div class="profile-details" *ngIf="currentUser">
+        <div class="detail-item" *ngIf="currentUser.total_active_days !== undefined">
+          <span class="detail-label">Active Days</span>
+          <span class="detail-value">{{ currentUser.total_active_days }}</span>
+        </div>
+        <div class="detail-item" *ngIf="currentUser.last_active_day">
+          <span class="detail-label">Last Active</span>
+          <span class="detail-value">{{ currentUser.last_active_day }}</span>
+        </div>
+        <div class="detail-item" *ngIf="currentUser.create_time">
+          <span class="detail-label">Member Since</span>
+          <span class="detail-value">{{ currentUser.create_time | date:'mediumDate' }}</span>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button class="primary-action-btn" routerLink="/mods">
+          <mat-icon>extension</mat-icon>
+          <span>Explore Mods</span>
+        </button>
+        <button class="secondary-action-btn" (click)="signOut()">
+          <mat-icon>logout</mat-icon>
+          <span>Sign Out</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

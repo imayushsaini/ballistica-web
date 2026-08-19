@@ -1,63 +1,110 @@
-<section>
-  <div class="background">
-    <div class="heading">
-      <h1>Mods Repository</h1>
-    </div>
-    <div class="about-page">
-      <p>
-        Mods/Plugins made by BombSquad Community , shared over community
-        <a href="https://discord.gg/ucyaesh">discord server</a> . Install at
-        your own risk - contact developers on discord if facing any issue .<br />
-        Become a contributor , post your mod in above mentioned discord server.
+<section class="mods-page">
+  <div class="mods-container">
+    <!-- Hero Header -->
+    <div class="hero-section">
+      <div class="hero-badge">
+        <mat-icon class="hero-badge-icon">extension</mat-icon>
+        <span>Ballistica Mods Repository</span>
+      </div>
+      <h1 class="hero-title">Community Mods &amp; Plugins</h1>
+      <p class="hero-subtitle">
+        Discover scripts and plugins made by the BombSquad community. Install directly to your cloud workspaces or
+        download manually.
       </p>
+
+      <div class="community-callout">
+        <mat-icon class="callout-icon">forum</mat-icon>
+        <span class="callout-text">
+          Want to share your mods or ask questions? Join the
+          <a href="https://discord.gg/ucyaesh" target="_blank" rel="noopener noreferrer">BombSquad Discord Server</a>.
+        </span>
+      </div>
     </div>
-    <div class="search-box">
-      <mat-form-field class="example-form-field">
-        <mat-label>Search Mod</mat-label>
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="value"
-          (ngModelChange)="valueChange($event)"
-        />
-        <button
-          *ngIf="value"
-          matSuffix
-          mat-icon-button
-          aria-label="Clear"
-          (click)="resetSearch()"
-        >
+
+    <!-- Search Bar -->
+    <div class="search-bar-wrapper">
+      <div class="search-input-box">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input type="text" class="custom-search-input" placeholder="Search mods by script name, uploader, or keyword..."
+          [(ngModel)]="value" (ngModelChange)="valueChange($event)" />
+        <button *ngIf="value" type="button" class="clear-btn" (click)="resetSearch()" title="Clear search">
           <mat-icon>close</mat-icon>
         </button>
-      </mat-form-field>
-    </div>
-    <div class="mods-list">
-      <div class="loading" *ngIf="isLoading">
-        <mat-spinner></mat-spinner>
       </div>
-      <div
-        class="mod"
-        *ngFor="let mod of mods; let i = index"
-        (click)="openModPage(mod)"
-      >
-        <div class="ads" *ngIf="i % 4 == 0 && i != 0">
-          <app-banner></app-banner>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ mod.title }}</h5>
-            {{ mod.description.slice(0, 120) }}
-          </div>
-        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="mods-content">
+      <!-- Loading State -->
+      <div class="loading-state" *ngIf="isLoading">
+        <mat-spinner diameter="44" class="custom-spinner"></mat-spinner>
+        <span class="loading-text">Loading repository mods...</span>
       </div>
 
-      <mat-paginator
-        [length]="200"
-        [pageSizeOptions]="[10, 50, 100]"
-        aria-label="Select page"
-        (page)="pageChanged($event)"
-      >
-      </mat-paginator>
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!isLoading && (!mods || mods.length === 0)">
+        <div class="empty-icon-wrap">
+          <mat-icon>search_off</mat-icon>
+        </div>
+        <h3 class="empty-title">No mods found</h3>
+        <p class="empty-desc" *ngIf="value">We couldn't find any mods matching "{{ value }}".</p>
+        <p class="empty-desc" *ngIf="!value">No mods available in the repository currently.</p>
+        <button *ngIf="value" class="reset-btn" (click)="resetSearch()">
+          <mat-icon>restart_alt</mat-icon>
+          <span>Clear Search</span>
+        </button>
+      </div>
+
+      <!-- Mods Grid -->
+      <div class="mods-grid" *ngIf="!isLoading && mods && mods.length > 0">
+        <ng-container *ngFor="let mod of mods; let i = index">
+          <!-- Mod Card -->
+          <div class="mod-card" (click)="openModPage(mod)">
+            <div class="mod-card-header">
+              <div class="mod-icon-wrapper">
+                <mat-icon>code</mat-icon>
+              </div>
+              <div class="mod-header-info">
+                <h3 class="mod-title" [title]="mod.title">{{ mod.title }}</h3>
+                <div class="mod-meta-row" *ngIf="mod.uploaderUsername">
+                  <span class="meta-author">by {{ mod.uploaderUsername }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mod-card-body">
+              <p class="mod-desc">
+                {{ mod.description || 'No description provided.' }}
+              </p>
+            </div>
+
+            <div class="mod-card-footer">
+              <div class="mod-chips">
+                <span class="chip chip-date" *ngIf="mod.uploadedOn">{{ mod.uploadedOn }}</span>
+                <span class="chip chip-attach" *ngIf="mod.attachments?.length">
+                  {{ mod.attachments.length }} {{ mod.attachments.length === 1 ? 'file' : 'files' }}
+                </span>
+              </div>
+              <span class="view-link">
+                <span>View</span>
+                <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+              </span>
+            </div>
+          </div>
+
+          <!-- Banner ad placeholder -->
+          <div class="ad-card-wrapper" *ngIf="i % 6 === 5">
+            <app-banner></app-banner>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Paginator -->
+      <div class="paginator-wrapper" *ngIf="!isLoading && mods && mods.length > 0">
+        <mat-paginator [length]="totalRows" [pageSize]="pageSize" [pageIndex]="currentPage"
+          [pageSizeOptions]="pageSizeOptions" aria-label="Select page" (page)="pageChanged($event)">
+        </mat-paginator>
+      </div>
     </div>
   </div>
 </section>

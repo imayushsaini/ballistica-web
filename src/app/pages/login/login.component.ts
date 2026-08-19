@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { WorkspaceService } from 'src/app/services/workspace.service';
+import { V2User } from 'src/app/models/model';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +18,15 @@ import { WorkspaceService } from 'src/app/services/workspace.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  date: any;
-  proxy: string = '';
-  key: string = '';
-  url?: string;
-  error: any;
+  apiKey: string = '';
+  showApiKey: boolean = false;
+  isLoading: boolean = false;
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
+  isLoggedIn: boolean = false;
+  currentUser: V2User | null = null;
   tag?: string;
-  isLoggedIn = false;
-  child: Window | null | undefined;
+
   constructor(
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
@@ -29,74 +37,105 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
-      this.tag = this.tokenStorage.getUser().tag;
+      this.currentUser = this.tokenStorage.getUser();
+      this.tag = this.currentUser?.tag;
       this.isLoggedIn = true;
 
       const redirect = this.route.snapshot.queryParamMap.get('redirect');
-      if (redirect == 'server-manager') {
+      if (redirect === 'server-manager') {
         window.location.href = '/server-manager/';
         return;
+      } else if (redirect) {
+        this.router.navigateByUrl(redirect);
+        return;
       }
-      this.router.navigate(['/mods']);
     }
   }
 
-  login() {
-    this.authService.getProxy().subscribe((data: any) => {
-      this.date = JSON.stringify(data.ec[1].s);
-      this.proxy = data.ec[1].p;
-      this.key = data.ec[1].k;
-      this.url = data.url;
-      setTimeout(() => {
-        this.child = window.open(this.url, '_blank');
-      }, 2000);
+  login(): void {
+    const token = this.apiKey.trim();
+    if (!token) {
+      this.errorMessage = 'Please enter your Ballistica API token.';
+      return;
+    }
 
-      this.checkProgress();
+    this.isLoading = true;
+    this.errorMessage = null;
+    this.successMessage = null;
+
+    this.authService.loginWithApiKey(token).subscribe({
+      next: (response) => {
+        if (response.success && response.token) {
+          this.tokenStorage.saveToken(response.token);
+          this.tokenStorage.saveUser(response.user);
+          this.currentUser = response.user;
+          this.tag = response.user.tag;
+          this.isLoggedIn = true;
+          this.isLoading = false;
+          this.successMessage = `Successfully authenticated as ${response.user.tag}!`;
+
+          const redirect = this.route.snapshot.queryParamMap.get('redirect');
+          setTimeout(() => {
+            if (redirect === 'server-manager') {
+              window.location.href = '/server-manager/';
+            } else if (redirect) {
+              this.router.navigateByUrl(redirect);
+            } else {
+              this.router.navigate(['/mods']);
+            }
+          }, 800);
+        } else {
+          this.isLoading = false;
+          this.errorMessage = 'Authentication failed. Please check your token.';
+        }
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        this.isLoading = false;
+        this.errorMessage =
+          err?.error?.message ||
+          err?.message ||
+          'Invalid or expired Ballistica API token. Please verify and try again.';
+      },
     });
   }
 
-  checkProgress() {
-    this.authService
-      .checkLoginProgress(this.date, this.proxy, this.key)
-      .subscribe(
-        (data: any) => {
-          if (data.status == 202) {
-            setTimeout(() => {
-              this.checkProgress();
-            }, 3000);
-          } else if (data.status == 200) {
-            const user = JSON.parse(atob(data.body.token.split('.')[1]));
-            this.tokenStorage.saveUser(user);
-            this.tokenStorage.saveToken(data.body.token);
-            this.child?.close();
-            this.afterLoggedIn();
-          }
-        },
-        (error) => {
-          this.error = error.error;
-        },
-      );
+  toggleShowApiKey(): void {
+    this.showApiKey = !this.showApiKey;
   }
 
-  afterLoggedIn() {
-    const user = this.tokenStorage.getUser();
-    this.tag = user.tag;
-    this.isLoggedIn = true;
-    setInterval(() => {
-      location.reload();
-    }, 1000);
+  clearApiKey(): void {
+    this.apiKey = '';
+    this.errorMessage = null;
   }
-  retry() {
-    location.reload();
+
+  signOut(): void {
+    this.tokenStorage.signOut();
+    this.isLoggedIn = false;
+    this.currentUser = null;
+    this.tag = '';
+    this.apiKey = '';
+    this.successMessage = null;
+    this.errorMessage = null;
   }
 }
 
 const routes: Routes = [{ path: '', component: LoginComponent }];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule.forChild(routes),
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ],
   exports: [LoginComponent],
   declarations: [LoginComponent],
   providers: [],
 })
 export class LoginModule {}
+

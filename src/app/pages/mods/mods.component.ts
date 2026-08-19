@@ -44,9 +44,9 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 export class ModsComponent implements OnInit {
   value = '';
   totalRows = 0;
-  pageSize = 10;
+  pageSize = 12;
   currentPage = 0;
-  pageSizeOptions: number[] = [10, 50, 100];
+  pageSizeOptions: number[] = [12, 24, 48, 96];
   mods: any;
   isLoading: boolean = true;
   banner: Banner;
@@ -68,15 +68,11 @@ export class ModsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mods = Array.from({ length: 5 }, (_, i) => ({
-      title: `Mod ${i + 1}`,
-      description: `Mod ${i + 1} description`,
-    }));
     const key = this.route.snapshot.queryParamMap.get('q');
     const page = this.route.snapshot.queryParamMap.get('page');
     const page_size = this.route.snapshot.queryParamMap.get('size');
     this.value = key ? key : '';
-    this.pageSize = Number(page_size) ? Number(page_size) : 10;
+    this.pageSize = Number(page_size) ? Number(page_size) : 12;
     this.currentPage = Number(page) ? Number(page) : 0;
 
     this.loadData();
@@ -100,20 +96,54 @@ export class ModsComponent implements OnInit {
   }
 
   loadData() {
+    this.isLoading = true;
     this.modsService
       .getMods(this.pageSize, this.currentPage, this.value)
-      .subscribe((data: any) => {
-        this.mods = data;
-        this.isLoading = false;
-        for (var mod of this.mods) {
-          var title = '';
-          for (var attach of mod.attachments) {
-            if (attach.fileName.endsWith('.py')) {
-              title = attach.fileName;
+      .subscribe({
+        next: (data: any) => {
+          this.isLoading = false;
+
+          // Support both paginated object ({ mods, total, ... }) and legacy raw array ([...])
+          if (Array.isArray(data)) {
+            this.mods = data;
+            if (this.mods.length === this.pageSize) {
+              this.totalRows = (this.currentPage + 2) * this.pageSize;
+            } else {
+              this.totalRows = this.currentPage * this.pageSize + this.mods.length;
             }
+          } else if (data && Array.isArray(data.mods)) {
+            this.mods = data.mods;
+            this.totalRows =
+              typeof data.total === 'number'
+                ? data.total
+                : data.pagination?.total || this.mods.length;
+          } else {
+            this.mods = [];
+            this.totalRows = 0;
           }
-          mod.title = title;
-        }
+
+          for (var mod of this.mods) {
+            var title = '';
+            if (mod.attachments && mod.attachments.length > 0) {
+              for (var attach of mod.attachments) {
+                if (
+                  attach.fileName.endsWith('.py') ||
+                  attach.fileName.endsWith('.zip') ||
+                  attach.fileName.endsWith('.rar')
+                ) {
+                  title = attach.fileName;
+                  break;
+                }
+              }
+              if (!title) title = mod.attachments[0].fileName;
+            }
+            mod.title = title || 'Community Mod';
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching mods:', err);
+          this.isLoading = false;
+        },
       });
   }
 
@@ -122,6 +152,7 @@ export class ModsComponent implements OnInit {
     this.currentPage = event.pageIndex;
     this.loadData();
   }
+
   openModPage(mod: any) {
     this.router.navigate(['/mods/' + mod.messageId], {
       queryParams: {
@@ -131,12 +162,15 @@ export class ModsComponent implements OnInit {
       },
     });
   }
+
   valueChange(event: any) {
+    this.currentPage = 0;
     this.loadData();
   }
 
   resetSearch() {
     this.value = '';
+    this.currentPage = 0;
     this.loadData();
   }
 }

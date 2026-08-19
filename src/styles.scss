@@ -60,5 +60,45 @@ body {
   background-color: black;
   color: white;
 }
+
+// Material Dialog Dark Surface
+.mat-mdc-dialog-container .mat-mdc-dialog-surface {
+  background-color: #16181f !important;
+  color: #e0e6ed !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+// Material Select Panel
+.mat-mdc-select-panel {
+  background-color: #16181f !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+
+  .mat-mdc-option {
+    color: #e0e6ed !important;
+
+    &:hover:not(.mdc-list-item--disabled) {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    &.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+      background-color: rgba(63, 81, 181, 0.2) !important;
+      color: #7986cb !important;
+    }
+  }
+}
+
+// Material Snack Bar
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: #1f222e !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
+

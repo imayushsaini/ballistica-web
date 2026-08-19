@@ -1,49 +1,119 @@
-<h2 mat-dialog-title>{{ file.fileName }}</h2>
-<mat-dialog-content class="mat-typography">
-  <div class="loggedin" *ngIf="loggedIn && validFile">
-    Download file and install it manually <br />
-    OR <br />
-    Directly install it to your workspace <br />
-    <mat-form-field appearance="fill">
-      <mat-label>Select workspace</mat-label>
-      <mat-select [(value)]="selected">
-        <mat-option
-          value="{{ workspaceName }}"
-          *ngFor="let workspaceName of workspaces"
-          >{{ workspaceName }}</mat-option
-        >
-      </mat-select>
-    </mat-form-field>
-    <div>
-      <span style="color: red" *ngIf="!haveWorkspace">
-        No workspace found in your account , visit ballistica.net and create
-        one.</span
-      >
+<div class="dialog-container">
+  <div class="dialog-header">
+    <div class="header-left">
+      <div class="file-icon-wrap">
+        <mat-icon>code</mat-icon>
+      </div>
+      <div>
+        <h2 class="dialog-title" mat-dialog-title>{{ file.fileName }}</h2>
+        <span class="dialog-subtitle">Choose how to install or download this script</span>
+      </div>
     </div>
+    <button mat-icon-button mat-dialog-close class="dialog-close-btn" title="Close">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  <div class="notloggedin" *ngIf="!loggedIn && validFile">
-    Download file and install it manually <br />
-    OR <br />
-    Login to your account to install mod directly to your workspace. <br />
-    <button mat-raised-button routerLink="login" mat-dialog-close>Login</button>
-    <br />.
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions align="center">
-  <button
-    mat-button
-    *ngIf="validFile && haveWorkspace && loggedIn"
-    (click)="install()"
-    mat-dialog-close
-  >
-    Install
-  </button>
-  <button mat-button cdkFocusInitial (click)="download()" mat-dialog-close>
-    Download
-  </button>
-  <button mat-button mat-dialog-close>Cancel</button>
-</mat-dialog-actions>
 
-<!-- Copyright 2022 Google LLC. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at https://angular.io/license -->
+  <mat-dialog-content class="dialog-content">
+    <!-- Option A: Cloud Workspace Install -->
+    <div class="option-card option-cloud" *ngIf="validFile">
+      <div class="option-header">
+        <div class="option-icon-wrap">
+          <mat-icon>cloud_sync</mat-icon>
+        </div>
+        <div class="option-title-wrap">
+          <div class="option-badge">Recommended</div>
+          <h3 class="option-title">Direct Cloud Workspace Install</h3>
+        </div>
+      </div>
+
+      <!-- Logged In & Has Workspaces -->
+      <div class="option-body" *ngIf="loggedIn && haveWorkspace">
+        <p class="option-desc">
+          Select target workspace to automatically sync and deploy this mod into your game:
+        </p>
+
+        <div class="workspace-select-wrapper">
+          <label class="select-label">Target Workspace:</label>
+          <mat-form-field appearance="outline" class="custom-select-field">
+            <mat-select [(value)]="selected">
+              <mat-option
+                [value]="ws.id || ws.name || ws"
+                *ngFor="let ws of workspaces"
+              >
+                <div class="workspace-option-item">
+                  <mat-icon class="ws-opt-icon">folder_special</mat-icon>
+                  <span>{{ ws.name || ws }}</span>
+                </div>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <button
+          type="button"
+          class="btn-install"
+          (click)="install()"
+          mat-dialog-close
+        >
+          <mat-icon>cloud_download</mat-icon>
+          <span>Install to Workspace</span>
+        </button>
+      </div>
+
+      <!-- Logged In & No Workspaces -->
+      <div class="option-body" *ngIf="loggedIn && !haveWorkspace">
+        <div class="dialog-alert alert-warning">
+          <mat-icon>info</mat-icon>
+          <div>
+            <strong>No active workspace found</strong>
+            <p>You can create a workspace in BombSquad or download the file manually below.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Not Logged In -->
+      <div class="option-body" *ngIf="!loggedIn">
+        <p class="option-desc">
+          Sign in with your Ballistica API token to install this mod directly into your game workspace with 1 click.
+        </p>
+        <button
+          type="button"
+          class="btn-login"
+          (click)="goToLogin()"
+        >
+          <mat-icon>vpn_key</mat-icon>
+          <span>Sign In to Enable Cloud Install</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Option B: Manual Download -->
+    <div class="option-card option-manual">
+      <div class="option-header">
+        <div class="option-icon-wrap manual-icon">
+          <mat-icon>download</mat-icon>
+        </div>
+        <div class="option-title-wrap">
+          <h3 class="option-title">Manual Download</h3>
+        </div>
+      </div>
+
+      <div class="option-body">
+        <p class="option-desc">
+          Download the raw file to place it into your local BombSquad mods directory manually.
+        </p>
+        <button
+          type="button"
+          class="btn-download"
+          (click)="download()"
+          mat-dialog-close
+        >
+          <mat-icon>file_download</mat-icon>
+          <span>Download {{ file.fileName }}</span>
+        </button>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>
+

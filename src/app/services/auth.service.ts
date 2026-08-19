@@ -1,27 +1,32 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { V2LoginResponse, V2User } from '../models/model';
 
-const API = 'https://mods.69420555.xyz';
-const httpOption = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
-let options = {
-  headers: httpOption,
-};
+const API_V2 = 'https://mods.69420555.xyz/v2';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  getProxy() {
-    return this.http.post(`${API}/getproxy`, {});
+  /**
+   * Exchanges a Ballistica Public API Key / Token for a signed JWT session.
+   * Endpoint: POST /v2/login
+   * Body: { token: "<ballistica_api_key>" }
+   */
+  loginWithApiKey(apiKey: string): Observable<V2LoginResponse> {
+    return this.http.post<V2LoginResponse>(`${API_V2}/login`, {
+      token: apiKey.trim(),
+    });
   }
 
-  checkLoginProgress(date: any, proxy: any, key: any) {
-    return this.http.get<HttpResponse<any>>(`${API}/login`, {
-      params: { date: date, proxy: proxy, key: key },
-      observe: 'response',
-    });
+  /**
+   * Fetches profile info for the authenticated user.
+   * Endpoint: GET /v2/accounts/me
+   */
+  getAccountProfile(): Observable<V2User> {
+    return this.http.get<V2User>(`${API_V2}/accounts/me`);
   }
 }
