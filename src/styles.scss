@@ -42,8 +42,113 @@ $ballistica-web-theme: mat.m2-define-dark-theme(
   background-color: transparent !important;
 }
 
-.mat-mdc-paginator-container {
-  justify-content: center;
+// Custom Paginator Modern Responsive Styling
+.mat-mdc-paginator {
+  background: transparent !important;
+  color: #e0e6ed !important;
+  font-family: inherit;
+
+  .mat-mdc-paginator-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-height: 52px;
+    padding: 6px 12px;
+    gap: 8px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 4px;
+      gap: 10px;
+    }
+  }
+
+  .mat-mdc-paginator-page-size {
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+
+    .mat-mdc-paginator-page-size-label {
+      color: #90a4ae;
+      font-size: 0.82rem;
+      margin-right: 6px;
+    }
+
+    .mat-mdc-form-field {
+      margin: 0;
+      width: 76px;
+
+      .mat-mdc-select-value {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.86rem;
+      }
+
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+    }
+  }
+
+  .mat-mdc-paginator-range-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .mat-mdc-paginator-range-label {
+      color: #b0bec5;
+      font-size: 0.84rem;
+      font-weight: 500;
+      margin: 0 8px;
+
+      @media (max-width: 600px) {
+        margin: 0;
+        font-size: 0.8rem;
+      }
+    }
+
+    .mat-mdc-paginator-navigation-previous,
+    .mat-mdc-paginator-navigation-next,
+    .mat-mdc-paginator-navigation-first,
+    .mat-mdc-paginator-navigation-last {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #7986cb;
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+
+      &:not([disabled]):hover {
+        background: rgba(63, 81, 181, 0.2);
+        border-color: rgba(63, 81, 181, 0.5);
+        color: #ffffff;
+      }
+
+      &[disabled] {
+        opacity: 0.3;
+        cursor: not-allowed;
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.04);
+      }
+
+      .mat-mdc-button-touch-target {
+        display: none;
+      }
+    }
+  }
 }
 /* You can add global styles to this file, and also import other style files */
 

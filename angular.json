@@ -153,16 +153,7 @@
         "prerender": {
           "builder": "@angular-devkit/build-angular:prerender",
           "options": {
-            "routes": [
-              "/home",
-              "/gallery",
-              "/download",
-              "/blog",
-              "/blog/host-bombsquad-server-free",
-              "/pluginmanager",
-              "/free-server"
-            ],
-            "discoverRoutes": false
+            "routesFile": "routes.txt"
           },
           "configurations": {
             "production": {

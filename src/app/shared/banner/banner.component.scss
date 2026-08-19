@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.ad-unit-container {
+  display: block;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  margin: 0 auto;
+  min-height: 0;
+}
+
+ins.adsbygoogle {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  min-height: 0;
+  overflow: hidden;
+
+  &[data-ad-status="unfilled"],
+  &[data-adsbygoogle-status="unfilled"] {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

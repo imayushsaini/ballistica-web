@@ -364,21 +364,41 @@
   }
 }
 
+.mods-top-ad {
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  min-height: 0;
+  transition: margin 0.25s ease;
+
+  &:has(.is-loaded),
+  &:has(iframe),
+  &:has(ins[data-ad-status="filled"]) {
+    margin: 0 0 24px 0;
+  }
+}
+
 .ad-card-wrapper {
   grid-column: 1 / -1;
-  margin: 10px 0;
+  margin: 0;
+  overflow: hidden;
+  min-height: 0;
+  transition: margin 0.25s ease;
+
+  &:has(.is-loaded),
+  &:has(iframe),
+  &:has(ins[data-ad-status="filled"]) {
+    margin: 12px 0;
+  }
 }
 
 .paginator-wrapper {
-  margin-top: 32px;
+  margin-top: 36px;
   background: #16181f;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-
-  mat-paginator {
-    background: transparent;
-    color: #e0e6ed;
-  }
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
+
 

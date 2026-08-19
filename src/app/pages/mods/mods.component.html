@@ -33,6 +33,11 @@
       </div>
     </div>
 
+    <!-- Top Featured Ad Banner for High Impressions & Clicks -->
+    <div class="mods-top-ad" *ngIf="!isLoading">
+      <app-banner></app-banner>
+    </div>
+
     <!-- Content Area -->
     <div class="mods-content">
       <!-- Loading State -->
@@ -92,7 +97,7 @@
             </div>
           </div>
 
-          <!-- Banner ad placeholder -->
+          <!-- In-grid Banner ad placeholder -->
           <div class="ad-card-wrapper" *ngIf="i % 6 === 5">
             <app-banner></app-banner>
           </div>
@@ -102,7 +107,7 @@
       <!-- Paginator -->
       <div class="paginator-wrapper" *ngIf="!isLoading && mods && mods.length > 0">
         <mat-paginator [length]="totalRows" [pageSize]="pageSize" [pageIndex]="currentPage"
-          [pageSizeOptions]="pageSizeOptions" aria-label="Select page" (page)="pageChanged($event)">
+          [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true" aria-label="Select page" (page)="pageChanged($event)">
         </mat-paginator>
       </div>
     </div>

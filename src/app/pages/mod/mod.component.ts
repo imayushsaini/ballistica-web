@@ -131,7 +131,9 @@ export class ModComponent implements OnInit {
   }
 
   loadMedia(fileId: string, type: string) {
+    if (typeof window === 'undefined') return;
     this.modsService.downloadMod(fileId).subscribe((response: Blob) => {
+      if (typeof window === 'undefined') return;
       const blob = new Blob([response], { type: response.type });
       const url = window.URL.createObjectURL(blob);
       if (type == 'image') {

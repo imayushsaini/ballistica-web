@@ -42,7 +42,16 @@
 
 .ad-banner-top,
 .ad-banner-bottom {
-  margin: 16px 0 24px;
+  margin: 0;
+  overflow: hidden;
+  min-height: 0;
+  transition: margin 0.25s ease;
+
+  &:has(.is-loaded),
+  &:has(iframe),
+  &:has(ins[data-ad-status="filled"]) {
+    margin: 16px 0 24px;
+  }
 }
 
 .mod-header-card {
