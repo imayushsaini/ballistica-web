@@ -73,7 +73,15 @@ export class ModsComponent implements OnInit {
     const page_size = this.route.snapshot.queryParamMap.get('size');
     this.value = key ? key : '';
     this.pageSize = Number(page_size) ? Number(page_size) : 12;
-    this.currentPage = Number(page) ? Number(page) : 0;
+
+    if (page !== null && page !== undefined && !isNaN(Number(page))) {
+      this.currentPage = Number(page);
+    } else if (this.value) {
+      this.currentPage = 0;
+    } else {
+      // Fresh landing on /mods: pick a random start page between 0, 1, 2, 3
+      this.currentPage = typeof window !== 'undefined' ? Math.floor(Math.random() * 4) : 0;
+    }
 
     this.loadData();
 
@@ -160,6 +168,7 @@ export class ModsComponent implements OnInit {
         page: this.currentPage,
         size: this.pageSize,
       },
+      state: { mod },
     });
   }
 

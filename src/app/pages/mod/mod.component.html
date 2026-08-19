@@ -1,4 +1,21 @@
 <div class="mod-detail-page">
+  <!-- Loading State when loading mod from network (e.g. direct link) -->
+  <div class="mod-loading-state" *ngIf="isLoading && (!mod || mod.length === 0)">
+    <mat-spinner diameter="44" class="custom-spinner"></mat-spinner>
+    <span class="loading-text">Loading mod details...</span>
+  </div>
+
+  <!-- Not Found State -->
+  <div class="mod-empty-state" *ngIf="!isLoading && (!mod || mod.length === 0)">
+    <mat-icon class="empty-icon">search_off</mat-icon>
+    <h2 class="empty-title">Mod Not Found</h2>
+    <p class="empty-desc">The requested mod could not be found or has been removed from the repository.</p>
+    <button class="back-btn" (click)="return()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back to Mods Repository</span>
+    </button>
+  </div>
+
   <div class="mod-detail-container" *ngIf="mod && mod.length > 0">
     <!-- Top Navigation Bar -->
     <div class="top-nav">
