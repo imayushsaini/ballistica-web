@@ -144,6 +144,19 @@ const routes: Routes = [
       ogUrl: 'https://bombsquad-community.web.app/baport'
     }
   },
+  {
+    path: 'workspaces',
+    loadChildren: () =>
+      import('./pages/workspaces/workspaces.component').then(
+        (m) => m.WorkspacesModule,
+      ),
+    data: {
+      title: 'Ballistica Workspaces Manager | BCS',
+      description:
+        'Manage Ballistica cloud workspaces, sync game mods, upload Python plugins, browse workspace files, and organize BombSquad scripts.',
+      ogUrl: 'https://bombsquad-community.web.app/workspaces',
+    },
+  },
   { path: '**', redirectTo: 'home' },
 ];
 

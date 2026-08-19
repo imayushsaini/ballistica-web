@@ -38,12 +38,15 @@ export interface Workspace {
 
 export interface WorkspaceFileEntry {
   path: string;
-  type: 'file' | 'directory';
-  size: number | null;
-  modified_time: string | null;
+  type?: 'file' | 'directory' | 'dir' | string;
+  size?: number | null;
+  modified_time?: string | null;
 }
 
+export type WorkspaceFile = WorkspaceFileEntry;
+
 export interface WorkspaceFilesResponse {
-  entries: WorkspaceFileEntry[];
+  entries?: WorkspaceFileEntry[];
+  files?: WorkspaceFileEntry[];
 }
 

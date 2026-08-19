@@ -39,6 +39,10 @@ export class BlogPostHome implements OnInit {
     console.log(link);
     this.router.navigateByUrl(this.router.url + '/' + link);
   }
+
+  openPluginManager() {
+    this.router.navigateByUrl('/pluginmanager');
+  }
 }
 
 const routes: Routes = [

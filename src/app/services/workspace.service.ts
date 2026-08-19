@@ -39,6 +39,15 @@ export class WorkspaceService {
         if (data && data.workspaces) {
           this.workspaces = data.workspaces;
           this.verifyWorkspace();
+
+          // If no active workspace is currently set, activate the first available workspace
+          if (this.workspaces.length > 0 && !this.activeWorkspace) {
+            this.activeWorkspace = this.workspaces[0];
+            this.setActive(this.workspaces[0].id).subscribe({
+              next: () => console.log(`Default active workspace set to "${this.workspaces[0].name}"`),
+              error: () => {},
+            });
+          }
         }
       },
       error: (error) => {
@@ -49,7 +58,11 @@ export class WorkspaceService {
 
     this.getActiveWorkspace().subscribe({
       next: (activeWs: any) => {
-        this.activeWorkspace = activeWs;
+        if (activeWs) {
+          this.activeWorkspace = activeWs;
+        } else if (this.workspaces.length > 0 && !this.activeWorkspace) {
+          this.activeWorkspace = this.workspaces[0];
+        }
       },
       error: () => {},
     });
@@ -129,6 +142,21 @@ export class WorkspaceService {
   }
 
   /**
+   * GET /v2/workspaces/{id} - Get single workspace metadata
+   */
+  getWorkspace(workspaceId: string): Observable<Workspace> {
+    return this.http.get<Workspace>(`${API_V2}/workspaces/${encodeURIComponent(workspaceId)}`);
+  }
+
+  /**
+   * POST /v2/workspaces/active - Deactivate syncing (set active to null)
+   */
+  deactivateWorkspace(): Observable<any> {
+    this.activeWorkspace = null;
+    return this.http.post(`${API_V2}/workspaces/active`, { workspace_id: null });
+  }
+
+  /**
    * GET /v2/workspaces/{id}/files - List files in workspace
    */
   getWorkspaceFiles(workspaceId: string): Observable<WorkspaceFilesResponse> {
@@ -138,33 +166,95 @@ export class WorkspaceService {
   }
 
   /**
-   * Installs a mod file into a workspace following Ballistica V2 file upload protocol
+   * GET /v2/workspaces/{id}/files/{path} - Download raw file bytes
    */
-  installModToWorkspace(
-    fileId: string,
-    fileName: string,
-    workspaceIdOrName: string,
-  ): Observable<{ status: number; message: string }> {
-    return from(this.installModToWorkspaceAsync(fileId, fileName, workspaceIdOrName));
+  downloadWorkspaceFile(workspaceId: string, filePath: string): Observable<Blob> {
+    return this.http.get(
+      `${API_V2}/workspaces/${encodeURIComponent(workspaceId)}/files/${encodeURIComponent(filePath)}`,
+      { responseType: 'blob' },
+    );
   }
 
-  private async installModToWorkspaceAsync(
-    fileId: string,
+  /**
+   * POST /v2/workspaces/{id}/files/{path} with {"op": "mkdir"} - Create directory
+   */
+  createDirectory(workspaceId: string, dirPath: string): Observable<any> {
+    return this.http.post(
+      `${API_V2}/workspaces/${encodeURIComponent(workspaceId)}/files/${encodeURIComponent(dirPath)}`,
+      { op: 'mkdir' },
+    );
+  }
+
+  /**
+   * POST /v2/workspaces/{id}/files/{path} with {"op": "move", "dest": "..."} - Move or rename
+   */
+  moveFile(workspaceId: string, sourcePath: string, destPath: string): Observable<any> {
+    return this.http.post(
+      `${API_V2}/workspaces/${encodeURIComponent(workspaceId)}/files/${encodeURIComponent(sourcePath)}`,
+      { op: 'move', dest: destPath },
+    );
+  }
+
+  /**
+   * POST /v2/workspaces/{id}/files/{path} with {"op": "copy", "dest": "..."} - Copy file or folder
+   */
+  copyFile(workspaceId: string, sourcePath: string, destPath: string): Observable<any> {
+    return this.http.post(
+      `${API_V2}/workspaces/${encodeURIComponent(workspaceId)}/files/${encodeURIComponent(sourcePath)}`,
+      { op: 'copy', dest: destPath },
+    );
+  }
+
+  /**
+   * DELETE /v2/workspaces/{id}/files/{path} - Delete file or directory
+   */
+  deleteWorkspaceFile(workspaceId: string, filePath: string): Observable<any> {
+    return this.http.delete(
+      `${API_V2}/workspaces/${encodeURIComponent(workspaceId)}/files/${encodeURIComponent(filePath)}`,
+    );
+  }
+
+  /**
+   * Uploads file to workspace at specific path
+   */
+  uploadFile(
+    workspaceId: string,
+    filePath: string,
+    content: Blob | File | ArrayBuffer,
+  ): Observable<{ status: number; message: string }> {
+    return from(this.installRawContentToWorkspaceAsync(content, filePath, workspaceId));
+  }
+
+  /**
+   * Installs raw mod file content (Blob or ArrayBuffer) into a workspace
+   */
+  async installRawContentToWorkspaceAsync(
+    content: Blob | ArrayBuffer,
     fileName: string,
-    workspaceIdOrName: string,
+    workspaceIdOrName?: string,
   ): Promise<{ status: number; message: string }> {
-    const ws = this.workspaces.find(
+    let ws = this.workspaces.find(
       (w) => w.id === workspaceIdOrName || w.name === workspaceIdOrName,
     );
-    const workspaceId = ws ? ws.id : workspaceIdOrName;
 
-    if (!workspaceId) {
-      throw new Error('No valid workspace selected.');
+    let workspaceId = ws ? ws.id : (workspaceIdOrName || this.activeWorkspace?.id || this.workspaces[0]?.id);
+
+    // Auto-create workspace if none exists
+    if (!workspaceId && this.tokenStorage.getToken()) {
+      const createdWs: any = await firstValueFrom(this.createWorkspace('BCS MODS'));
+      if (createdWs?.id) {
+        workspaceId = createdWs.id;
+        await firstValueFrom(this.setActive(workspaceId));
+        this.initializeWorkspace();
+      }
     }
 
-    // 1. Download mod file content
-    const blob = await firstValueFrom(this.modsService.downloadMod(fileId));
-    const arrayBuffer = await blob.arrayBuffer();
+    if (!workspaceId) {
+      throw new Error('No workspace found. Please log in or create a workspace first.');
+    }
+
+    // 1. Convert content to ArrayBuffer
+    const arrayBuffer = content instanceof ArrayBuffer ? content : await content.arrayBuffer();
     const size = arrayBuffer.byteLength;
 
     // 2. Compute SHA-256 hash
@@ -193,7 +283,7 @@ export class WorkspaceService {
 
     // If file already exists in Ballistica dedup store, it's instantly linked
     if (initRes && initRes.status === 'exists') {
-      return { status: 200, message: 'Mod installed successfully' };
+      return { status: 200, message: 'Installed successfully' };
     }
 
     // 4. Upload file content directly if required
@@ -210,7 +300,7 @@ export class WorkspaceService {
       });
 
       if (!uploadRes.ok) {
-        throw new Error(`Failed to upload mod content: ${uploadRes.statusText}`);
+        throw new Error(`Failed to upload file content: ${uploadRes.statusText}`);
       }
 
       // 5. Finalize upload
@@ -224,10 +314,38 @@ export class WorkspaceService {
         ),
       );
 
-      return { status: 200, message: 'Mod installed successfully' };
+      return { status: 200, message: 'Installed successfully' };
     }
 
-    return { status: 200, message: 'Mod installed successfully' };
+    return { status: 200, message: 'Installed successfully' };
+  }
+
+  installRawContentToWorkspace(
+    content: Blob | ArrayBuffer,
+    fileName: string,
+    workspaceIdOrName?: string,
+  ): Observable<{ status: number; message: string }> {
+    return from(this.installRawContentToWorkspaceAsync(content, fileName, workspaceIdOrName));
+  }
+
+  /**
+   * Installs a mod file by ID into a workspace following Ballistica V2 file upload protocol
+   */
+  installModToWorkspace(
+    fileId: string,
+    fileName: string,
+    workspaceIdOrName: string,
+  ): Observable<{ status: number; message: string }> {
+    return from(this.installModToWorkspaceAsync(fileId, fileName, workspaceIdOrName));
+  }
+
+  private async installModToWorkspaceAsync(
+    fileId: string,
+    fileName: string,
+    workspaceIdOrName: string,
+  ): Promise<{ status: number; message: string }> {
+    const blob = await firstValueFrom(this.modsService.downloadMod(fileId));
+    return this.installRawContentToWorkspaceAsync(blob, fileName, workspaceIdOrName);
   }
 }
 

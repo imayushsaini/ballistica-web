@@ -1,0 +1,508 @@
+<div class="workspaces-page">
+  <div class="ws-container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="header-titles">
+        <div class="badge-tag">
+          <mat-icon class="badge-icon">cloud_sync</mat-icon>
+          <span>Ballistica Cloud Workspaces</span>
+        </div>
+        <h1 class="main-title">Workspace Manager</h1>
+        <p class="sub-title">
+          Create, organize, and sync your Python mods, scripts, and custom game assets with BombSquad.
+        </p>
+      </div>
+
+      <div class="header-actions" *ngIf="isLoggedIn">
+        <button
+          type="button"
+          class="btn-new-ws"
+          (click)="openCreateWsModal()"
+          [disabled]="isActionRunning"
+        >
+          <mat-icon>add</mat-icon>
+          <span>New Workspace</span>
+        </button>
+        <button
+          type="button"
+          class="btn-refresh"
+          (click)="loadWorkspaces()"
+          [disabled]="isLoadingWorkspaces"
+          title="Refresh Workspaces"
+        >
+          <mat-icon [class.spinning]="isLoadingWorkspaces">refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Not Logged In State -->
+    <div class="not-logged-in-card" *ngIf="!isLoggedIn">
+      <div class="lock-icon-wrap">
+        <mat-icon>vpn_key</mat-icon>
+      </div>
+      <h2>Sign in to Manage Workspaces</h2>
+      <p>
+        Ballistica Workspaces allow you to deploy and synchronize mods directly to your BombSquad game clients across all devices.
+      </p>
+      <button type="button" class="btn-login" (click)="goToLogin()">
+        <mat-icon>login</mat-icon>
+        <span>Sign In with Ballistica API Token</span>
+      </button>
+    </div>
+
+    <!-- Logged In Layout -->
+    <div class="ws-layout" *ngIf="isLoggedIn">
+      <!-- Left Column: Workspaces List -->
+      <div class="ws-sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title-row">
+            <mat-icon class="sec-icon">folder_shared</mat-icon>
+            <h3>Your Workspaces</h3>
+          </div>
+          <span class="count-badge">{{ workspaces.length }}</span>
+        </div>
+
+        <!-- Workspaces Loading Spinner -->
+        <div class="ws-loading" *ngIf="isLoadingWorkspaces">
+          <mat-spinner diameter="32"></mat-spinner>
+          <span>Loading workspaces...</span>
+        </div>
+
+        <!-- Empty Workspaces List -->
+        <div class="empty-ws-state" *ngIf="!isLoadingWorkspaces && workspaces.length === 0">
+          <mat-icon>folder_off</mat-icon>
+          <p>No workspaces found on your account.</p>
+          <button type="button" class="btn-create-first" (click)="openCreateWsModal()">
+            <mat-icon>add</mat-icon>
+            <span>Create Workspace</span>
+          </button>
+        </div>
+
+        <!-- Workspaces List -->
+        <div class="ws-list" *ngIf="!isLoadingWorkspaces && workspaces.length > 0">
+          <div
+            class="ws-item"
+            *ngFor="let ws of workspaces"
+            [class.is-selected]="selectedWorkspace?.id === ws.id"
+            (click)="selectWorkspace(ws)"
+          >
+            <div class="ws-item-top">
+              <div class="ws-icon-name">
+                <mat-icon class="ws-folder-icon">folder</mat-icon>
+                <span class="ws-name" [title]="ws.name">{{ ws.name }}</span>
+              </div>
+
+              <!-- Active Status Badge -->
+              <span
+                class="active-badge"
+                *ngIf="activeWorkspace?.id === ws.id"
+                title="Active workspace syncing with your game"
+              >
+                <mat-icon>check_circle</mat-icon>
+                <span>Active</span>
+              </span>
+            </div>
+
+            <!-- Workspace Action Buttons -->
+            <div class="ws-item-actions">
+              <!-- Set Active or Deactivate -->
+              <button
+                type="button"
+                class="btn-ws-opt btn-set-active"
+                *ngIf="activeWorkspace?.id !== ws.id"
+                (click)="setActive(ws, $event)"
+                [disabled]="isActionRunning"
+                title="Set as active sync workspace"
+              >
+                <mat-icon>sync</mat-icon>
+                <span>Set Active</span>
+              </button>
+
+              <button
+                type="button"
+                class="btn-ws-opt btn-deactivate"
+                *ngIf="activeWorkspace?.id === ws.id"
+                (click)="deactivateActive($event)"
+                [disabled]="isActionRunning"
+                title="Disable sync"
+              >
+                <mat-icon>sync_disabled</mat-icon>
+                <span>Syncing</span>
+              </button>
+
+              <!-- Rename -->
+              <button
+                type="button"
+                class="btn-ws-opt btn-rename"
+                (click)="openRenameWsModal(ws, $event)"
+                [disabled]="isActionRunning"
+                title="Rename workspace"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <!-- Delete -->
+              <button
+                type="button"
+                class="btn-ws-opt btn-delete"
+                (click)="deleteWorkspace(ws, $event)"
+                [disabled]="isActionRunning"
+                title="Delete workspace"
+              >
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: File Explorer -->
+      <div class="ws-explorer">
+        <!-- Explorer Header -->
+        <div class="explorer-header" *ngIf="selectedWorkspace">
+          <div class="explorer-title-wrap">
+            <div class="exp-icon-wrap">
+              <mat-icon>inventory_2</mat-icon>
+            </div>
+            <div>
+              <h2 class="explorer-ws-name">{{ selectedWorkspace.name }}</h2>
+              <span class="explorer-meta">
+                ID: <code>{{ selectedWorkspace.id }}</code> &bull; {{ files.length }}
+                {{ files.length === 1 ? 'file' : 'files' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Explorer Actions Toolbar -->
+          <div class="explorer-toolbar">
+            <!-- Search Filter -->
+            <div class="search-wrap">
+              <mat-icon class="search-icon">search</mat-icon>
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Filter files..."
+                [(ngModel)]="searchQuery"
+              />
+              <button
+                type="button"
+                class="clear-search-btn"
+                *ngIf="searchQuery"
+                (click)="searchQuery = ''"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+
+            <!-- Upload File Button -->
+            <input
+              type="file"
+              #fileInput
+              multiple
+              style="display: none"
+              (change)="onFileSelected($event)"
+            />
+            <button
+              type="button"
+              class="btn-tool btn-upload"
+              (click)="triggerFileInput()"
+              [disabled]="isActionRunning"
+            >
+              <mat-icon>upload_file</mat-icon>
+              <span>Upload</span>
+            </button>
+
+            <!-- New Folder Button -->
+            <button
+              type="button"
+              class="btn-tool btn-mkdir"
+              (click)="openMkdirModal()"
+              [disabled]="isActionRunning"
+            >
+              <mat-icon>create_new_folder</mat-icon>
+              <span>New Folder</span>
+            </button>
+
+            <!-- Refresh Files Button -->
+            <button
+              type="button"
+              class="btn-tool btn-refresh-files"
+              (click)="loadFiles(selectedWorkspace.id)"
+              [disabled]="isLoadingFiles"
+              title="Refresh Files"
+            >
+              <mat-icon [class.spinning]="isLoadingFiles">refresh</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Drop Zone Wrapper -->
+        <div
+          class="drop-zone"
+          [class.drag-over]="isDraggingOver"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+        >
+          <!-- Drag Overlay Message -->
+          <div class="drag-overlay" *ngIf="isDraggingOver">
+            <mat-icon>cloud_upload</mat-icon>
+            <span>Drop files here to upload to {{ selectedWorkspace?.name }}</span>
+          </div>
+
+          <!-- Files Loading State -->
+          <div class="files-loading" *ngIf="isLoadingFiles">
+            <mat-spinner diameter="40"></mat-spinner>
+            <span>Loading workspace files...</span>
+          </div>
+
+          <!-- Empty Files State -->
+          <div
+            class="empty-files-state"
+            *ngIf="!isLoadingFiles && selectedWorkspace && filteredFiles.length === 0"
+          >
+            <mat-icon class="empty-files-icon">folder_open</mat-icon>
+            <h3>{{ searchQuery ? 'No files match your search' : 'Workspace is empty' }}</h3>
+            <p *ngIf="!searchQuery">
+              Drag and drop <code>.py</code> mod scripts, zip archives, or textures here to upload them.
+            </p>
+            <button
+              type="button"
+              class="btn-primary-upload"
+              *ngIf="!searchQuery"
+              (click)="triggerFileInput()"
+            >
+              <mat-icon>upload_file</mat-icon>
+              <span>Upload First File</span>
+            </button>
+          </div>
+
+          <!-- Files List Table / Cards -->
+          <div
+            class="files-table"
+            *ngIf="!isLoadingFiles && selectedWorkspace && filteredFiles.length > 0"
+          >
+            <div class="table-header">
+              <span class="col-name">File / Path</span>
+              <span class="col-size">Size</span>
+              <span class="col-actions">Actions</span>
+            </div>
+
+            <div class="file-row" *ngFor="let file of filteredFiles">
+              <!-- File Info -->
+              <div class="col-name file-name-col">
+                <mat-icon class="file-type-icon">{{ getFileIcon(file.path, file.type) }}</mat-icon>
+                <span class="file-path-text" [title]="file.path">{{ file.path }}</span>
+              </div>
+
+              <!-- Size -->
+              <div class="col-size file-size-col">
+                <span>{{ formatSize(file.size) }}</span>
+              </div>
+
+              <!-- File Action Buttons -->
+              <div class="col-actions file-actions-col">
+                <!-- Download -->
+                <button
+                  type="button"
+                  class="action-btn download-btn"
+                  (click)="downloadFile(file)"
+                  title="Download File"
+                >
+                  <mat-icon>file_download</mat-icon>
+                </button>
+
+                <!-- Move / Rename -->
+                <button
+                  type="button"
+                  class="action-btn rename-btn"
+                  (click)="openMoveFileModal(file)"
+                  title="Move / Rename"
+                >
+                  <mat-icon>drive_file_rename_outline</mat-icon>
+                </button>
+
+                <!-- Copy -->
+                <button
+                  type="button"
+                  class="action-btn copy-btn"
+                  (click)="copyFile(file)"
+                  title="Duplicate File"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+
+                <!-- Delete -->
+                <button
+                  type="button"
+                  class="action-btn delete-btn"
+                  (click)="deleteFile(file)"
+                  title="Delete File"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad Unit -->
+    <div class="ad-section">
+      <app-banner></app-banner>
+    </div>
+  </div>
+
+  <!-- Modal: Create Workspace -->
+  <div class="modal-backdrop" *ngIf="showCreateWsModal" (click)="showCreateWsModal = false">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <mat-icon class="modal-icon">create_new_folder</mat-icon>
+        <h3>Create New Workspace</h3>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">Workspace Name:</label>
+        <input
+          type="text"
+          class="modal-input"
+          placeholder="e.g. My Custom Mods"
+          [(ngModel)]="newWsName"
+          (keyup.enter)="createWorkspace()"
+          autofocus
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn-modal-cancel"
+          (click)="showCreateWsModal = false"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn-modal-submit"
+          [disabled]="!newWsName.trim() || isActionRunning"
+          (click)="createWorkspace()"
+        >
+          {{ isActionRunning ? 'Creating...' : 'Create' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Rename Workspace -->
+  <div class="modal-backdrop" *ngIf="showRenameWsModal" (click)="showRenameWsModal = false">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <mat-icon class="modal-icon">edit</mat-icon>
+        <h3>Rename Workspace</h3>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">New Name:</label>
+        <input
+          type="text"
+          class="modal-input"
+          placeholder="Enter new workspace name"
+          [(ngModel)]="renameWsName"
+          (keyup.enter)="renameWorkspace()"
+          autofocus
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn-modal-cancel"
+          (click)="showRenameWsModal = false"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn-modal-submit"
+          [disabled]="!renameWsName.trim() || isActionRunning"
+          (click)="renameWorkspace()"
+        >
+          {{ isActionRunning ? 'Renaming...' : 'Save Name' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Create Directory / Folder -->
+  <div class="modal-backdrop" *ngIf="showMkdirModal" (click)="showMkdirModal = false">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <mat-icon class="modal-icon">folder</mat-icon>
+        <h3>Create Folder</h3>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">Folder Path / Name:</label>
+        <input
+          type="text"
+          class="modal-input"
+          placeholder="e.g. textures or scripts/custom"
+          [(ngModel)]="newDirName"
+          (keyup.enter)="createDirectory()"
+          autofocus
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn-modal-cancel"
+          (click)="showMkdirModal = false"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn-modal-submit"
+          [disabled]="!newDirName.trim() || isActionRunning"
+          (click)="createDirectory()"
+        >
+          {{ isActionRunning ? 'Creating...' : 'Create Folder' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Move / Rename File -->
+  <div class="modal-backdrop" *ngIf="showMoveFileModal" (click)="showMoveFileModal = false">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <mat-icon class="modal-icon">drive_file_rename_outline</mat-icon>
+        <h3>Rename / Move File</h3>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label">Destination Path:</label>
+        <input
+          type="text"
+          class="modal-input"
+          placeholder="e.g. plugins/my_mod.py"
+          [(ngModel)]="newFilePath"
+          (keyup.enter)="moveFile()"
+          autofocus
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn-modal-cancel"
+          (click)="showMoveFileModal = false"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn-modal-submit"
+          [disabled]="!newFilePath.trim() || isActionRunning"
+          (click)="moveFile()"
+        >
+          {{ isActionRunning ? 'Moving...' : 'Move / Rename' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

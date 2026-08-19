@@ -192,7 +192,37 @@ body {
       background-color: rgba(63, 81, 181, 0.2) !important;
       color: #7986cb !important;
     }
+
+    mat-icon,
+    .mat-icon {
+      font-family: 'Material Icons' !important;
+      font-size: 18px !important;
+      width: 18px !important;
+      height: 18px !important;
+      line-height: 18px !important;
+      vertical-align: middle;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+    }
   }
+}
+
+// Global Material Icons Font Enforcement
+mat-icon,
+.mat-icon,
+.material-icons {
+  font-family: 'Material Icons' !important;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
 
 // Material Snack Bar

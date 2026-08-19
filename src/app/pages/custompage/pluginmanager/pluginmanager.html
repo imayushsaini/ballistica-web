@@ -1,132 +1,284 @@
-<div class="main">
-  <div class="content">
-    <h1>Download BombSquad Plugin Manager</h1>
+<div class="plugin-manager-page">
+  <div class="pm-container">
+    <!-- Hero Header -->
+    <div class="hero-section">
+      <div class="hero-badge">
+        <mat-icon class="hero-badge-icon">extension</mat-icon>
+        <span>Official Community Tool</span>
+      </div>
+      <h1 class="hero-title">Download BombSquad Plugin Manager</h1>
+      <p class="hero-subtitle">
+        Introducing BombSquad Plugin Manager: Simplify game modding and access hundreds of community plugins, minigames, and utilities directly from inside your game.
+      </p>
+    </div>
 
-    <p>
-      Introducing Bombsquad Plugin Manager: Simplify Game Modding and Access
-      Community Content <br />
+    <!-- Overview Text Block -->
+    <div class="text-content-card intro-card">
+      <p>
+        The <strong>BombSquad Plugin Manager</strong> is a powerful, open-source modding utility designed specifically for the popular multiplayer party game <strong>BombSquad</strong>. This plugin manager serves as a convenient gateway to enhance your gaming experience by providing easy 1-click access to a wide range of community-created content, custom characters, game modes, maps, and server scripts.
+      </p>
+      <p>
+        Whether you are playing on Android, Windows, macOS, Linux, or VR headsets, the Plugin Manager brings effortless mod discovery and management straight to your game's settings menu.
+      </p>
+    </div>
 
-      The Bombsquad Plugin Manager is a powerful tool designed specifically for
-      the popular game Bombsquad. This plugin manager serves as a convenient
-      gateway to enhance your gaming experience by providing easy access to a
-      wide range of community-created content.
-    </p>
+    <!-- Top Ad Unit -->
+    <div class="ad-section">
+      <app-banner></app-banner>
+    </div>
 
-    <h2>Key Features of Bombsquad Plugin Manager</h2>
-    <ul>
-      <li>
-        <strong>Open-Source:</strong> Both the plugin manager itself and all the
-        plugins available in this repository are completely open-source. This
-        ensures transparency and allows for collaboration and improvement within
-        the gaming community.
-      </li>
-      <li>
-        <strong>Cross-Platform Compatibility:</strong> The plugin manager works
-        seamlessly on all platforms, ensuring that players on different devices
-        can benefit from its functionality.
-      </li>
-      <li>
-        <strong>API Version Compatibility:</strong> The plugin manager ensures
-        that you only encounter plugins and updates that are compatible with
-        your game's current API version. This prevents any compatibility issues
-        and ensures a smooth modding experience.
-      </li>
-      <li>
-        <strong>Plugin Search:</strong> Easily search for plugins that cater to
-        your specific needs. The plugin manager provides a convenient search
-        function that allows you to discover new and exciting additions to your
-        game.
-      </li>
-      <li>
-        <strong>Third-Party Plugin Sources:</strong> Expand your options by
-        adding 3rd party plugin sources. However, please note that these plugins
-        may not be audited, so exercise caution when using them. Add 3rd party
-        plugin sources (use them at your own risk, since they may not be
-        audited!).
-      </li>
-      <li>
-        <strong>Auto-Updates Control:</strong>Take control of your plugin
-        manager and plugin updates. Enable or disable auto-updates based on your
-        preferences, ensuring that you have full control over the modding
-        process.
-      </li>
-      <li>
-        <strong>Instant Activation:</strong> No need to restart the game after
-        installing plugins or minigames. The plugin manager allows you to
-        immediately enable installed plugins without any interruptions to your
-        gameplay.
-      </li>
-      <li>
-        <strong>Seamless Integration:</strong> Launch a plugin's settings
-        directly from the plugin manager window, providing a seamless and
-        efficient way to customize your gaming experience.
-      </li>
-      <li>
-        <strong>Source Code Preview:</strong> Prior to installation, you can
-        review a plugin's source code within the plugin manager. This
-        transparency allows you to make informed decisions about which plugins
-        to install.
-      </li>
-    </ul>
+    <!-- Key Features Section -->
+    <div class="features-section">
+      <h2 class="section-title">
+        <mat-icon class="sec-icon">star</mat-icon>
+        <span>Key Features of BombSquad Plugin Manager</span>
+      </h2>
 
-    <h2>Download</h2>
-    Direct download for all platforms. Click this download button to start
-    downloading plugin manager script. <br />
-    <button mat-raised-button color="primary" (click)="onDownload()">
-      Download Now
-    </button>
-    <br /><br />
-    <a href="https://github.com/bombsquad-community/plugin-manager"
-      >View it on github </a
-    ><br />
-    <br />
-    <app-banner></app-banner> <br />
-    <h2>Installation Options</h2>
-    There are two recommended methods for installing the Bombsquad Plugin
-    Manager: <br />
-    <ul>
-      <li>
-        <strong>Recommended Method:</strong> Download the "plugin_manager.py"
-        file to your mods directory. Access the mods directory by navigating to
-        your game's Settings, then selecting Advanced, and finally clicking on
-        Show Mods Folder. This method ensures a seamless installation process.
-      </li>
-      <li>
-        <strong>Alternative Method:</strong> Add the "plugin_manager.py" file to
-        your workspace. However, please note that self-updates of the plugin
-        manager will not work with this installation method. To manually apply
-        updates, simply copy the latest source code of the plugin manager into
-        your workspace. It's important to note that this method may lead to
-        compatibility issues if the game overwrites the plugin manager during
-        the next sync.
-      </li>
-    </ul>
+      <div class="features-grid">
+        <div class="feature-card">
+          <mat-icon class="feature-icon">lock_open</mat-icon>
+          <h4>100% Open-Source</h4>
+          <p>Both the plugin manager itself and all the plugins available in this repository are completely open-source. This ensures transparency and allows for collaboration and continuous improvement within the gaming community.</p>
+        </div>
 
-    <h2>Usage</h2>
-    If installed correctly, you'll see the plugin manager button in your game's
-    settings.
-    <br />
-    <video controls width="750" style="width: 100%">
-      <source src="assets/img/plugin-manager.webm" alt="" />
-    </video>
-    <br />
+        <div class="feature-card">
+          <mat-icon class="feature-icon">devices</mat-icon>
+          <h4>Cross-Platform Compatibility</h4>
+          <p>The plugin manager works seamlessly on all platforms including Android, Windows, Mac, Linux, and VR devices, ensuring that players across all ecosystems can benefit from its modding functionality.</p>
+        </div>
 
-    That's it, you now have access to a variety of community created content
-    waiting for you to install!
-    <h2>Contributing</h2>
-    Submitting a Plugin In order for a plugin to get accepted to this
-    <a href="https://github.com/bombsquad-community/plugin-manager"
-      >official repository</a
-    >
-    <br />
-    <br />
+        <div class="feature-card">
+          <mat-icon class="feature-icon">verified</mat-icon>
+          <h4>API Version Compatibility</h4>
+          <p>The plugin manager ensures that you only encounter plugins and updates that are compatible with your game's current API version (API 7, API 8, etc.), preventing crashes and ensuring a smooth modding experience.</p>
+        </div>
 
-    Discover the Power of Bombsquad Plugin Manager <br />
+        <div class="feature-card">
+          <mat-icon class="feature-icon">search</mat-icon>
+          <h4>In-Game Plugin Search</h4>
+          <p>Easily search for plugins that cater to your specific gameplay needs. The plugin manager provides a convenient in-game search function that allows you to discover new mods, minigames, and tweaks instantly.</p>
+        </div>
 
-    Take your Bombsquad gaming experience to the next level with the Bombsquad
-    Plugin Manager. Simplify the process of modding your game and explore an
-    extensive library of community-created content. With its user-friendly
-    interface and powerful features, the plugin manager is your ultimate
-    companion for expanding and customizing your gameplay.
+        <div class="feature-card">
+          <mat-icon class="feature-icon">public</mat-icon>
+          <h4>Third-Party Plugin Sources</h4>
+          <p>Expand your options by adding custom 3rd-party plugin sources and community repositories. Note: Please exercise caution with third-party sources as they may not be officially audited.</p>
+        </div>
+
+        <div class="feature-card">
+          <mat-icon class="feature-icon">update</mat-icon>
+          <h4>Auto-Updates Control</h4>
+          <p>Take full control of your plugin manager and installed mod updates. Enable or disable automatic background updates based on your preferences to maintain full stability over your game.</p>
+        </div>
+
+        <div class="feature-card">
+          <mat-icon class="feature-icon">bolt</mat-icon>
+          <h4>Instant Mod Activation</h4>
+          <p>No need to restart BombSquad after installing plugins or minigames. The plugin manager allows you to immediately enable and play newly installed content without interruptions to your gameplay.</p>
+        </div>
+
+        <div class="feature-card">
+          <mat-icon class="feature-icon">tune</mat-icon>
+          <h4>Seamless Integration & Settings</h4>
+          <p>Launch a plugin's custom settings directly from the in-game plugin manager window, providing a seamless and efficient way to customize your game rules, modifiers, and visuals.</p>
+        </div>
+
+        <div class="feature-card">
+          <mat-icon class="feature-icon">visibility</mat-icon>
+          <h4>Source Code Preview</h4>
+          <p>Prior to installation, you can review any plugin's Python source code within the manager. This full transparency allows you to make informed, secure decisions about which scripts to run.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation Options Guide -->
+    <div class="text-content-card guide-card">
+      <h2 class="section-title">
+        <mat-icon class="sec-icon">build</mat-icon>
+        <span>Installation Options & Guide</span>
+      </h2>
+      <p>There are two recommended methods for installing the BombSquad Plugin Manager into your game:</p>
+      
+      <div class="guide-steps">
+        <div class="guide-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Recommended Method: Direct Mods Directory</h4>
+            <p>
+              Download the <code>plugin_manager.py</code> file directly to your game's mods directory. Access your mods directory by opening BombSquad, navigating to <strong>Settings</strong> &rarr; <strong>Advanced</strong> &rarr; and clicking <strong>Show Mods Folder</strong>. Place <code>plugin_manager.py</code> in this folder and restart the game. This method supports automatic self-updates.
+            </p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Cloud Workspace Method</h4>
+            <p>
+              Use the 1-Click Cloud Workspace Install button above to sync <code>plugin_manager.py</code> straight to your Ballistica cloud account. The game will automatically download and activate the script on your next launch or workspace sync.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage Video Preview -->
+    <div class="usage-section">
+      <h2 class="section-title">
+        <mat-icon class="sec-icon">play_circle</mat-icon>
+        <span>In-Game Usage & Demonstration</span>
+      </h2>
+      <p class="section-desc">
+        Once installed correctly, you will see a dedicated <strong>Plugin Manager</strong> button inside your game's Settings menu. Browse, preview, and install community content with just one tap.
+      </p>
+      <div class="video-wrapper">
+        <video controls class="pm-video" preload="metadata">
+          <source src="assets/img/plugin-manager.webm" type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- Contributing Section -->
+    <div class="text-content-card contribute-card">
+      <h2 class="section-title">
+        <mat-icon class="sec-icon">group_add</mat-icon>
+        <span>Contributing & Submitting a Plugin</span>
+      </h2>
+      <p>
+        Are you a BombSquad modder or developer? You can submit your own custom plugins, character packs, powerups, or minigames to be included in the official community repository!
+      </p>
+      <p>
+        Submit a pull request to the
+        <a href="https://github.com/bombsquad-community/plugin-manager" target="_blank" rel="noopener noreferrer" class="link-highlight">
+          official GitHub repository
+        </a>. Once reviewed and tested for API compatibility, your mod will become accessible to thousands of players worldwide directly inside their game!
+      </p>
+    </div>
+
+    <!-- Quick Action Cards (Cloud Install & Manual Download) at Bottom -->
+    <div class="actions-grid">
+      <!-- Option 1: Direct Cloud Workspace Install -->
+      <div class="action-card cloud-card">
+        <div class="card-header">
+          <div class="icon-badge cloud-badge">
+            <mat-icon>cloud_sync</mat-icon>
+          </div>
+          <div class="header-text">
+            <span class="rec-tag">Recommended</span>
+            <h3 class="card-title">1-Click Cloud Workspace Install</h3>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="card-desc">
+            Instantly deploy the <code>plugin_manager.py</code> script into your Ballistica cloud workspace to sync directly with your connected game client.
+          </p>
+
+          <!-- Logged in with workspaces -->
+          <div *ngIf="isLoggedIn && workspaces.length > 0" class="workspace-selection-wrap">
+            <label class="field-label">Target Workspace:</label>
+            <mat-form-field appearance="outline" class="custom-select-field">
+              <mat-select [(value)]="selectedWorkspace">
+                <mat-option *ngFor="let ws of workspaces" [value]="ws.id || ws.name">
+                  <mat-icon class="ws-opt-icon">folder</mat-icon>
+                  <span>{{ ws.name || ws }}</span>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button
+              type="button"
+              class="btn-primary-action"
+              [disabled]="isInstalling"
+              (click)="installToWorkspace()"
+            >
+              <mat-spinner *ngIf="isInstalling" diameter="18" class="btn-spinner"></mat-spinner>
+              <mat-icon *ngIf="!isInstalling">cloud_download</mat-icon>
+              <span>{{ isInstalling ? 'Installing to Workspace...' : 'Install Plugin Manager to Workspace' }}</span>
+            </button>
+          </div>
+
+          <!-- Logged in but 0 workspaces (will auto-create BCS MODS) -->
+          <div *ngIf="isLoggedIn && workspaces.length === 0" class="workspace-selection-wrap">
+            <div class="info-alert">
+              <mat-icon>info</mat-icon>
+              <span>No workspace found. Clicking install will automatically create and link the <strong>BCS MODS</strong> workspace for your account.</span>
+            </div>
+            <button
+              type="button"
+              class="btn-primary-action"
+              [disabled]="isInstalling"
+              (click)="installToWorkspace()"
+            >
+              <mat-spinner *ngIf="isInstalling" diameter="18" class="btn-spinner"></mat-spinner>
+              <mat-icon *ngIf="!isInstalling">add_circle</mat-icon>
+              <span>{{ isInstalling ? 'Creating Workspace & Installing...' : 'Create Workspace & Install' }}</span>
+            </button>
+          </div>
+
+          <!-- Not logged in -->
+          <div *ngIf="!isLoggedIn" class="login-prompt">
+            <p class="login-desc">
+              Sign in with your Ballistica API token to install the Plugin Manager directly into your game workspace in 1 click.
+            </p>
+            <button type="button" class="btn-login-action" (click)="goToLogin()">
+              <mat-icon>vpn_key</mat-icon>
+              <span>Sign In to Enable Cloud Install</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 2: Manual Download -->
+      <div class="action-card manual-card">
+        <div class="card-header">
+          <div class="icon-badge manual-badge">
+            <mat-icon>download</mat-icon>
+          </div>
+          <div class="header-text">
+            <h3 class="card-title">Manual Script Download</h3>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="card-desc">
+            Download the raw <code>plugin_manager.py</code> script file for manual installation into your local BombSquad mods directory on any platform.
+          </p>
+
+          <div class="manual-actions">
+            <button type="button" class="btn-secondary-action" (click)="onDownload()">
+              <mat-icon>file_download</mat-icon>
+              <span>Download plugin_manager.py</span>
+            </button>
+            <a
+              href="https://github.com/bombsquad-community/plugin-manager"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-github-link"
+            >
+              <mat-icon>code</mat-icon>
+              <span>View Source on GitHub</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad Unit Bottom -->
+    <div class="ad-section">
+      <app-banner></app-banner>
+    </div>
+
+    <!-- Comprehensive Summary for SEO -->
+    <div class="text-content-card summary-card">
+      <h2 class="section-title">
+        <mat-icon class="sec-icon">rocket_launch</mat-icon>
+        <span>Discover the Power of BombSquad Plugin Manager</span>
+      </h2>
+      <p>
+        Take your BombSquad gaming experience to the next level with the BombSquad Plugin Manager. Simplify the process of modding your game and explore an extensive, ever-growing library of community-created content. With its user-friendly in-game interface, live source previews, automatic API checks, and powerful feature set, the plugin manager is your ultimate companion for expanding and customizing your BombSquad gameplay.
+      </p>
+    </div>
   </div>
 </div>
