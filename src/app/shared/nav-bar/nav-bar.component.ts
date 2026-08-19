@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -12,9 +13,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
   @Input() tag: any;
   title = 'BombSquad';
   public isMenuCollapsed = true;
+  public isUserMenuOpen = false;
   private sub?: Subscription;
 
-  constructor(private tokenStorage: TokenStorageService) {}
+  constructor(
+    private tokenStorage: TokenStorageService,
+    private router: Router,
+    private elRef: ElementRef,
+  ) {}
 
   ngOnInit(): void {
     const user = this.tokenStorage.getUser();
@@ -32,7 +38,31 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  signout() {
+  toggleUserMenu(event?: Event): void {
+    if (event) event.stopPropagation();
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  closeUserMenu(): void {
+    this.isUserMenuOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.elRef.nativeElement.contains(event.target)) {
+      this.isUserMenuOpen = false;
+    }
+  }
+
+  navigateToWorkspaces(): void {
+    this.isUserMenuOpen = false;
+    this.isMenuCollapsed = true;
+    this.router.navigate(['/workspaces']);
+  }
+
+  signout(): void {
+    this.isUserMenuOpen = false;
+    this.isMenuCollapsed = true;
     this.tokenStorage.signOut();
     this.isLoggedIn = false;
     this.tag = '';

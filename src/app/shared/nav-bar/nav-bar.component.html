@@ -104,9 +104,6 @@
           <a class="nav-link" routerLink="mods" (click)="isMenuCollapsed = true" routerLinkActive="active">Mods</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="workspaces" (click)="isMenuCollapsed = true" routerLinkActive="active">Workspaces</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" routerLink="blog" (click)="isMenuCollapsed = true" routerLinkActive="active">Blog</a>
         </li>
         <!-- <li class="nav-item">
@@ -125,14 +122,38 @@
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active" routerLink="login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
-          <div class="nav-link tag">
-            <img src="assets/img/icon_account_v2.svg" width="20px" alt="" />
-            <span> {{ tag }}</span>
+
+        <!-- Logged In User Account Dropdown -->
+        <li class="nav-item user-nav-item" *ngIf="isLoggedIn">
+          <button
+            type="button"
+            class="user-tag-btn"
+            (click)="toggleUserMenu($event)"
+            [class.active]="isUserMenuOpen"
+            title="Account Menu"
+          >
+            <img src="assets/img/icon_account_v2.svg" width="22px" alt="User" />
+            <span class="user-tag-name">{{ tag || 'Account' }}</span>
+            <span class="dropdown-arrow" [class.open]="isUserMenuOpen">&#9662;</span>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div class="user-dropdown-card" *ngIf="isUserMenuOpen" (click)="$event.stopPropagation()">
+            <div class="user-dropdown-header">
+              <span class="user-hdr-sub">Signed in as</span>
+              <span class="user-hdr-tag">{{ tag }}</span>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="user-menu-item" (click)="navigateToWorkspaces()">
+              <span class="menu-icon">&#128193;</span>
+              <span>Manage Workspaces</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <button type="button" class="user-menu-item btn-signout" (click)="signout()">
+              <span class="menu-icon">&#10140;</span>
+              <span>Sign Out</span>
+            </button>
           </div>
-        </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" (click)="isMenuCollapsed = true" (click)="signout()">SignOut</a>
         </li>
       </ul>
     </div>

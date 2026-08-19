@@ -87,13 +87,17 @@
   margin-bottom: 28px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 
   .search-input-box {
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%;
-    max-width: 640px;
+    flex: 1;
+    max-width: 580px;
+    min-width: 260px;
     background: #0f1117;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 10px;
@@ -133,17 +137,53 @@
       border: none;
       color: #78909c;
       cursor: pointer;
-      display: flex;
       padding: 4px;
-
-      &:hover {
-        color: #ffffff;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       mat-icon {
         font-size: 18px;
         width: 18px;
         height: 18px;
+      }
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .btn-manage-workspaces {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(63, 81, 181, 0.14);
+    border: 1px solid rgba(63, 81, 181, 0.35);
+    color: #c5cae9;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #7986cb;
+      transition: color 0.15s ease;
+    }
+
+    &:hover {
+      background: #3f51b5;
+      color: #ffffff;
+      border-color: #3f51b5;
+
+      mat-icon {
+        color: #ffffff;
       }
     }
   }
