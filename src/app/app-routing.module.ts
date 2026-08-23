@@ -45,15 +45,22 @@ const routes: Routes = [
       ogUrl: 'https://bombsquad-community.web.app/download',
     },
   },
-  //  {
-  //   path:'servers',
-  //   loadChildren:() => import ('./pages/servers/servers.component').then(m => m.ServersModule),
-  //   data:{
-  //     title:'BombSquad Public Server List',
-  //     description:"BombSquad Public Servers List, find queue Id, IP address of all public servers ever hosted for bombsquad.",
-  //     ogUrl:'https://bombsquad-community.web.app/servers'
-  //   }
-  // },
+  {
+    path: 'public-servers',
+    loadChildren: () =>
+      import('./pages/servers/servers.component').then((m) => m.ServersModule),
+    data: {
+      title: 'BombSquad Live Game Servers & Version Stats | BCS',
+      description:
+        'Explore real-time active BombSquad public servers, live online player counts, version distribution statistics, and queue IDs.',
+      ogUrl: 'https://bombsquad-community.web.app/public-servers',
+    },
+  },
+  {
+    path: 'servers',
+    redirectTo: 'public-servers',
+    pathMatch: 'full',
+  },
   {
     path: 'players',
     loadChildren: () =>

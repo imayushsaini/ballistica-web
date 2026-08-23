@@ -12,6 +12,8 @@ const BASE_ROUTES = [
   '/mods',
   '/gallery',
   '/download',
+  '/public-servers',
+  '/servers',
   '/players',
   '/blog',
   '/blog/host-bombsquad-server-free',

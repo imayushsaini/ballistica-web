@@ -106,10 +106,10 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="blog" (click)="isMenuCollapsed = true" routerLinkActive="active">Blog</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="servers" (click)="isMenuCollapsed = true"
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/public-servers" (click)="isMenuCollapsed = true"
             routerLinkActive="active">Servers</a>
-        </li> -->
+        </li>
         <li class="nav-item">
           <a href="/server-manager/" class="nav-link" (click)="isMenuCollapsed = true">Server Manager</a>
         </li>
@@ -125,13 +125,8 @@
 
         <!-- Logged In User Account Dropdown -->
         <li class="nav-item user-nav-item" *ngIf="isLoggedIn">
-          <button
-            type="button"
-            class="user-tag-btn"
-            (click)="toggleUserMenu($event)"
-            [class.active]="isUserMenuOpen"
-            title="Account Menu"
-          >
+          <button type="button" class="user-tag-btn" (click)="toggleUserMenu($event)" [class.active]="isUserMenuOpen"
+            title="Account Menu">
             <img src="assets/img/icon_account_v2.svg" width="22px" alt="User" />
             <span class="user-tag-name">{{ tag || 'Account' }}</span>
             <span class="dropdown-arrow" [class.open]="isUserMenuOpen">&#9662;</span>

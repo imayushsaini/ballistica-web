@@ -1,66 +1,399 @@
-<section>
-  <div class="background">
-    <div class="heading">
-      <span>Public Servers List</span>
-    </div>
-    <div class="about-page">
-      hmmmmm public server list ...for no reason ! <br />
-      servers checked after every 20 minutes , so if you see server lastseen
-      longer then that maybe server is offline now. Started this service on 24
-      July 2022 so thats the oldest first seen.Score is calculated based on
-      players playing on that server 24/7 and size of the server.
-    </div>
-    <div class="search-box">
-      <mat-form-field class="example-form-field" appearance="fill">
-        <mat-label>Search Servers</mat-label>
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="value"
-          (ngModelChange)="valueChange($event)"
-        />
-        <button
-          *ngIf="value"
-          matSuffix
-          mat-icon-button
-          aria-label="Clear"
-          (click)="resetSearch()"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
-    <div class="mods-list">
-      <div class="loading" *ngIf="isLoading">
-        <mat-spinner></mat-spinner>
+<section class="servers-page">
+  <div class="servers-container">
+    <!-- Hero Header -->
+    <div class="hero-section">
+      <div class="hero-badge">
+        <mat-icon class="hero-badge-icon">dns</mat-icon>
+        <span>Ballistica Public Servers</span>
       </div>
-      <div class="mod" *ngFor="let server of servers">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title" style="font-weight: 550">
-              {{ server.name }}
-            </h5>
-            IP: {{ server.ip }} , PortT: {{ server.port }} , Build:
-            {{ server.build }}<br />
-            <span *ngIf="server.stats">STATS: {{ server.stats }} <br /></span>
-            QueueId: {{ server.queueId }} <br />
-            {{ server.city }} , {{ server.region }}, {{ server.country }},
-            {{ server.host }} <br />
-            MaxPlayers: {{ server.maxPlayers }} , Language:
-            {{ server.language }} <br />
-            Score: {{ server.score.toFixed(2) }} , FirstSeen:
-            {{ server.firstSeen }} , LastSeen: {{ server.lastSeen }}
+      <h1 class="hero-title">Live BombSquad Game Servers</h1>
+      <p class="hero-subtitle">
+        Real-time public server list, active player count, and version statistics fetched live from the Ballistica master server network.
+      </p>
+
+      <div class="header-meta-row">
+        <div class="community-callout">
+          <mat-icon class="callout-icon">forum</mat-icon>
+          <span class="callout-text">
+            Join multiplayer parties &amp; community events on the
+            <a href="https://discord.gg/ucyaesh" target="_blank" rel="noopener noreferrer">BombSquad Discord</a>.
+          </span>
+        </div>
+
+        <button
+          type="button"
+          class="btn-refresh"
+          (click)="loadData(true)"
+          [disabled]="isLoading || isRefreshing"
+          title="Refresh server list"
+        >
+          <mat-icon [class.spinning]="isRefreshing">refresh</mat-icon>
+          <span>{{ isRefreshing ? 'Refreshing...' : 'Refresh Live Data' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Stats Overview Section -->
+    <div class="stats-section" *ngIf="stats && !isLoading">
+      <!-- 4 Quick Metric Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrap stat-icon-servers">
+            <mat-icon>public</mat-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.totalServers }}</span>
+            <span class="stat-label">Active Public Servers</span>
+            <span class="stat-sub">{{ stats.activeServersCount }} with players online</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrap stat-icon-players">
+            <mat-icon>groups</mat-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.totalPlayers }}</span>
+            <span class="stat-label">Players Online</span>
+            <span class="stat-sub">Across {{ stats.totalCapacity }} capacity slots</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrap stat-icon-queue">
+            <mat-icon>queue</mat-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.queueEnabledCount }}</span>
+            <span class="stat-label">Queue Enabled</span>
+            <span class="stat-sub">Direct queue join available</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrap stat-icon-version">
+            <mat-icon>layers</mat-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ stats.dominantVersion }}</span>
+            <span class="stat-label">Dominant Version</span>
+            <span class="stat-sub">{{ stats.dominantVersionPercentage.toFixed(1) }}% of network</span>
           </div>
         </div>
       </div>
 
-      <mat-paginator
-        [length]="200"
-        [pageSizeOptions]="[10, 50, 100]"
-        aria-label="Select page"
-        (page)="pageChanged($event)"
-      >
-      </mat-paginator>
+      <!-- Version Distribution Breakdown Card -->
+      <div class="version-distribution-card">
+        <div class="distribution-header">
+          <div class="distribution-title-wrap">
+            <mat-icon>bar_chart</mat-icon>
+            <h3 class="distribution-title">Server Versions Distribution</h3>
+          </div>
+          <span class="distribution-note">Click a version pill to filter servers</span>
+        </div>
+
+        <!-- Proportional Progress Bar -->
+        <div class="distribution-bar-track">
+          <div
+            *ngFor="let v of stats.versionStats"
+            class="distribution-bar-segment"
+            [style.width.%]="v.percentage"
+            [style.background-color]="v.color || '#6366f1'"
+            [title]="v.label + ': ' + v.servers + ' servers (' + v.percentage.toFixed(1) + '%)'"
+          ></div>
+        </div>
+
+        <!-- Interactive Version Filter Pills -->
+        <div class="version-pills-list">
+          <button
+            type="button"
+            class="version-pill"
+            [class.active]="selectedVersionGroup === 'all'"
+            (click)="selectVersionFilter('all')"
+          >
+            <span class="pill-dot pill-dot-all"></span>
+            <span class="pill-name">All Versions</span>
+            <span class="pill-count">{{ stats.totalServers }}</span>
+          </button>
+
+          <button
+            *ngFor="let v of stats.versionStats"
+            type="button"
+            class="version-pill"
+            [class.active]="selectedVersionGroup === v.name"
+            (click)="selectVersionFilter(v.name)"
+          >
+            <span class="pill-dot" [style.background-color]="v.color || '#6366f1'"></span>
+            <span class="pill-name">{{ v.label }}</span>
+            <span class="pill-count">{{ v.servers }} ({{ v.percentage.toFixed(0) }}%)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Featured Ad Banner -->
+    <div class="servers-top-ad" *ngIf="!isLoading">
+      <app-banner></app-banner>
+    </div>
+
+    <!-- Search & Filter Controls Toolbar -->
+    <div id="server-results-anchor" class="search-toolbar-section">
+      <!-- Search Input Box -->
+      <div class="search-input-box">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input
+          type="text"
+          class="custom-search-input"
+          placeholder="Search by server name, IP address, port, queue ID, language..."
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="onSearchChange()"
+        />
+        <button
+          *ngIf="searchQuery"
+          type="button"
+          class="clear-btn"
+          (click)="resetSearch()"
+          title="Clear search"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <!-- Quick Filter Pills & Sort Select -->
+      <div class="filters-row">
+        <div class="status-pills">
+          <button
+            type="button"
+            class="filter-chip"
+            [class.active]="selectedStatus === 'all'"
+            (click)="selectStatusFilter('all')"
+          >
+            All ({{ allParties.length }})
+          </button>
+          <button
+            type="button"
+            class="filter-chip"
+            [class.active]="selectedStatus === 'active'"
+            (click)="selectStatusFilter('active')"
+          >
+            <span class="status-dot dot-active"></span>
+            Active with Players ({{ stats?.activeServersCount || 0 }})
+          </button>
+          <button
+            type="button"
+            class="filter-chip"
+            [class.active]="selectedStatus === 'empty'"
+            (click)="selectStatusFilter('empty')"
+          >
+            <span class="status-dot dot-empty"></span>
+            Empty ({{ stats?.emptyServersCount || 0 }})
+          </button>
+          <button
+            type="button"
+            class="filter-chip"
+            [class.active]="selectedStatus === 'queue'"
+            (click)="selectStatusFilter('queue')"
+          >
+            <span class="status-dot dot-queue"></span>
+            Queue Enabled ({{ stats?.queueEnabledCount || 0 }})
+          </button>
+        </div>
+
+        <div class="toolbar-actions">
+          <div class="sort-selector-wrap">
+            <mat-icon class="sort-icon">sort</mat-icon>
+            <select class="custom-select" [(ngModel)]="sortBy" (change)="onSortChange($event)">
+              <option value="players">Sort: Most Players</option>
+              <option value="name">Sort: Name (A - Z)</option>
+              <option value="build">Sort: Newest Version/Build</option>
+              <option value="capacity">Sort: Max Capacity</option>
+            </select>
+          </div>
+
+          <span class="results-counter" *ngIf="!isLoading">
+            Showing <strong>{{ filteredParties.length }}</strong> of {{ allParties.length }} servers
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="servers-content">
+      <!-- Loading State -->
+      <div class="loading-state" *ngIf="isLoading">
+        <mat-spinner diameter="44" class="custom-spinner"></mat-spinner>
+        <span class="loading-text">Fetching live public servers from master server...</span>
+      </div>
+
+      <!-- Error State -->
+      <div class="error-state" *ngIf="!isLoading && errorMessage">
+        <div class="error-icon-wrap">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <h3 class="error-title">Unable to Load Servers</h3>
+        <p class="error-desc">{{ errorMessage }}</p>
+        <button class="reset-btn" (click)="loadData()">
+          <mat-icon>refresh</mat-icon>
+          <span>Try Again</span>
+        </button>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!isLoading && !errorMessage && (!filteredParties || filteredParties.length === 0)">
+        <div class="empty-icon-wrap">
+          <mat-icon>search_off</mat-icon>
+        </div>
+        <h3 class="empty-title">No matching servers found</h3>
+        <p class="empty-desc" *ngIf="searchQuery || selectedVersionGroup !== 'all' || selectedStatus !== 'all'">
+          No active servers match your search criteria. Try modifying your search query or reset filters.
+        </p>
+        <p class="empty-desc" *ngIf="!searchQuery && selectedVersionGroup === 'all' && selectedStatus === 'all'">
+          No public servers currently active on the master server.
+        </p>
+        <button class="reset-btn" (click)="resetSearch()">
+          <mat-icon>restart_alt</mat-icon>
+          <span>Reset All Filters</span>
+        </button>
+      </div>
+
+      <!-- Servers Grid -->
+      <div class="servers-grid" *ngIf="!isLoading && !errorMessage && pagedParties && pagedParties.length > 0">
+        <ng-container *ngFor="let server of pagedParties; let i = index; trackBy: trackByParty">
+          <!-- Server Card -->
+          <div class="server-card" [class.server-card-active]="server.status === 'active'">
+            <!-- Card Header -->
+            <div class="server-card-header">
+              <div class="server-title-row">
+                <span
+                  class="status-indicator"
+                  [class.status-active]="server.status === 'active'"
+                  [class.status-full]="server.status === 'full'"
+                  [class.status-empty]="server.status === 'empty'"
+                  [title]="server.status === 'active' ? 'Active with players' : server.status === 'full' ? 'Server is full' : 'Empty server'"
+                ></span>
+                <h3 class="server-title" [title]="server.n">{{ server.cleanTitle }}</h3>
+              </div>
+
+              <div class="header-badges">
+                <span class="badge badge-queue" *ngIf="server.qe" title="Queue Enabled">
+                  <mat-icon>queue</mat-icon> Queue
+                </span>
+                <span class="badge badge-lang" *ngIf="server.l">{{ server.l }}</span>
+              </div>
+            </div>
+
+            <!-- Card Body / Details -->
+            <div class="server-card-body">
+              <!-- Players Count & Mini Progress Bar -->
+              <div class="detail-row detail-players">
+                <div class="detail-label">
+                  <mat-icon>group</mat-icon>
+                  <span>Players:</span>
+                </div>
+                <div class="players-info-wrap">
+                  <span class="players-count-text">
+                    <strong>{{ server.s }}</strong> / {{ server.sm }}
+                  </span>
+                  <div class="mini-progress-track">
+                    <div
+                      class="mini-progress-fill"
+                      [style.width.%]="server.playerPercentage"
+                      [class.fill-active]="server.s > 0"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- IP & Port with Copy Button -->
+              <div class="detail-row detail-address">
+                <div class="detail-label">
+                  <mat-icon>router</mat-icon>
+                  <span>Address:</span>
+                </div>
+                <div class="address-copy-box" (click)="copyAddress(server)" title="Click to copy IP:Port">
+                  <code>{{ server.a }}:{{ server.p }}</code>
+                  <button type="button" class="btn-copy-inline">
+                    <mat-icon *ngIf="copiedAddressKey !== (server.a + '_' + server.p)">content_copy</mat-icon>
+                    <mat-icon *ngIf="copiedAddressKey === (server.a + '_' + server.p)" class="icon-copied">check</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Version & Build -->
+              <div class="detail-row detail-version">
+                <div class="detail-label">
+                  <mat-icon>layers</mat-icon>
+                  <span>Version:</span>
+                </div>
+                <div class="version-badges-wrap">
+                  <span class="badge-version-pill">{{ server.versionLabel }}</span>
+                  <span class="build-tag">Build {{ server.b }}</span>
+                </div>
+              </div>
+
+              <!-- Queue ID (if present) -->
+              <div class="detail-row detail-queue" *ngIf="server.q">
+                <div class="detail-label">
+                  <mat-icon>tag</mat-icon>
+                  <span>Queue ID:</span>
+                </div>
+                <div class="queue-id-box" (click)="copyQueueId(server)" title="Click to copy Queue ID">
+                  <code class="queue-code">{{ server.q }}</code>
+                  <button type="button" class="btn-copy-inline">
+                    <mat-icon *ngIf="copiedQueueKey !== server.q">content_copy</mat-icon>
+                    <mat-icon *ngIf="copiedQueueKey === server.q" class="icon-copied">check</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Footer / Actions -->
+            <div class="server-card-footer">
+              <div class="footer-meta-left">
+                <span class="ping-tag" *ngIf="server.pd" title="Ping Delay">
+                  <mat-icon>speed</mat-icon> {{ server.pd }}ms
+                </span>
+                <span class="physics-tag" *ngIf="server.f && server.f !== 1.0" title="Game Speed">
+                  ⚡ {{ server.f }}x
+                </span>
+              </div>
+
+              <div class="footer-actions-right">
+                <a
+                  *ngIf="server.sa"
+                  [href]="server.sa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-external-link"
+                  title="Open Server External Link / Discord"
+                >
+                  <mat-icon>open_in_new</mat-icon>
+                  <span>Join Link</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- In-grid Banner ad placeholder -->
+          <div class="ad-card-wrapper" *ngIf="i % 6 === 5">
+            <app-banner></app-banner>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Bottom Paginator -->
+      <div class="paginator-wrapper" *ngIf="!isLoading && !errorMessage && filteredParties && filteredParties.length > 0">
+        <mat-paginator
+          [length]="filteredParties.length"
+          [pageSize]="pageSize"
+          [pageIndex]="currentPage"
+          [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="true"
+          aria-label="Select server list page"
+          (page)="pageChanged($event)"
+        >
+        </mat-paginator>
+      </div>
     </div>
   </div>
 </section>
