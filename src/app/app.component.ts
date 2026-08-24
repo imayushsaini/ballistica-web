@@ -16,6 +16,8 @@ declare const gtag: Function;
 declare global {
   interface Window {
     adsbygoogle: any;
+    gtag?: Function;
+    dataLayer?: any[];
   }
 }
 @Component({
@@ -36,13 +38,21 @@ export class AppComponent {
     private swUpdate: SwUpdate,
   ) {
     this.router.events
-      .pipe(filter((event: Event) => event instanceof NavigationEnd))
-      .subscribe((event) => {
+      .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
         /** START : Code to Track Page View  */
         if (isPlatformBrowser(this.platformId)) {
-          gtag('event', 'page_view', {
-            page_path: this.router.url,
-          });
+          const pagePath = event.urlAfterRedirects || this.router.url;
+          const pageTitle = typeof document !== 'undefined' ? document.title : '';
+          const pageLocation = typeof window !== 'undefined' ? window.location.href : '';
+
+          if (typeof (window as any).gtag === 'function') {
+            (window as any).gtag('event', 'page_view', {
+              page_path: pagePath,
+              page_location: pageLocation,
+              page_title: pageTitle,
+            });
+          }
         }
         /** END */
       });

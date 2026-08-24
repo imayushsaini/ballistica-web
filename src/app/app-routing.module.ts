@@ -9,9 +9,9 @@ const routes: Routes = [
         (m) => m.HomepageModule,
       ),
     data: {
-      title: 'BombSquad Community Site | BCS',
+      title: 'BombSquad Community — The Ultimate Modding Hub, Servers & Workspaces | BCS',
       description:
-        'Welcome to BombSquad Community Website, find plugins, servers & account details, downloads links and tools.',
+        'Explore 500+ BombSquad mods & Python plugins, manage Ballistica cloud workspaces, browse real-time public servers, and find official game & controller downloads.',
       ogUrl: 'https://bombsquad-community.web.app/home',
     },
   },
@@ -21,9 +21,9 @@ const routes: Routes = [
       import('./pages/mods/mods.component').then((m) => m.ModsModule),
 
     data: {
-      title: 'Download Latest BombSquad Mods',
+      title: 'Download BombSquad Mods & Python Plugins | BCS Repository',
       description:
-        'Download Community Mods, Plugins for all version of BombSquad and install them directly to workspace.',
+        'Download community mods, Python plugins, minigames, and character packs for all versions of BombSquad. Install directly to Ballistica workspaces with 1 click.',
       ogUrl: 'https://bombsquad-community.web.app/mods',
     },
   },
@@ -39,9 +39,9 @@ const routes: Routes = [
         (m) => m.DownloadModule,
       ),
     data: {
-      title: 'Download BombSquad Game',
+      title: 'Download BombSquad Game, Remote Controller & Dedicated Server Builds | BCS',
       description:
-        'Get the latest version of BombSquad for Android, Windows, Linux, and MacBook. Transform your mobile devices into gaming controllers with BombSquad Remote. Immerse yourself in VR battles with BombSquad VR.',
+        'Download official BombSquad game for Android, Windows PC, Linux, macOS, and VR. Get BombSquad Remote controller app, dedicated server scripts, or browse community mods.',
       ogUrl: 'https://bombsquad-community.web.app/download',
     },
   },
@@ -77,8 +77,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/login/login.component').then((m) => m.LoginModule),
     data: {
-      title: 'Login BombSquad Account',
-      description: 'BombSquad Account login page',
+      title: 'Login to BombSquad Account | Ballistica V2 Workspace & Mod Sync',
+      description:
+        'Sign in with your Ballistica API token to install, update, and manage BombSquad community mods directly in your cloud workspaces.',
       ogUrl: 'https://bombsquad-community.web.app/login',
     },
   },

@@ -1,127 +1,442 @@
-<section style="background-color: black; padding-bottom: 20px">
-  <div class="header">
-    <img src="assets/img/bombsquad-header-1.jpg" alt="" width="100%" />
-    <h1>BombSquad Community Site</h1>
-    <div class="about-text container">
-      <h3>Biggest community of active bombsquaders</h3>
-      <p>
-        Welcome to the thriving hub of BombSquad modders and players! <br />
-        Join our active community, where passionate individuals like yourself
-        actively contribute to the development of BombSquad and create exciting
-        mods for the game. Under the guidance of BombSquad owner Eric Fromeling,
-        we proudly collaborate on projects like Ballistica, sharing our plugins
-        with fellow enthusiasts. Whether you're seeking guidance or looking to
-        share your own creations, you'll find everything you need for BombSquad
-        and Ballistica right here.
-      </p>
-      <p>
-        Calling all BombSquaders! Join our community of over 6000 like-minded
-        individuals and become part of an open-source gaming revolution. Our
-        welcoming Discord server transcends geographical boundaries, language
-        barriers, and cultural differences, treating everyone equally. Together,
-        we explore the boundless possibilities of this amazing game. Discover an
-        array of mods and plugins in our dedicated Mods Channel. Simplify your
-        experience with the Community Plugin Manager, making it effortless to
-        download and share plugins. Within our community, countless mods,
-        ModPacks, and server scripts have been created.
-      </p>
-      <p>
-        We also take pride in assisting newcomers, helping them navigate the
-        world of BombSquad modding. By sharing our knowledge from diverse
-        domains, we empower one another and foster the growth of professional
-        modders. At our core, we believe in the power of sharing. If you
-        resonate with our values, join us and show your support. Together, we
-        can take BombSquad to new heights.
-      </p>
-      <div class="featured-list">
-        <span><a href="https://discord.gg/ucyaesh">Bombsquad Community Discord Server</a></span>
-        <span><a routerLink="/pluginmanager">Community Plugin Manager</a></span>
-        <span><a href="https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server">Modded Server Scripts
-          </a></span>
-        <span><a routerLink="/mods">Mods Channel</a></span>
-        <span><a href="https://www.youtube.com/c/HeySmoothy">YouTube Tutorials</a></span>
-        <span><a routerLink="/baport">BA PORT</a></span>
-        <span><a routerLink="/support">Support us</a></span>
+<section class="home-page">
+  <div class="home-container">
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <mat-icon class="hero-badge-icon">sports_esports</mat-icon>
+          <span>The Ultimate BombSquad &amp; Ballistica Modding Hub</span>
+        </div>
+
+        <h1 class="hero-title">
+          BombSquad Community — Mods, Servers, Downloads &amp; Workspaces
+        </h1>
+
+        <p class="hero-subtitle">
+          Welcome to the central hub for BombSquad players, modders, and server hosts.
+          Download <strong>500+ verified community mods &amp; Python plugins</strong>, sync your cloud workspaces with API keys,
+          browse live multiplayer servers, and join 6,000+ passionate players worldwide.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-actions">
+          <a routerLink="/mods" class="btn-hero-primary">
+            <mat-icon>extension</mat-icon>
+            <span>Explore 500+ Community Mods</span>
+          </a>
+          <a routerLink="/download" class="btn-hero-secondary">
+            <mat-icon>cloud_download</mat-icon>
+            <span>Download Game &amp; Servers</span>
+          </a>
+          <a
+            href="https://discord.gg/ucyaesh"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-hero-discord"
+          >
+            <mat-icon>forum</mat-icon>
+            <span>Join Discord (6,000+)</span>
+          </a>
+        </div>
+
+        <!-- Community Trust Stats Counter -->
+        <div class="community-stats-grid">
+          <div class="stat-card">
+            <span class="stat-number">6,000+</span>
+            <span class="stat-label">Discord Members</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Community Mods &amp; Plugins</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100+</span>
+            <span class="stat-label">Live Public Game Servers</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Free &amp; Open Source</span>
+          </div>
+        </div>
       </div>
-      <!-- <a href="https://discord.gg/ucyaesh">Bombsquad Community Discord Server.</a>
-       Join with us and explore the possibility of this opensource game. Community not restricted to any country/region/language, people around the world are equally treated and invited here. <br>
-       Find mods/plugins in <a routerLink="/mods">Mods Channel</a>. Checkout <a routerLink="/pluginmanager">Community Plugin Manager</a> to ease your life in downloading
-       and sharing plugins.
-       Together people here worked on many mods, ModPack,<a href="https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server">Server Scripts </a>  and helped other newbies to get started with bombsquad modding.
-       Sharing our knowledge from different domains together we learned many things and gave birth to many pro modders.<br>
-       <strong>Our values : Sharing is caring.</strong>
-       Like us ? then <a routerLink="/support">Support us</a> -->
-    </div>
-  </div>
+    </header>
 
-  <!-- <div class="empty-block" fxShow="true" fxHide.gt-md>
+    <!-- Top In-Page Ad Banner -->
+    <div class="ad-container-wrap">
+      <app-banner></app-banner>
+    </div>
 
-    </div> -->
-</section>
+    <!-- Core Ecosystem Feature Grid -->
+    <section class="ecosystem-section" aria-labelledby="ecosystem-heading">
+      <div class="section-title-box">
+        <span class="section-tag"><mat-icon>hub</mat-icon> Community Tools &amp; Features</span>
+        <h2 id="ecosystem-heading" class="section-heading">Everything You Need for BombSquad &amp; Ballistica</h2>
+        <p class="section-subtext">
+          Explore powerful tools, cloud mod management, and multiplayer servers created by the community.
+        </p>
+      </div>
 
-<section class="about">
-  <h2>ABOUT BOMBSQUAD</h2>
-  <div class="about-text container">
-    <p>
-      BombSquad, an explosive arcade-style party game best enjoyed with several
-      friends and a large couch.
-    </p>
-    <p>
-      Jump, punch, throw, and bomb your way to victory as you compete in a
-      plethora of mini-games including Capture-the-Flag, King-of-the-Hill,
-      Bomber-Hockey, and of course Epic-Slow-Motion-Elimination.
-    </p>
-    <p>
-      Up to 8 local players can get in on the action through BombSquad’s support
-      of keyboards, PC gamepads, Wiimotes, PS3 controllers, and XBox 360
-      controllers. You can even use iOS and Android devices as wireless gamepads
-      via BombSquad Remote, available for free on the iOS App Store, Google
-      Play, and the Amazon Appstore.
-    </p>
-    <p>
-      Harness your mastery of physics to barrage your opponents from afar with
-      precision-thrown bombs, or simply charge in and toss your enemies off the
-      nearest cliff; all’s fair in love and BombSquad.
-      <br />
-      Bombs away!
-    </p>
-  </div>
+      <div class="ecosystem-grid">
+        <!-- Card 1: Mods Repository -->
+        <article class="feature-card mod-card-highlight">
+          <div class="feature-icon mod-icon">
+            <mat-icon>extension</mat-icon>
+          </div>
+          <h3 class="feature-title">Community Mods Repository</h3>
+          <p class="feature-desc">
+            Discover minigames, custom characters, powerup packs, and server plugins for BombSquad 1.7+.
+            Search by script name, uploader, or tag.
+          </p>
+          <a routerLink="/mods" class="feature-link">
+            <span>Browse Mods Repository</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </article>
 
-  <h2>Downloads</h2>
-  <div class="downloads">
-    <a href="https://play.google.com/store/apps/details?id=net.froemling.bombsquad"><img src="assets/img/gpBanner.png"
-        alt="" /></a>
-    <a href="http://appstore.com/mac/bombsquad"><img src="assets/img/macAppStore.png" alt="" /></a>
-    <a href="http://www.amazon.com/gp/product/B00E7NAVZA/ref=mas_pm_bombsquad"><img
-        src="assets/img/amazon-apps-store-us-black2.png" alt="" /></a>
-  </div>
-</section>
-<section *ngIf="isScrolled" class="trailer">
-  <h2>WATCH</h2>
-  <div class="videos-list container">
-    <div class="row">
-      <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/pgq8sOCgU98"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        <!-- Card 2: Workspaces Manager -->
+        <article class="feature-card">
+          <div class="feature-icon workspace-icon">
+            <mat-icon>folder_shared</mat-icon>
+          </div>
+          <h3 class="feature-title">Cloud Workspaces Sync</h3>
+          <p class="feature-desc">
+            Connect your Ballistica V2 account with your API key to synchronize mods and scripts directly to your devices with 1 click.
+          </p>
+          <a routerLink="/workspaces" class="feature-link">
+            <span>Manage Workspaces</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </article>
+
+        <!-- Card 3: Live Public Servers -->
+        <article class="feature-card">
+          <div class="feature-icon server-icon">
+            <mat-icon>dns</mat-icon>
+          </div>
+          <h3 class="feature-title">Live Public Game Servers</h3>
+          <p class="feature-desc">
+            Real-time server browser displaying active multiplayer servers, current player counts, version statistics, and quick queue IDs.
+          </p>
+          <a routerLink="/public-servers" class="feature-link">
+            <span>Browse Public Servers</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </article>
+
+        <!-- Card 4: Plugin Manager -->
+        <article class="feature-card">
+          <div class="feature-icon plugin-icon">
+            <mat-icon>download_for_offline</mat-icon>
+          </div>
+          <h3 class="feature-title">Community Plugin Manager</h3>
+          <p class="feature-desc">
+            An in-game utility for BombSquad that lets you discover, install, and auto-update community mods without leaving the game.
+          </p>
+          <a routerLink="/pluginmanager" class="feature-link">
+            <span>Get Plugin Manager</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </article>
+
+        <!-- Card 5: Free Server Hosting -->
+        <article class="feature-card">
+          <div class="feature-icon hosting-icon">
+            <mat-icon>cloud_queue</mat-icon>
+          </div>
+          <h3 class="feature-title">Free Server Hosting</h3>
+          <p class="feature-desc">
+            Launch a 24/7 dedicated BombSquad multiplayer server with full configuration controls, live web console, and instant deployment.
+          </p>
+          <a routerLink="/free-server" class="feature-link">
+            <span>Create Free Server</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </article>
+
+        <!-- Card 6: BA Port Migration Tool -->
+        <article class="feature-card">
+          <div class="feature-icon baport-icon">
+            <mat-icon>transform</mat-icon>
+          </div>
+          <h3 class="feature-title">BA Port (API 7 to API 8)</h3>
+          <p class="feature-desc">
+            Automated mod converter to migrate older BombSquad API 7 / Python 3.7 scripts to the latest Ballistica API 8 architecture.
+          </p>
+          <a routerLink="/baport" class="feature-link">
+            <span>Launch BA Port</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Popular Mod Categories & Quick Search Tags -->
+    <section class="mod-categories-section">
+      <div class="categories-header">
+        <h2 class="categories-title">Popular Mod Categories</h2>
+        <a routerLink="/mods" class="view-all-link">View All Mods &rarr;</a>
+      </div>
+      <div class="categories-tags-wrap">
+        <a routerLink="/mods" [queryParams]="{ q: 'minigame' }" class="category-tag">
+          <mat-icon>videogame_asset</mat-icon>
+          <span>Minigames</span>
+        </a>
+        <a routerLink="/mods" [queryParams]="{ q: 'character' }" class="category-tag">
+          <mat-icon>face</mat-icon>
+          <span>Character Packs</span>
+        </a>
+        <a routerLink="/mods" [queryParams]="{ q: 'powerup' }" class="category-tag">
+          <mat-icon>bolt</mat-icon>
+          <span>Powerups &amp; Weapons</span>
+        </a>
+        <a routerLink="/mods" [queryParams]="{ q: 'server' }" class="category-tag">
+          <mat-icon>dns</mat-icon>
+          <span>Server Plugins</span>
+        </a>
+        <a routerLink="/mods" [queryParams]="{ q: 'map' }" class="category-tag">
+          <mat-icon>map</mat-icon>
+          <span>Custom Maps</span>
+        </a>
+        <a routerLink="/mods" [queryParams]="{ q: 'ui' }" class="category-tag">
+          <mat-icon>palette</mat-icon>
+          <span>UI &amp; HUD Mods</span>
+        </a>
+        <a routerLink="/mods" [queryParams]="{ q: 'sound' }" class="category-tag">
+          <mat-icon>volume_up</mat-icon>
+          <span>Sound Effects</span>
+        </a>
+        <a routerLink="/mods" [queryParams]="{ q: 'admin' }" class="category-tag">
+          <mat-icon>security</mat-icon>
+          <span>Admin Commands</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- About BombSquad Deep Dive (SEO Section) -->
+    <section class="about-game-section" aria-labelledby="about-heading">
+      <div class="about-grid">
+        <div class="about-text-col">
+          <span class="section-tag"><mat-icon>info</mat-icon> About the Game</span>
+          <h2 id="about-heading" class="about-main-heading">What is BombSquad? Explosive Party Mayhem</h2>
+          <p class="about-lead">
+            <strong>BombSquad</strong> is an adrenaline-pumping, physics-based 8-player arcade party game created by Eric Froemling.
+            Best enjoyed with friends on a big screen or online over low-latency multiplayer servers!
+          </p>
+
+          <div class="about-features-list">
+            <div class="about-feature-item">
+              <div class="feat-icon"><mat-icon>military_tech</mat-icon></div>
+              <div>
+                <strong>Exciting Mini-Game Modes</strong>
+                <p>Compete in Capture-the-Flag, King-of-the-Hill, Bomber-Hockey, Football, Epic Elimination, and hundreds of custom community mini-games.</p>
+              </div>
+            </div>
+
+            <div class="about-feature-item">
+              <div class="feat-icon"><mat-icon>sports_esports</mat-icon></div>
+              <div>
+                <strong>Universal Controller Support</strong>
+                <p>Support for keyboards, USB/Bluetooth gamepads, Xbox, PlayStation, and wireless smartphones via the free BombSquad Remote app.</p>
+              </div>
+            </div>
+
+            <div class="about-feature-item">
+              <div class="feat-icon"><mat-icon>code</mat-icon></div>
+              <div>
+                <strong>Open Modding with Python &amp; Ballistica</strong>
+                <p>Powered by the extensible Ballistica engine, allowing modders to write custom game modes, maps, characters, and server plugins using Python.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-dl-bar">
+            <a routerLink="/download" class="btn-about-dl">
+              <mat-icon>cloud_download</mat-icon>
+              <span>Download BombSquad Game</span>
+            </a>
+            <a routerLink="/gallery" class="btn-about-gallery">
+              <mat-icon>photo_library</mat-icon>
+              <span>View Screenshot Gallery</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="about-media-col">
+          <div class="game-image-wrap">
+            <img
+              src="assets/img/bombsquad-home.webp"
+              alt="BombSquad Multiplayer Gameplay"
+              class="game-feature-img"
+              width="600"
+              height="338"
+              loading="lazy"
+            />
+            <div class="game-image-overlay">
+              <div class="overlay-badge">
+                <mat-icon>sports_esports</mat-icon>
+                <span>8-Player Local &amp; Online Multiplayer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Video Showcase (High Performance Video Facade) -->
+    <section class="video-showcase-section" aria-labelledby="videos-heading">
+      <div class="section-title-box">
+        <span class="section-tag"><mat-icon>smart_display</mat-icon> Video Showcase</span>
+        <h2 id="videos-heading" class="section-heading">Watch BombSquad Trailers, Gameplays &amp; Tutorials</h2>
+        <p class="section-subtext">
+          Explore official trailers, thrilling gameplay footage, and step-by-step modding tutorials.
+        </p>
+      </div>
+
+      <div class="video-cards-grid">
+        <article class="video-card" *ngFor="let video of videos">
+          <div class="video-player-box">
+            <!-- Iframe (Only injected when user clicks play to preserve 100/100 Core Web Vitals) -->
+            <iframe
+              *ngIf="video.isLoaded && video.embedUrl"
+              [src]="video.embedUrl"
+              [title]="video.title"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="video-iframe"
+            ></iframe>
+
+            <!-- Video Thumbnail Facade -->
+            <div
+              *ngIf="!video.isLoaded"
+              class="video-facade"
+              (click)="loadVideo(video)"
+              [title]="'Play: ' + video.title"
+            >
+              <img
+                [src]="'https://img.youtube.com/vi/' + video.id + '/hqdefault.jpg'"
+                [alt]="video.title"
+                class="video-thumb-img"
+                width="480"
+                height="360"
+                loading="lazy"
+              />
+              <div class="play-button-overlay">
+                <mat-icon class="play-icon">play_arrow</mat-icon>
+              </div>
+              <span class="video-cat-badge">{{ video.category }}</span>
+            </div>
+          </div>
+
+          <div class="video-info">
+            <h3 class="video-card-title">{{ video.title }}</h3>
+            <p class="video-card-desc">{{ video.description }}</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Mid-Page Ad Banner -->
+    <div class="ad-container-wrap">
+      <app-banner></app-banner>
     </div>
-    <div class="row">
-      <iframe loading="lazy" width="560" height="315" src="https://youtube.com/embed/RJlY4b8P6yQ"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
-    <div class="row">
-      <iframe loading="lazy" width="560" height="315" src="https://youtube.com/embed/HuZwgDU7n8Y"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
-    <div class="row">
-      <iframe loading="lazy" width="560" height="315" src="https://youtube.com/embed/1NJO_j16H4o"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
+
+    <!-- Community Tutorials & Guides Hub -->
+    <section class="tutorials-section" aria-labelledby="tutorials-heading">
+      <div class="section-title-box">
+        <span class="section-tag"><mat-icon>school</mat-icon> Guides &amp; Documentation</span>
+        <h2 id="tutorials-heading" class="section-heading">Learn BombSquad Modding &amp; Server Hosting</h2>
+        <p class="section-subtext">
+          In-depth tutorials written by experienced community members to help you get started.
+        </p>
+      </div>
+
+      <div class="guides-grid">
+        <a routerLink="/blog/host-bombsquad-server-free" class="guide-card">
+          <div class="guide-icon"><mat-icon>dns</mat-icon></div>
+          <div class="guide-body">
+            <span class="guide-type">Server Tutorial</span>
+            <h3 class="guide-title">How to Host a Free BombSquad Server 24/7</h3>
+            <p class="guide-desc">Step-by-step guide to hosting a high-performance dedicated multiplayer server for free.</p>
+          </div>
+          <mat-icon class="guide-arrow">arrow_forward</mat-icon>
+        </a>
+
+        <a routerLink="/pluginmanager" class="guide-card">
+          <div class="guide-icon"><mat-icon>download_for_offline</mat-icon></div>
+          <div class="guide-body">
+            <span class="guide-type">Mod Loader</span>
+            <h3 class="guide-title">Community Plugin Manager User Guide</h3>
+            <p class="guide-desc">Learn how to easily install, configure, and auto-update community plugins in-game.</p>
+          </div>
+          <mat-icon class="guide-arrow">arrow_forward</mat-icon>
+        </a>
+
+        <a
+          href="https://www.youtube.com/c/HeySmoothy"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="guide-card"
+        >
+          <div class="guide-icon"><mat-icon>smart_display</mat-icon></div>
+          <div class="guide-body">
+            <span class="guide-type">Video Tutorials</span>
+            <h3 class="guide-title">Modding Video Tutorials by HeySmoothy</h3>
+            <p class="guide-desc">Comprehensive video playlist covering Python scripting, API 8 updates, and server setups.</p>
+          </div>
+          <mat-icon class="guide-arrow">open_in_new</mat-icon>
+        </a>
+
+        <a
+          href="https://github.com/efroemling/ballistica"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="guide-card"
+        >
+          <div class="guide-icon"><mat-icon>code</mat-icon></div>
+          <div class="guide-body">
+            <span class="guide-type">GitHub Repository</span>
+            <h3 class="guide-title">Official Ballistica Open Source Engine</h3>
+            <p class="guide-desc">Explore the official C++ and Python codebase, assets, and documentation by Eric Froemling.</p>
+          </div>
+          <mat-icon class="guide-arrow">open_in_new</mat-icon>
+        </a>
+      </div>
+    </section>
+
+    <!-- Join Community Banner -->
+    <section class="join-community-cta">
+      <div class="cta-glow"></div>
+      <div class="cta-inner">
+        <div class="cta-icon-box">
+          <mat-icon>group_add</mat-icon>
+        </div>
+        <div class="cta-text">
+          <h2 class="cta-heading">Join 6,000+ BombSquad Modders &amp; Gamers</h2>
+          <p class="cta-desc">
+            Our welcoming Discord community transcends language and cultural boundaries.
+            Ask questions, share your Python mods, participate in tournaments, and help shape the future of BombSquad!
+          </p>
+        </div>
+        <div class="cta-btn-group">
+          <a
+            href="https://discord.gg/ucyaesh"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-cta-discord"
+          >
+            <mat-icon>forum</mat-icon>
+            <span>Join Discord Server</span>
+          </a>
+          <a routerLink="/support" class="btn-cta-support">
+            <mat-icon>volunteer_activism</mat-icon>
+            <span>Support Community</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </div>
 </section>

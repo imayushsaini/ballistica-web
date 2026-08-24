@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { WorkspaceService } from 'src/app/services/workspace.service';
+import { SEOServiceService } from 'src/app/services/seoservice.service';
 import { V2User } from 'src/app/models/model';
 
 @Component({
@@ -33,9 +34,27 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private workspace: WorkspaceService,
+    private seoService: SEOServiceService,
   ) {}
 
   ngOnInit(): void {
+    // Set SEO metadata for the login page
+    this.seoService.updateTitle('Login to BombSquad Account | Ballistica V2 Workspace & Mod Sync');
+    this.seoService.updateDescription(
+      'Sign in with your Ballistica API token to install, update, and manage BombSquad community mods directly in your cloud workspaces.'
+    );
+    this.seoService.updateOgUrl('https://bombsquad-community.web.app/login');
+    this.seoService.updateKeywords('bombsquad login, ballistica v2 account, bombsquad api key, workspace sync, bombsquad mods login');
+
+    // Track page view event explicitly
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'page_view', {
+        page_path: '/login',
+        page_location: window.location.href,
+        page_title: 'Login to BombSquad Account | Ballistica V2 Workspace & Mod Sync',
+      });
+    }
+
     if (this.tokenStorage.getToken()) {
       this.currentUser = this.tokenStorage.getUser();
       this.tag = this.currentUser?.tag;
@@ -74,6 +93,12 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
           this.successMessage = `Successfully authenticated as ${response.user.tag}!`;
 
+          if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+            (window as any).gtag('event', 'login', {
+              method: 'api_key',
+            });
+          }
+
           const redirect = this.route.snapshot.queryParamMap.get('redirect');
           setTimeout(() => {
             if (redirect === 'server-manager') {
@@ -110,6 +135,9 @@ export class LoginComponent implements OnInit {
   }
 
   signOut(): void {
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'sign_out');
+    }
     this.tokenStorage.signOut();
     this.isLoggedIn = false;
     this.currentUser = null;

@@ -1,226 +1,663 @@
-<div class="main background">
-  <div class="content">
-    <div class="heading">
-      <h1>Download BombSquad and Its Companion Apps</h1>
-    </div>
-    <div class="bombsquad-app">
-      <h2>
-        BombSquad Game:
-        <div class="icon">
-          <img src="assets/img/icon-150x150.png" alt="Bombsquad icon" />
+<section class="downloads-page">
+  <div class="downloads-container">
+
+    <!-- Hero Header -->
+    <header class="hero-section">
+      <div class="hero-badge">
+        <mat-icon class="hero-badge-icon">cloud_download</mat-icon>
+        <span>Official Ballistica &amp; BombSquad Repository</span>
+      </div>
+      <h1 class="hero-title">Download BombSquad, Controller App &amp; Dedicated Servers</h1>
+      <p class="hero-subtitle">
+        Get the latest official releases of BombSquad for Android, Windows PC, Linux, macOS, and VR headsets.
+        Turn your smartphone into a wireless gamepad with BombSquad Remote or host your own 24/7 multiplayer server.
+      </p>
+
+      <!-- Quick Platform Jump Navigation -->
+      <nav class="quick-nav" aria-label="Downloads Navigation">
+        <a href="#mods-notice" class="quick-pill mods-pill">
+          <mat-icon>extension</mat-icon>
+          <span>Looking for Mods?</span>
+        </a>
+        <a href="#game-clients" class="quick-pill">
+          <mat-icon>sports_esports</mat-icon>
+          <span>Game Clients</span>
+        </a>
+        <a href="#remote-controller" class="quick-pill">
+          <mat-icon>phonelink</mat-icon>
+          <span>Remote Controller</span>
+        </a>
+        <a href="#dedicated-servers" class="quick-pill">
+          <mat-icon>dns</mat-icon>
+          <span>Dedicated Servers</span>
+        </a>
+        <a href="#vr-edition" class="quick-pill">
+          <mat-icon>videogame_asset</mat-icon>
+          <span>VR Edition</span>
+        </a>
+        <a href="#faqs" class="quick-pill">
+          <mat-icon>help_outline</mat-icon>
+          <span>Download FAQ</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- ⭐ PROMINENT CALLOUT: LOOKING FOR MODS & PLUGINS? ⭐ -->
+    <section id="mods-notice" class="mods-callout-banner">
+      <div class="callout-glow"></div>
+      <div class="callout-content">
+        <div class="callout-icon-box">
+          <mat-icon>extension</mat-icon>
         </div>
-      </h2>
-      <p>
-        Explosive Multiplayer Action for Multiple Platforms BombSquad is an
-        adrenaline-pumping multiplayer game that offers explosive fun on various
-        platforms. Whether you own an Android device (version 5 and above),
-        Windows PC, Linux, or MacBook, you can join the action-packed mayhem of
-        BombSquad. The latest version of BombSquad is readily available on the
-        Google Play Store and the Amazon App Store, ensuring easy access for
-        Android users. For Windows, Linux, and MacBook users, you can download
-        the latest test build from the official BombSquad website at
-        https://ballistica.net/downloads.
-      </p>
-      <div class="thumbnail">
-        <img
-          mat-card-image
-          src="assets/img/bombsquad-home.png"
-          alt="Bombsquad game "
-          class="mat-card-image"
-        />
-      </div>
-      <div class="downloads">
-        <h3>Download</h3>
-        <button mat-button class="dwn-btn">
-          <a
-            href="https://play.google.com/store/apps/details?id=net.froemling.bombsquad"
-            ><img src="assets/img/gplay-badge.png" alt=""
-          /></a>
-        </button>
-        <button mat-button class="dwn-btn">
-          <a href="http://appstore.com/mac/bombsquad"
-            ><img src="assets/img/mac-badge.webp" alt=""
-          /></a>
-        </button>
-        <button mat-button class="dwn-btn">
-          <a
-            href="http://www.amazon.com/gp/product/B00E7NAVZA/ref=mas_pm_bombsquad"
-            ><img src="assets/img/amazon-badge.png" alt=""
-          /></a>
-        </button>
-        <button mat-button class="dwn-btn">
-          <a
-            href="https://files.ballistica.net/bombsquad/builds/BombSquad_Windows_1.7.23.zip"
-            ><img src="assets/img/windows-badge.png" alt=""
-          /></a>
-        </button>
-        <button mat-button class="dwn-btn">
-          <a
-            href="https://files.ballistica.net/bombsquad/builds/BombSquad_Linux_x86_64_1.7.23.tar.gz"
-            ><img src="assets/img/linux-badge3.webp" alt=""
-          /></a>
-        </button>
-      </div>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <app-banner></app-banner>
-    <br />
-    <hr />
-    <br />
-    <div class="bombsquad-remote">
-      <h2>
-        BombSquad Controller
-        <div class="icon">
-          <img src="assets/img/bsremote-150x150.png" alt="" />
+        <div class="callout-text">
+          <div class="callout-tag">
+            <mat-icon>info</mat-icon>
+            <span>Did you come here looking for Mods, Plugins, or Mod Managers?</span>
+          </div>
+          <h2 class="callout-heading">Looking to Download BombSquad Mods &amp; Python Scripts?</h2>
+          <p class="callout-description">
+            This page provides downloads for the <strong>base BombSquad game, server builds, and controller apps</strong>.
+            If you want to download custom <strong>community mods, minigames, character packs, powerups, server plugins, or the Community Plugin Manager</strong>,
+            head over to our dedicated Community Mods Repository!
+          </p>
+          <div class="callout-actions">
+            <a routerLink="/mods" class="btn-action-primary">
+              <mat-icon>extension</mat-icon>
+              <span>Browse 500+ Community Mods</span>
+            </a>
+            <a routerLink="/pluginmanager" class="btn-action-secondary">
+              <mat-icon>download_for_offline</mat-icon>
+              <span>Get Community Plugin Manager</span>
+            </a>
+            <a routerLink="/workspaces" class="btn-action-outline">
+              <mat-icon>folder_shared</mat-icon>
+              <span>Cloud Workspaces Sync</span>
+            </a>
+            <a routerLink="/baport" class="btn-action-outline">
+              <mat-icon>transform</mat-icon>
+              <span>BA Port (API 8 Tool)</span>
+            </a>
+          </div>
         </div>
-      </h2>
-      <p>
-        Transform Your Mobile Devices into Gaming Controllers Don't have enough
-        controllers for your BombSquad multiplayer sessions? No worries!
-        BombSquad offers a convenient solution with its free BombSquad Remote
-        app. Simply download the BombSquad Remote app on your Android or iOS
-        device and transform it into a fully functional gaming controller. With
-        intuitive touch controls, you can enjoy the thrilling multiplayer
-        battles with your friends and family, even if you're short on physical
-        controllers.
-      </p>
-      <div class="thumbnail">
-        <img
-          src="assets/img/bombsquad-remote.jpg"
-          alt="BombSquad remote"
-          class="mat-card-image"
-        />
       </div>
-      <div class="downloads">
-        <h3>Download</h3>
-        <button mat-button class="dwn-btn">
-          <a
-            href="https://play.google.com/store/apps/details?id=net.froemling.bsremote"
-            ><img src="assets/img/gplay-badge.png" alt=""
-          /></a>
-        </button>
-        <button mat-button class="dwn-btn">
-          <a
-            href="http://itunes.apple.com/us/app/bombsquad-remote/id416471850?ls=1&mt=8"
-            ><img src="assets/img/ios-badge.webp" alt=""
-          /></a>
-        </button>
-        <button mat-button class="dwn-btn">
-          <a
-            href="https://www.amazon.com/Eric-Froemling-BombSquad-Remote/dp/B00BLYPDJM/"
-            ><img src="assets/img/amazon-badge.png" alt=""
-          /></a>
-        </button>
-      </div>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="bombsquad-vr">
-      <h2>
-        BombSquad VR
-        <div class="icon">
-          <img src="assets/img/icon_vr-150x150.png" alt="bombsquad vr" />
+    </section>
+
+    <!-- Section 1: BombSquad Game Clients -->
+    <section id="game-clients" class="download-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon game-icon">
+            <img src="assets/img/icon-150x150.png" alt="BombSquad Icon" width="36" height="36" />
+          </div>
+          <div>
+            <h2 class="section-title">BombSquad Game Clients</h2>
+            <p class="section-desc">Explosive 8-player local and online physics-based arcade party action on all major platforms.</p>
+          </div>
         </div>
-      </h2>
-      <p>
-        Immerse Yourself in Explosive Virtual Reality Battles Take your
-        BombSquad experience to the next level by diving into virtual reality
-        with BombSquad VR. With virtual reality headsets such as Oculus Rift,
-        HTC Vive, or Valve Index, you can step into the virtual arena and engage
-        in explosive battles with your enemies. Experience the thrill of
-        BombSquad like never before as you throw bombs, strategize with your
-        team, and conquer opponents in a fully immersive VR environment.
-      </p>
-      <div class="thumbnail">
-        <img
-          src="assets/img/bombsquad-vr.webp"
-          alt="bombsquad vr "
-          class="mat-card-image"
-        />
+        <div class="feature-badges">
+          <span class="badge-item"><mat-icon>group</mat-icon> Up to 8 Players</span>
+          <span class="badge-item"><mat-icon>gamepad</mat-icon> Controller Support</span>
+          <span class="badge-item"><mat-icon>devices</mat-icon> Cross-Platform</span>
+        </div>
       </div>
-      <div class="downloads">
-        <h3>Download</h3>
-        <button mat-button class="dwn-btn">
-          <a
-            href="https://play.google.com/store/apps/details?id=net.froemling.bombsquadcb"
-            ><img src="assets/img/gplay-badge.png" alt=""
-          /></a>
-        </button>
+
+      <!-- Game Showcase & Platform Cards -->
+      <div class="game-showcase-grid">
+        <!-- Visual Preview Card -->
+        <div class="preview-card">
+          <div class="preview-media">
+            <img
+              src="assets/img/bombsquad-home.webp"
+              alt="BombSquad Party Game Showcase"
+              class="preview-img"
+              width="600"
+              height="338"
+              loading="lazy"
+            />
+            <div class="preview-overlay">
+              <span class="version-tag">Version 1.7+ (Ballistica Engine)</span>
+            </div>
+          </div>
+          <div class="preview-body">
+            <h3 class="preview-title">Physics-Driven Party Battles</h3>
+            <p class="preview-text">
+              Jump, punch, throw, and bomb your way through Capture-the-Flag, King-of-the-Hill, Bomber-Hockey,
+              and epic elimination battles. Play locally on TV or online with friends across different devices!
+            </p>
+            <div class="preview-official">
+              <span>Official builds repository:</span>
+              <a href="https://ballistica.net/downloads" target="_blank" rel="noopener noreferrer">
+                ballistica.net/downloads &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Platform Download Cards Grid -->
+        <div class="platforms-grid">
+          <!-- Android Card -->
+          <div class="platform-card">
+            <div class="platform-header">
+              <div class="platform-icon android-bg">
+                <mat-icon>android</mat-icon>
+              </div>
+              <div class="platform-info">
+                <h3 class="platform-name">Android</h3>
+                <span class="platform-meta">Smartphones, Tablets, Android TV, Google TV</span>
+              </div>
+            </div>
+            <p class="platform-desc">
+              Requires Android 5.0 or higher. Full touch controls, gamepad support, and Google Play Games achievements.
+            </p>
+            <div class="platform-actions">
+              <a
+                href="https://play.google.com/store/apps/details?id=net.froemling.bombsquad"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="store-badge-link"
+                title="Get BombSquad on Google Play"
+              >
+                <img src="assets/img/gplay-badge.png" alt="Get it on Google Play" class="badge-img" height="48" />
+              </a>
+              <a
+                href="http://www.amazon.com/gp/product/B00E7NAVZA/ref=mas_pm_bombsquad"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="store-badge-link"
+                title="Get BombSquad on Amazon Appstore"
+              >
+                <img src="assets/img/amazon-badge.png" alt="Available at Amazon Appstore" class="badge-img" height="48" />
+              </a>
+            </div>
+          </div>
+
+          <!-- Windows Card -->
+          <div class="platform-card">
+            <div class="platform-header">
+              <div class="platform-icon windows-bg">
+                <mat-icon>desktop_windows</mat-icon>
+              </div>
+              <div class="platform-info">
+                <h3 class="platform-name">Windows PC</h3>
+                <span class="platform-meta">Windows 10, 11 (64-bit)</span>
+              </div>
+            </div>
+            <p class="platform-desc">
+              Standalone portable build with high framerate graphics, custom keyboard mappings, and USB/XInput gamepad support.
+            </p>
+            <div class="platform-actions">
+              <a
+                href="https://files.ballistica.net/bombsquad/builds/BombSquad_Windows_1.7.23.zip"
+                class="btn-direct-download windows-btn"
+                title="Download BombSquad for Windows"
+              >
+                <img src="assets/img/windows-badge.webp" alt="Windows" class="mini-platform-badge" height="24" />
+                <span>Download Windows (.zip)</span>
+                <mat-icon class="btn-icon-end">file_download</mat-icon>
+              </a>
+            </div>
+          </div>
+
+          <!-- macOS Card -->
+          <div class="platform-card">
+            <div class="platform-header">
+              <div class="platform-icon mac-bg">
+                <mat-icon>laptop_mac</mat-icon>
+              </div>
+              <div class="platform-info">
+                <h3 class="platform-name">macOS</h3>
+                <span class="platform-meta">macOS 10.13+ (Apple Silicon &amp; Intel)</span>
+              </div>
+            </div>
+            <p class="platform-desc">
+              Optimized for Mac with native Apple Silicon and Intel architecture support, Game Center sync, and multi-gamepad input.
+            </p>
+            <div class="platform-actions">
+              <a
+                href="http://appstore.com/mac/bombsquad"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="store-badge-link"
+                title="Download BombSquad on Mac App Store"
+              >
+                <img src="assets/img/mac-badge.webp" alt="Download on the Mac App Store" class="badge-img" height="48" />
+              </a>
+            </div>
+          </div>
+
+          <!-- Linux Card -->
+          <div class="platform-card">
+            <div class="platform-header">
+              <div class="platform-icon linux-bg">
+                <mat-icon>terminal</mat-icon>
+              </div>
+              <div class="platform-info">
+                <h3 class="platform-name">Linux &amp; Steam Deck</h3>
+                <span class="platform-meta">x86_64 (Ubuntu, Debian, Fedora, Arch, SteamOS)</span>
+              </div>
+            </div>
+            <p class="platform-desc">
+              Lightweight portable tarball. Works great on desktop Linux distributions, HTPCs, and Steam Deck desktop mode.
+            </p>
+            <div class="platform-actions">
+              <a
+                href="https://files.ballistica.net/bombsquad/builds/BombSquad_Linux_x86_64_1.7.23.tar.gz"
+                class="btn-direct-download linux-btn"
+                title="Download BombSquad for Linux"
+              >
+                <img src="assets/img/linux-badge3.webp" alt="Linux" class="mini-platform-badge" height="24" />
+                <span>Download Linux (.tar.gz)</span>
+                <mat-icon class="btn-icon-end">file_download</mat-icon>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- Top In-Page Ad Banner -->
+    <div class="ad-container-wrap">
+      <app-banner></app-banner>
     </div>
-    <br />
-    <hr />
-    <br />
-    <app-banner></app-banner>
-    <br />
-    <hr />
-    <br />
-    <div class="bombsquad-server">
-      <h2>BombSquad Server</h2>
-      <p>
-        Host Your Own BombSquad Server For those who want to create their own
-        BombSquad multiplayer experience, BombSquad offers server scripts that
-        enable you to host your own server. Whether you're running Windows,
-        Linux, macOS, or even Raspberry Pi, these server scripts provide the
-        necessary tools and resources to set up, configure, and manage your
-        custom BombSquad server. Hosting your own server allows you to customize
-        gameplay settings, create unique game modes, and invite friends for epic
-        battles. Know more about BombSquad Server Hosting :
-        <a
-          href="https://bombsquad-community.web.app/blog/host-bombsquad-server-free"
-          >BombSquad Server Hosting Guide</a
-        >
-      </p>
-      <div class="downloads">
-        <h3>Download</h3>
-        <a
-          href="https://files.ballistica.net/bombsquad/builds/BombSquad_Server_Linux_Arm64_1.7.23.tar.gz"
-          >BombSquad_Server_Linux_Arm64_1.7.23.tar.gz</a
-        >
-        <br />
+
+    <!-- Section 2: BombSquad Remote (Controller App) -->
+    <section id="remote-controller" class="download-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon remote-icon">
+            <img src="assets/img/bsremote-150x150.png" alt="BombSquad Remote Icon" width="36" height="36" />
+          </div>
+          <div>
+            <h2 class="section-title">BombSquad Remote (Wireless Controller)</h2>
+            <p class="section-desc">Transform your iOS or Android mobile devices into responsive gamepads over local Wi-Fi.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="remote-showcase-layout">
+        <div class="remote-info-card">
+          <h3 class="remote-headline">Never Run Out of Gamepads Again</h3>
+          <p class="remote-text">
+            Short on physical controllers for your party session? <strong>BombSquad Remote</strong> turns your smartphone
+            or tablet into a wireless game controller with an intuitive touch D-pad, punch, jump, bomb, and pickup buttons.
+            Connect up to 8 mobile devices simultaneously!
+          </p>
+
+          <!-- 3-Step Setup Guide -->
+          <div class="setup-steps">
+            <div class="step-card">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <strong>Connect Same Wi-Fi</strong>
+                <p>Ensure your phone and game host device (PC, Mac, or TV) are on the same Wi-Fi network.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <strong>Open BombSquad Remote</strong>
+                <p>Launch the app on your mobile phone or tablet.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <strong>Instant Multiplayer</strong>
+                <p>The app automatically detects the game and connects as an active player gamepad!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Store Download Badges -->
+          <div class="remote-badges">
+            <a
+              href="https://play.google.com/store/apps/details?id=net.froemling.bsremote"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="store-badge-link"
+            >
+              <img src="assets/img/gplay-badge.png" alt="Get BombSquad Remote on Google Play" height="46" />
+            </a>
+            <a
+              href="http://itunes.apple.com/us/app/bombsquad-remote/id416471850?ls=1&mt=8"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="store-badge-link"
+            >
+              <img src="assets/img/ios-badge.webp" alt="Download BombSquad Remote on App Store" height="46" />
+            </a>
+            <a
+              href="https://www.amazon.com/Eric-Froemling-BombSquad-Remote/dp/B00BLYPDJM/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="store-badge-link"
+            >
+              <img src="assets/img/amazon-badge.png" alt="Get BombSquad Remote on Amazon" height="46" />
+            </a>
+          </div>
+        </div>
+
+        <div class="remote-media-card">
+          <img
+            src="assets/img/bombsquad-remote.jpg"
+            alt="BombSquad Remote Controller Interface"
+            class="remote-preview-img"
+            width="500"
+            height="320"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Dedicated Server Packages -->
+    <section id="dedicated-servers" class="download-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon server-icon">
+            <mat-icon>dns</mat-icon>
+          </div>
+          <div>
+            <h2 class="section-title">BombSquad Dedicated Game Servers</h2>
+            <p class="section-desc">Host high-performance 24/7 multiplayer servers, run custom Python mods, and build community rooms.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Server Hosting Notice -->
+      <div class="server-promo-card">
+        <div class="promo-text-wrap">
+          <div class="promo-badge">
+            <mat-icon>cloud_queue</mat-icon>
+            <span>Automated Cloud Hosting</span>
+          </div>
+          <h3 class="promo-title">Don't want to self-host? Get a Free 24/7 Managed Server</h3>
+          <p class="promo-desc">
+            We provide 100% free automated BombSquad server hosting with custom config, live web console, and instant setup.
+          </p>
+        </div>
+        <div class="promo-btn-wrap">
+          <a routerLink="/free-server" class="btn-promo-primary">
+            <mat-icon>add_circle_outline</mat-icon>
+            <span>Create Free Server</span>
+          </a>
+          <a routerLink="/blog/host-bombsquad-server-free" class="btn-promo-secondary">
+            <mat-icon>menu_book</mat-icon>
+            <span>Server Hosting Guide</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dedicated Server Download Packages Grid -->
+      <div class="server-packages-grid">
+        <!-- Linux x86_64 -->
         <a
           href="https://files.ballistica.net/bombsquad/builds/BombSquad_Server_Linux_x86_64_1.7.23.tar.gz"
+          class="server-download-card"
         >
-          BombSquad_Server_Linux_x86_64_1.7.23.tar.gz</a
+          <div class="server-card-top">
+            <mat-icon class="server-os-icon">terminal</mat-icon>
+            <span class="server-os-tag">Linux 64-bit</span>
+          </div>
+          <div class="server-file-info">
+            <span class="file-name">BombSquad_Server_Linux_x86_64_1.7.23.tar.gz</span>
+            <span class="file-desc">Standard Linux x86_64 servers (VPS, Dedicated, Cloud)</span>
+          </div>
+          <div class="server-dl-action">
+            <mat-icon>download</mat-icon>
+            <span>Download</span>
+          </div>
+        </a>
+
+        <!-- Linux ARM64 -->
+        <a
+          href="https://files.ballistica.net/bombsquad/builds/BombSquad_Server_Linux_Arm64_1.7.23.tar.gz"
+          class="server-download-card"
         >
-        <br />
+          <div class="server-card-top">
+            <mat-icon class="server-os-icon">memory</mat-icon>
+            <span class="server-os-tag">Linux ARM64</span>
+          </div>
+          <div class="server-file-info">
+            <span class="file-name">BombSquad_Server_Linux_Arm64_1.7.23.tar.gz</span>
+            <span class="file-desc">AWS Graviton, Oracle Cloud ARM, 64-bit ARM Linux</span>
+          </div>
+          <div class="server-dl-action">
+            <mat-icon>download</mat-icon>
+            <span>Download</span>
+          </div>
+        </a>
+
+        <!-- macOS Apple Silicon -->
         <a
           href="https://files.ballistica.net/bombsquad/builds/BombSquad_Server_Mac_Arm64_1.7.23.tar.gz"
-          >BombSquad_Server_Mac_Arm64_1.7.23.tar.gz</a
+          class="server-download-card"
         >
-        <br />
+          <div class="server-card-top">
+            <mat-icon class="server-os-icon">laptop_mac</mat-icon>
+            <span class="server-os-tag">macOS Apple Silicon</span>
+          </div>
+          <div class="server-file-info">
+            <span class="file-name">BombSquad_Server_Mac_Arm64_1.7.23.tar.gz</span>
+            <span class="file-desc">Apple Silicon (M1, M2, M3, M4) Macs</span>
+          </div>
+          <div class="server-dl-action">
+            <mat-icon>download</mat-icon>
+            <span>Download</span>
+          </div>
+        </a>
+
+        <!-- macOS Intel -->
         <a
           href="https://files.ballistica.net/bombsquad/builds/BombSquad_Server_Mac_x86_64_1.7.23.tar.gz"
-          >BombSquad_Server_Mac_x86_64_1.7.23.tar.gz</a
+          class="server-download-card"
         >
-        <br />
+          <div class="server-card-top">
+            <mat-icon class="server-os-icon">laptop_mac</mat-icon>
+            <span class="server-os-tag">macOS Intel</span>
+          </div>
+          <div class="server-file-info">
+            <span class="file-name">BombSquad_Server_Mac_x86_64_1.7.23.tar.gz</span>
+            <span class="file-desc">Intel-based Mac computers (macOS 10.13+)</span>
+          </div>
+          <div class="server-dl-action">
+            <mat-icon>download</mat-icon>
+            <span>Download</span>
+          </div>
+        </a>
+
+        <!-- Raspberry Pi -->
         <a
           href="https://files.ballistica.net/bombsquad/builds/BombSquad_Server_RaspberryPi_1.7.23.tar.gz"
-          >BombSquad_Server_RaspberryPi_1.7.23.tar.gz</a
+          class="server-download-card"
         >
-        <br />
+          <div class="server-card-top">
+            <mat-icon class="server-os-icon">developer_board</mat-icon>
+            <span class="server-os-tag">Raspberry Pi</span>
+          </div>
+          <div class="server-file-info">
+            <span class="file-name">BombSquad_Server_RaspberryPi_1.7.23.tar.gz</span>
+            <span class="file-desc">Raspberry Pi 3 / 4 / 5 and single-board computers</span>
+          </div>
+          <div class="server-dl-action">
+            <mat-icon>download</mat-icon>
+            <span>Download</span>
+          </div>
+        </a>
+
+        <!-- Windows Server -->
         <a
           href="https://files.ballistica.net/bombsquad/builds/BombSquad_Server_Windows_1.7.23.zip"
-          >BombSquad_Server_Windows_1.7.23.zip</a
+          class="server-download-card"
         >
+          <div class="server-card-top">
+            <mat-icon class="server-os-icon">desktop_windows</mat-icon>
+            <span class="server-os-tag">Windows Server</span>
+          </div>
+          <div class="server-file-info">
+            <span class="file-name">BombSquad_Server_Windows_1.7.23.zip</span>
+            <span class="file-desc">Windows 10, 11, Windows Server (Headless/CLI build)</span>
+          </div>
+          <div class="server-dl-action">
+            <mat-icon>download</mat-icon>
+            <span>Download</span>
+          </div>
+        </a>
       </div>
+
+      <!-- Modded Server Script Link -->
+      <div class="modded-script-callout">
+        <mat-icon>code</mat-icon>
+        <span>
+          Looking for pre-configured modded server scripts with admin commands, custom maps, and coin systems?
+          Check out our <a href="https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server" target="_blank" rel="noopener noreferrer">BombSquad Modded Server on GitHub</a>.
+        </span>
+      </div>
+    </section>
+
+    <!-- Section 4: BombSquad VR Edition -->
+    <section id="vr-edition" class="download-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon vr-icon">
+            <img src="assets/img/icon_vr-150x150.png" alt="BombSquad VR" width="36" height="36" />
+          </div>
+          <div>
+            <h2 class="section-title">BombSquad VR Edition</h2>
+            <p class="section-desc">Immerse yourself in virtual reality arena battles with full 3D stereoscopic depth.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="vr-showcase-layout">
+        <div class="vr-media-card">
+          <img
+            src="assets/img/bombsquad-vr.webp"
+            alt="BombSquad VR Gameplay"
+            class="vr-preview-img"
+            width="500"
+            height="281"
+            loading="lazy"
+          />
+        </div>
+        <div class="vr-info-card">
+          <h3 class="vr-headline">Step Inside the Explosive Arena</h3>
+          <p class="vr-text">
+            Experience BombSquad from a whole new perspective in full 3D virtual reality.
+            Throw bombs, dodge explosions, and strategize with your teammates in an exhilarating VR arena environment.
+          </p>
+          <div class="vr-actions">
+            <a
+              href="https://play.google.com/store/apps/details?id=net.froemling.bombsquadcb"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="store-badge-link"
+            >
+              <img src="assets/img/gplay-badge.png" alt="Get BombSquad VR on Google Play" height="46" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Ad Banner -->
+    <div class="ad-container-wrap">
+      <app-banner></app-banner>
     </div>
-    <br />
-    <hr />
-    <br />
-    <div class="more">
-      Download and Join the Explosive Fun <br />
-      Download BombSquad and its companion apps today to experience the
-      explosive multiplayer action across different platforms. Whether you're
-      playing on your favorite Android device, using your mobile as a
-      controller, immersing yourself in VR battles, or hosting your own server,
-      BombSquad guarantees endless fun for gaming enthusiasts. Prepare for
-      intense battles, strategic gameplay, and lots of laughter as you embark on
-      the BombSquad adventure. Get ready to detonate the competition and emerge
-      victorious in this thrilling multiplayer experience!
-    </div>
+
+    <!-- Section 5: Frequently Asked Questions (SEO FAQs) -->
+    <section id="faqs" class="download-section faq-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-icon faq-icon">
+            <mat-icon>quiz</mat-icon>
+          </div>
+          <div>
+            <h2 class="section-title">Download &amp; Installation FAQ</h2>
+            <p class="section-desc">Quick answers to common questions regarding game downloads, controller setup, and mods.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <!-- FAQ 1: Downloading Mods vs Base Game -->
+        <article class="faq-item" [class.open]="selectedFaq === 1">
+          <button class="faq-question" (click)="toggleFaq(1)" type="button">
+            <span>Where can I download custom mods, plugins, and minigames?</span>
+            <mat-icon class="faq-arrow">{{ selectedFaq === 1 ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+          <div class="faq-answer" *ngIf="selectedFaq === 1">
+            <p>
+              Custom mods and Python plugins are available in our <a routerLink="/mods">Community Mods Repository</a>.
+              You can search over 500+ community-created minigames, custom characters, powerup packs, and server plugins.
+              You can also use the <a routerLink="/pluginmanager">Community Plugin Manager</a> or connect your Ballistica API key in
+              <a routerLink="/workspaces">Workspaces</a> to sync mods with 1 click!
+            </p>
+          </div>
+        </article>
+
+        <!-- FAQ 2: Installing on PC -->
+        <article class="faq-item" [class.open]="selectedFaq === 2">
+          <button class="faq-question" (click)="toggleFaq(2)" type="button">
+            <span>How do I install BombSquad on Windows PC or Linux?</span>
+            <mat-icon class="faq-arrow">{{ selectedFaq === 2 ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+          <div class="faq-answer" *ngIf="selectedFaq === 2">
+            <p>
+              For <strong>Windows</strong>, download the <code>.zip</code> package, extract the folder to your preferred location,
+              and double-click <code>BombSquad.exe</code> to run. No complex installation is required.
+              For <strong>Linux</strong>, extract the <code>.tar.gz</code> archive and execute the <code>bombsquad</code> binary.
+            </p>
+          </div>
+        </article>
+
+        <!-- FAQ 3: Connecting Controller App -->
+        <article class="faq-item" [class.open]="selectedFaq === 3">
+          <button class="faq-question" (click)="toggleFaq(3)" type="button">
+            <span>How do I connect the BombSquad Remote app on my phone?</span>
+            <mat-icon class="faq-arrow">{{ selectedFaq === 3 ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+          <div class="faq-answer" *ngIf="selectedFaq === 3">
+            <p>
+              Make sure both the device running BombSquad (PC, Mac, Android TV) and your phone are connected to the
+              <strong>same Wi-Fi network</strong>. When you open the BombSquad Remote app, it will automatically search and connect
+              to the running game within seconds.
+            </p>
+          </div>
+        </article>
+
+        <!-- FAQ 4: File Location for Mods -->
+        <article class="faq-item" [class.open]="selectedFaq === 4">
+          <button class="faq-question" (click)="toggleFaq(4)" type="button">
+            <span>Where is the BombSquad mods folder located on my device?</span>
+            <mat-icon class="faq-arrow">{{ selectedFaq === 4 ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+          <div class="faq-answer" *ngIf="selectedFaq === 4">
+            <p>
+              - <strong>Windows</strong>: Inside the extracted game folder or under <code>%APPDATA%/BombSquad/mods</code> or workspace directory.<br />
+              - <strong>Android</strong>: In <code>Android/data/net.froemling.bombsquad/files/mods</code> (or via Ballistica workspace sync).<br />
+              - <strong>macOS</strong>: Under <code>~/Library/Application Support/BombSquad/mods</code>.<br />
+              - <strong>Linux</strong>: Under <code>~/.bombsquad/mods</code>.
+            </p>
+          </div>
+        </article>
+
+        <!-- FAQ 5: Free and Cross-Play -->
+        <article class="faq-item" [class.open]="selectedFaq === 5">
+          <button class="faq-question" (click)="toggleFaq(5)" type="button">
+            <span>Is BombSquad free and cross-play compatible?</span>
+            <mat-icon class="faq-arrow">{{ selectedFaq === 5 ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+          <div class="faq-answer" *ngIf="selectedFaq === 5">
+            <p>
+              Yes! BombSquad is completely free to play. You can play multiplayer matches across Android, Windows, Mac, Linux,
+              and VR over local Wi-Fi or online public game servers found on our <a routerLink="/public-servers">Public Servers Browser</a>.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
   </div>
-</div>
+</section>
+
