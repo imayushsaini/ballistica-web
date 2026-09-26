@@ -153,6 +153,24 @@ const routes: Routes = [
     }
   },
   {
+    path: 'commands',
+    loadChildren: () =>
+      import('./pages/custompage/commands/commands').then(
+        (m) => m.CommandsModule,
+      ),
+    data: {
+      title: 'BombSquad Chat Commands Documentation | BCS',
+      description:
+        'Browse and search all in-game chat commands, syntax, player permissions, and examples for BombSquad Ballistica modded server.',
+      ogUrl: 'https://bombsquad-community.web.app/commands',
+    },
+  },
+  {
+    path: 'chat-commands',
+    redirectTo: 'commands',
+    pathMatch: 'full',
+  },
+  {
     path: 'workspaces',
     loadChildren: () =>
       import('./pages/workspaces/workspaces.component').then(

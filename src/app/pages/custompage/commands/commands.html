@@ -1,0 +1,97 @@
+<div class="commands-wrapper">
+  <header class="page-header">
+    <h1>Server Chat Commands</h1>
+    <p>Complete, auto-generated documentation for in-game chat commands.</p>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="state-box">
+    <div class="spinner"></div>
+    <p>Fetching command documentation from GitHub...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="state-box error-box">
+    <p>{{ error }}</p>
+    <button (click)="fetchCommands()" class="retry-btn">Retry Loading</button>
+  </div>
+
+  <!-- Main View -->
+  <div *ngIf="!loading && !error">
+    <!-- Controls (Search Bar + Category Filters) -->
+    <div class="controls-card">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="filterCommands()"
+          placeholder="Search by command (/kick, /ban), alias, arguments, or description..."
+        />
+      </div>
+
+      <div class="category-tabs">
+        <button
+          *ngFor="let cat of categories"
+          [class.active]="selectedCategory === cat"
+          (click)="selectCategory(cat)"
+        >
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Meta -->
+    <div class="results-meta">
+      Showing <strong>{{ filteredCommands.length }}</strong> of {{ allCommands.length }} commands
+    </div>
+
+    <!-- Command Cards Grid -->
+    <div class="command-grid">
+      <div class="command-card" *ngFor="let cmd of filteredCommands">
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="title-group">
+            <span class="cmd-name">{{ cmd.name }}</span>
+            <span class="badge category-badge">{{ cmd.category }}</span>
+            <span class="badge cost-badge" *ngIf="cmd.shopCost > 0">🎟️ {{ cmd.shopCost }} t</span>
+            <span class="badge free-badge" *ngIf="cmd.shopCost === 0">Free</span>
+          </div>
+
+          <button
+            class="copy-btn"
+            (click)="copyToClipboard(cmd.usage)"
+            [title]="'Copy syntax: ' + cmd.usage"
+          >
+            {{ copiedUsage === cmd.usage ? '✓ Copied' : 'Copy Syntax' }}
+          </button>
+        </div>
+
+        <!-- Description -->
+        <p class="cmd-description">{{ cmd.description }}</p>
+
+        <!-- Syntax Usage Box -->
+        <div class="usage-box">
+          <span class="label">Syntax:</span>
+          <code>{{ cmd.usage }}</code>
+        </div>
+
+        <!-- Aliases Badges -->
+        <div class="aliases-section" *ngIf="cmd.aliases.length > 0">
+          <span class="label">Aliases:</span>
+          <div class="aliases-list">
+            <span class="alias-tag" *ngFor="let alias of cmd.aliases">{{ alias }}</span>
+          </div>
+        </div>
+
+        <!-- Examples List -->
+        <div class="examples-section" *ngIf="cmd.examples.length > 0">
+          <span class="label">Examples:</span>
+          <div class="examples-list">
+            <code *ngFor="let ex of cmd.examples">{{ ex }}</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
