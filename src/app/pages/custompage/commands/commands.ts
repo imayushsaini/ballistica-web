@@ -25,7 +25,7 @@ export interface ChatCommand {
 })
 export class CommandsComponent implements OnInit {
   private readonly COMMANDS_RAW_URL =
-    'https://raw.githubusercontent.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/main/docs/commands.json';
+    'https://raw.githubusercontent.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/public-server/docs/commands.json';
 
   allCommands: ChatCommand[] = [];
   filteredCommands: ChatCommand[] = [];
@@ -39,7 +39,7 @@ export class CommandsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private _seoService: SEOServiceService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -60,14 +60,17 @@ export class CommandsComponent implements OnInit {
     this.http.get<ChatCommand[]>(this.COMMANDS_RAW_URL).subscribe({
       next: (data) => {
         this.allCommands = data;
-        const uniqueCategories = Array.from(new Set(data.map((c) => c.category)));
+        const uniqueCategories = Array.from(
+          new Set(data.map((c) => c.category)),
+        );
         this.categories = ['All', ...uniqueCategories];
         this.filterCommands();
         this.loading = false;
       },
       error: (err) => {
         console.error('Failed to load chat commands from GitHub:', err);
-        this.error = 'Failed to load chat commands. Please check network connection.';
+        this.error =
+          'Failed to load chat commands. Please check network connection.';
         this.loading = false;
       },
     });
@@ -78,7 +81,8 @@ export class CommandsComponent implements OnInit {
 
     this.filteredCommands = this.allCommands.filter((cmd) => {
       const matchesCategory =
-        this.selectedCategory === 'All' || cmd.category === this.selectedCategory;
+        this.selectedCategory === 'All' ||
+        cmd.category === this.selectedCategory;
 
       const matchesSearch =
         !query ||
